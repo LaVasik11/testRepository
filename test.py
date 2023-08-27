@@ -4,15 +4,12 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
 
-
-def main():
-    city = input('Погоду какого города вы хотите узнать?: ')
+def check_the_weather(city):
     print('Идёт поиск информации...')
     url = 'https://weather.com/ru-EE/weather/today'
 
     options = webdriver.ChromeOptions()
     options.add_argument('--headless')
-
 
     driver = webdriver.Chrome(options=options)
     driver.get(url)
@@ -26,12 +23,10 @@ def main():
     first_child_element.click()
 
     weather_data = driver.find_element(By.CLASS_NAME, 'CurrentConditions--primary--2DOqs')
-    print('__________________'+'_'*len(city))
+    print('__________________' + '_' * len(city))
     print(f'Погода в городе "{city}":')
     print(weather_data.text)
 
+
 if __name__ == '__main__':
-    main()
-
-
-
+    check_the_weather(input('Погоду какого города вы хотите узнать?: '))
