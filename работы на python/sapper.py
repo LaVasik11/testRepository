@@ -111,8 +111,6 @@ class MineSweeper:
                 x, y = cur_btn.x, cur_btn.y
                 for dx in [1, 0, -1]:
                     for dy in [1, 0, -1]:
-                        # if not abs(dx-dy) == 1:
-                        #     continue
                         next_btn = self.buttons[x+dx][y+dy]
                         if not next_btn.is_open and 1 <= next_btn.x <= MineSweeper.ROW and \
                                 1 <= next_btn.y <= MineSweeper.COLUMNS and next_btn not in queue:
@@ -124,6 +122,7 @@ class MineSweeper:
         self.create_widgets()
         MineSweeper.IS_FIRST_CLICK = True
         MineSweeper.IS_GAME_OVER = False
+        print('-'*MineSweeper.ROW*2)
 
     def create_settings_win(self):
         win_settings = tk.Toplevel(self.window)
