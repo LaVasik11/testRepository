@@ -147,13 +147,12 @@ class MineSweeper:
 
     def change_settings(self, row: tk.Entry, colum: tk.Entry, mines: tk.Entry):
         try:
-            int(row.get()), int(colum.get()), int(mines.get())
+            MineSweeper.ROW = int(row.get())
+            MineSweeper.COLUMNS = int(colum.get())
+            MineSweeper.MINES = int(mines.get())
         except ValueError:
             showerror('Ошибка', 'ВЫ ввели неправильное значение.')
             return
-        MineSweeper.ROW = int(row.get())
-        MineSweeper.colum = int(colum.get())
-        MineSweeper.mines = int(mines.get())
         self.reload()
 
 

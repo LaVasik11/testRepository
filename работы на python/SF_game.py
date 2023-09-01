@@ -151,7 +151,7 @@ while raning:
                 screen.blit(coil, (el.x, el.y))
                 t += 1
 
-                if t >= 20:
+                if t >= 15:
                     t = 0
                     bullets.pop(i)
 
