@@ -1,6 +1,7 @@
 import tkinter as tk
 from random import shuffle
 from tkinter.messagebox import showinfo, showerror
+import time
 
 
 colors = {
@@ -40,6 +41,8 @@ class MineSweeper:
 
     def __init__(self):
         self.buttons = []
+        self.start_time = None
+        self.timer_label = None
         for i in range(MineSweeper.ROW + 2):
             temp = []
             for j in range(MineSweeper.COLUMNS + 2):
@@ -60,9 +63,7 @@ class MineSweeper:
             cur_btn['text'] = ''
             cur_btn['state'] = 'normal'
 
-
     def click(self, clicked_button: MyButton):
-
         if MineSweeper.IS_GAME_OVER:
             return
 
@@ -71,6 +72,7 @@ class MineSweeper:
             self.count_mine_in_buttons()
             self.print_buttons()
             MineSweeper.IS_FIRST_CLICK = False
+            self.start_time = time.time()
 
         if clicked_button.is_mine:
             clicked_button.config(text='*', background='red', disabledforeground='black')
@@ -120,9 +122,21 @@ class MineSweeper:
         [child.destroy() for child in self.window.winfo_children()]
         self.__init__()
         self.create_widgets()
+        self.create_timer_label()
         MineSweeper.IS_FIRST_CLICK = True
         MineSweeper.IS_GAME_OVER = False
-        print('-'*MineSweeper.ROW*2)
+        self.start_time = None
+        print('-' * MineSweeper.ROW * 2)
+
+    def create_timer_label(self):
+        self.timer_label = tk.Label(self.window, text="Время: 0 сек")
+        self.timer_label.grid(row=0, column=0, columnspan=MineSweeper.COLUMNS, sticky="W")
+
+    def update_timer_label(self):
+        if self.start_time:
+            elapsed_time = int(time.time() - self.start_time)
+            self.timer_label.config(text=f"Время: {elapsed_time} сек")
+        self.window.after(1000, self.update_timer_label)
 
     def create_settings_win(self):
         win_settings = tk.Toplevel(self.window)
@@ -191,8 +205,8 @@ class MineSweeper:
 
     def start(self):
         self.create_widgets()
-
-        # self.open_all_buttons()
+        self.create_timer_label()
+        self.update_timer_label()
         MineSweeper.window.mainloop()
 
     def print_buttons(self):
