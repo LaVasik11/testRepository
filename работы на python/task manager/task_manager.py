@@ -1,11 +1,16 @@
 import sqlite3
 from datetime import datetime
-
+import os
 from PyQt5 import QtCore, QtGui, QtWidgets
+
+
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+db_path = os.path.join(current_dir, 'tasks.db')
 
 class Ui_Dialog(object):
     def __init__(self):
-        self.conn = sqlite3.connect("tasks.db")
+        self.conn = sqlite3.connect(db_path)
         self.create_table()
 
     def create_table(self):
