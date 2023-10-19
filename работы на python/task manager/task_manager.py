@@ -1,4 +1,6 @@
 import sqlite3
+from datetime import datetime
+
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_Dialog(object):
@@ -21,6 +23,7 @@ class Ui_Dialog(object):
         cursor.execute("INSERT INTO tasks (task_text, importance, task_date, task_note) VALUES (?, ?, ?, ?)",
                        (task_text, task_importance, task_date, task_note))
         self.conn.commit()
+        return cursor.lastrowid
 
     def remove_task_from_db(self, task_id):
         cursor = self.conn.cursor()
@@ -40,7 +43,6 @@ class Ui_Dialog(object):
         Dialog.setObjectName("Dialog")
         Dialog.resize(403, 297)
 
-        self.tasks = []
 
         self.stackedWidget = QtWidgets.QStackedWidget(Dialog)
         self.stackedWidget.setGeometry(QtCore.QRect(10, 10, 381, 281))
@@ -131,13 +133,14 @@ class Ui_Dialog(object):
         self.pushButton_add_task.setText("Добавление задачи")
         self.pushButton_add_task.clicked.connect(self.switchToPage1)
 
-
         self.importance_map = {
-            "Очень важно": 3,
-            "Важно": 2,
-            "Среднее": 1,
-            "Не важно": 0
-        }
+                "Очень важно": 3,
+                "Важно": 2,
+                "Среднее": 1,
+                "Не важно": 0
+            }
+
+
 
     def switchToPage1(self):
         self.stackedWidget.setCurrentIndex(0)
@@ -146,36 +149,33 @@ class Ui_Dialog(object):
         self.stackedWidget.setCurrentIndex(1)
         self.update_task_list()
 
-
-
     def remove_task(self):
         selected_item = self.task_list.currentItem()
         if selected_item:
-            row = self.task_list.row(selected_item)
-            self.task_list.takeItem(row)
-            del self.tasks[row]
+            print("Remove Task Button Clicked")
+            task_text = selected_item.text()
+            task_id = self.find_task_id_by_text(task_text)
+            print(task_id)
+            if task_id is not None:
+                self.remove_task_from_db(task_id)
+                self.update_task_list()
 
+    def find_task_id_by_text(self, task_text):
+        text = task_text.split(": ")[1].split(',')[0]
+        cursor = self.conn.cursor()
+        cursor.execute("SELECT id FROM tasks WHERE task_text=?", (text,))
+        result = cursor.fetchone()
+        if result:
+            return result[0]
+        return None
 
     def sort_tasks_by_importance(self):
-        try:
-            self.tasks.sort(key=lambda task: self.importance_map.get(self.get_importance(task), 0), reverse=True)
-            self.update_task_list()
-        except Exception as e:
-            print("Error sorting by importance:", e)
-
-    def get_importance(self, task):
-        parts = task.split('Важность: ')
-        if len(parts) > 1:
-            importance_str = parts[1].split(',')[0]
-            return importance_str.strip()
-        return ""
+        self.update_task_list(lambda x: self.importance_map[x[2]])
 
     def sort_tasks_by_date(self):
         try:
-            self.tasks.sort(
-                key=lambda task: QtCore.QDate.fromString(task.split('Срок выполнения: ')[1], 'dd/MM/yyyy'),
-                reverse=True)
-            self.update_task_list()
+            print(self.get_tasks_from_db()[0][-2])
+            self.update_task_list(lambda x: datetime.strptime(x[-2], "%d/%m/%Y"))
         except Exception as e:
             print("Error sorting by date:", e)
 
@@ -186,19 +186,24 @@ class Ui_Dialog(object):
         task_date = self.dateEdit.date().toString('dd/MM/yyyy')
         task_note = self.note_text.toPlainText()
 
-        task = f"Задача: {task_text}, Примичание: {task_note}, Важность: {task_importance}, Срок выполнения: {task_date}"
+        self.add_task_to_db(task_text, task_importance, task_date, task_note)
+        self.update_task_list()
+        self.text_task.clear()
+        self.importance_comboBox.setCurrentIndex(0)
+        self.dateEdit.setDate(QtCore.QDate.currentDate())
+        self.note_text.clear()
 
-        if task not in self.tasks:
-            self.tasks.append(task)
-            self.update_task_list()
-            self.text_task.clear()
-            self.importance_comboBox.setCurrentIndex(0)
-            self.dateEdit.setDate(QtCore.QDate.currentDate())
-            self.note_text.clear()
-
-    def update_task_list(self):
+    def update_task_list(self, sort=None):
         self.task_list.clear()
-        self.task_list.addItems(self.tasks)
+
+        if sort:
+            tasks = sorted(self.get_tasks_from_db(), key=sort, reverse=True)
+        else:
+            tasks = self.get_tasks_from_db()
+
+        for task in tasks:
+            task_str = f"Задача: {task[1]}, Примечание: {task[4]}, Важность: {task[2]}, Срок выполнения: {task[3]}"
+            self.task_list.addItem(task_str)
 
 
     def retranslateUi(self, Dialog):
