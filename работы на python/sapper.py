@@ -32,9 +32,9 @@ class MyButton(tk.Button):
 
 class MineSweeper:
     window = tk.Tk()
-    window.geometry('350x350+500+250')
     ROW = 10
     COLUMNS = 10
+    window.geometry(f'{int((ROW+COLUMNS)*5*3.5)}x{int((ROW+COLUMNS)*5*3.5)}+500+250')
     MINES = 15
     IS_GAME_OVER = False
     IS_FIRST_CLICK = True
@@ -143,15 +143,15 @@ class MineSweeper:
         win_settings.title('Настройки')
         tk.Label(win_settings, text='Количиство строк:').grid(row=0, column=0)
         row_entry = tk.Entry(win_settings)
-        row_entry.insert(0, MineSweeper.ROW)
+        row_entry.insert(0, str(MineSweeper.ROW))
         row_entry.grid(row=0, column=1, padx=20, pady=20)
         tk.Label(win_settings, text='Количиство колонок:').grid(row=1, column=0)
         colum_entry = tk.Entry(win_settings)
-        colum_entry.insert(0, MineSweeper.COLUMNS)
+        colum_entry.insert(0, str(MineSweeper.COLUMNS))
         colum_entry.grid(row=1, column=1, padx=20, pady=20)
         tk.Label(win_settings, text='Количиство мин:').grid(row=2, column=0)
         mines_entry = tk.Entry(win_settings)
-        mines_entry.insert(0, MineSweeper.MINES)
+        mines_entry.insert(0, str(MineSweeper.MINES))
         mines_entry.grid(row=2, column=1, padx=20, pady=20)
 
         save_btn = tk.Button(win_settings, text='Применить',
@@ -172,7 +172,6 @@ class MineSweeper:
     def create_widgets(self):
         menubar = tk.Menu(self.window)
         self.window.config(menu=menubar)
-
         settings_menu = tk.Menu(menubar, tearoff=0)
         settings_menu.add_command(label='Играть', command=self.reload)
         settings_menu.add_command(label='Натсройки', command=self.create_settings_win)
@@ -246,7 +245,6 @@ class MineSweeper:
         indexes.remove(exclude_number)
         shuffle(indexes)
         return indexes[:MineSweeper.MINES]
-
 
 game = MineSweeper()
 game.start()

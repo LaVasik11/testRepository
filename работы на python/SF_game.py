@@ -31,8 +31,8 @@ player_y = 150
 is_jump = False
 jump_count = 8
 
-bg_sound = p.mixer.Sound('../инструменты/Sound/y2mate.com - Sewerslvt  Lexapro Delirium.mp3')
-bg_sound.play()
+# bg_sound = p.mixer.Sound('../инструменты/Sound/y2mate.com - Sewerslvt  Lexapro Delirium.mp3')
+# bg_sound.play()
 
 ghost_timer = p.USEREVENT + 1
 p.time.set_timer(ghost_timer, 7000)
