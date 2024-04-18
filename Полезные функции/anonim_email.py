@@ -79,6 +79,7 @@ def main(mail):
         print(f'[+] Ваш почтовый адрес: {mail}')
 
         mail_req = requests.get(f'{API}?login={mail.split("@")[0]}&domain={mail.split("@")[1]}')
+        print(mail_req)
 
         while check_letters:
             check_mail(mail=mail)
@@ -92,3 +93,4 @@ def main(mail):
 
 if __name__ == '__main__':
     main(mail)
+

@@ -157,10 +157,8 @@ class Ui_Dialog(object):
     def remove_task(self):
         selected_item = self.task_list.currentItem()
         if selected_item:
-            print("Remove Task Button Clicked")
             task_text = selected_item.text()
             task_id = self.find_task_id_by_text(task_text)
-            print(task_id)
             if task_id is not None:
                 self.remove_task_from_db(task_id)
                 self.update_task_list()
@@ -179,7 +177,6 @@ class Ui_Dialog(object):
 
     def sort_tasks_by_date(self):
         try:
-            print(self.get_tasks_from_db()[0][-2])
             self.update_task_list(lambda x: datetime.strptime(x[-2], "%d/%m/%Y"))
         except Exception as e:
             print("Error sorting by date:", e)

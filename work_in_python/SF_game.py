@@ -47,7 +47,8 @@ continue_label = label.render('Продолжить', False, (255, 255, 255))
 pause_label = label.render('Пауза', False, (230, 71, 71))
 win_label = label.render('Вы победили!', False, (255, 255, 255))
 
-coil_icon = p.image.load('../инструменты/фотокарточки/imgonline-com-ua-Resize-N7OfOJ17iCHh9XPK.jpg')
+coil_icon = p.imag
+e.load('../инструменты/фотокарточки/imgonline-com-ua-Resize-N7OfOJ17iCHh9XPK.jpg')
 coil_count = 10
 speed_bara = 10
 count_enemies_killed = 0
