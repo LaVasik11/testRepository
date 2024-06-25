@@ -74,6 +74,6 @@ def get_score(game_stamps: list[dict], offset: int) -> dict:
     return game_stamps[high]["score"]
 
 
-offset = 10000
+offset = 100000
 score_at_offset = get_score(game_stamps, offset)
 print("Score at offset", offset, ":", score_at_offset)
