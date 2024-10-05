@@ -1,4 +1,4 @@
-
+from pynput.mouse import Controller, Button
 import numpy as np
 import keyboard
 import pyautogui
@@ -320,15 +320,15 @@ def take_plunger():
 
 
 def catching_mice():
+    mouse = Controller()
     positions = [(539, 892), (826, 737), (572, 432), (1139, 377), (1259, 809)]
-
-    time.sleep(2)
     start_time = time.time()
+
     while time.time() - start_time < 5:
-        print(start_time - time.time())
-        for i in positions:
-            pyautogui.moveTo(*i)
-            pyautogui.click()
+        for pos in positions:
+            mouse.position = pos
+            mouse.click(Button.left)
+            time.sleep(0.06)
 
 
 def hang_up_knives():
@@ -420,7 +420,6 @@ def make_coffee():
 
 keyboard.add_hotkey('ctrl+shift+a', check_position)
 
-keyboard.add_hotkey('ctrl+shift+2', make_coffee)
 
 
 actions = {
@@ -455,10 +454,12 @@ actions = {
     "pour_tea.png": pour_tea,
     "cleaning_armor.png": cleaning_armor,
     "make_coffee.png": make_coffee,
+    "catching_mice.png": catching_mice,
 }
 
 
 def execute_action_based_on_image():
+    time.sleep(0.5)
     image_name = get_similar_image()
     if image_name in actions:
         print(f"Сработала функция: {image_name}")
@@ -467,7 +468,7 @@ def execute_action_based_on_image():
         print("Нет функции для обработки этого изображения.")
 
 
-keyboard.add_hotkey('ctrl+shift+1', execute_action_based_on_image)
+keyboard.add_hotkey('ctrl+e', execute_action_based_on_image)
 
 
 print("Скрипт запущен. Нажмите Ctrl+Shift+A для выполнения действий.")
