@@ -9,22 +9,53 @@ def should_buy(state):
     pos = state.get_my_position()
     field = state.get_my_field()
 
-    if not field or field["type"] != "field":
+
+    if not field or field.get("type") != "field":
         return False
 
     owner = state.get_owner(pos)
-
     if owner is not None:
         return False
 
+    price = field.get("price", 0)
     money = state.get_me()["money"]
 
+    if money < price:
+        return False
 
-    if money > 3000:
+    group = field.get("group")
+    group_fields = state.get_group_fields(group)
+    owners = [state.get_owner(p) for p in group_fields]
+
+    # убираем None
+    owned = [o for o in owners if o is not None]
+
+
+    print("---- BUY DEBUG ----")
+    print("Money:", money)
+    print("Price:", price)
+    print("Group:", group)
+    print("Owners:", owners)
+
+
+    teammate = state.get_teammate()
+    teammate_id = teammate["user_id"] if teammate else None
+
+    # --- 1. никто не владеет ---
+    if not owned:
+        return True
+
+    # --- 2. все свои / тимейт ---
+    if all(o == state.me_id or o == teammate_id for o in owned):
+        return True
+
+    # --- 3. у врага есть (ломаем монополию) ---
+    enemies = [o for o in owned if o != state.me_id and o != teammate_id]
+
+    if len(enemies) > 0:
         return True
 
     return False
-
 
 def click_button(page, text):
     try:
@@ -61,7 +92,7 @@ def detect_actions(page):
             "buy": "Купить за" in text,
             "auction": "На аукцион" in text,
             "pay": "Заплатить" in text,
-            "accept": "Принять" in text,
+           # "accept": "Принять" in text,
             "decline": "Отклонить" in text,
             "refuse": "Отказаться" in text
         }
@@ -89,7 +120,7 @@ def handle_actions(page, state, actions):
     # --- 1. ROLL ---
     if actions.get("roll"):
         print("DO: ROLL")
-        time.sleep(3)
+        time.sleep(2)
         click_button(page, "Бросить кубики")
         last_action_time = now
         return
@@ -112,20 +143,29 @@ def handle_actions(page, state, actions):
     # --- 3. PAY ---
     if actions.get("pay"):
         print("DO: PAY")
+        time.sleep(2)
         click_contains(page, "Заплатить")
         last_action_time = now
         return
 
     # --- 4. TRADE ---
-    if actions.get("accept"):
-        print("DO: ACCEPT")
-        click_button(page, "Принять")
-        last_action_time = now
-        return
+    # if actions.get("accept"):
+    #     print("DO: ACCEPT")
+    #     click_button(page, "Принять")
+    #     last_action_time = now
+    #     return
 
     if actions.get("decline"):
         print("DO: DECLINE")
+        time.sleep(2)
         click_button(page, "Отклонить")
+        last_action_time = now
+        return
+
+    if actions.get("refuse"):
+        print("DO: REFUSE")
+        time.sleep(2)
+        click_button(page, "Отказаться")
         last_action_time = now
         return
 

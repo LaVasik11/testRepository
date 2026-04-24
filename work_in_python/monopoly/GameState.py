@@ -24,7 +24,12 @@ class GameState:
     # ---------- UPDATE ----------
 
     def update(self, data):
-        players = data["status"]["players"]
+        if "status" not in data:
+            return
+
+        status = data["status"]
+
+        players = status.get("players", [])
 
         for p in players:
             self.players[p["user_id"]] = p
@@ -32,8 +37,8 @@ class GameState:
             if p["user_id"] == self.me_id:
                 self.my_team = p["team"]
 
-        self.fields_state = data["status"].get("fields", {})
-        self.current_player = data["status"]["action_player"]
+        self.fields_state = status.get("fields", {})
+        self.current_player = status.get("action_player")
 
     # ---------- GETTERS ----------
 

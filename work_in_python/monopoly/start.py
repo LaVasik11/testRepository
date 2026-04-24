@@ -45,6 +45,9 @@ def handle_ws_message(raw):
 
     data = json.loads(raw[7:])
 
+    if "status" not in data:
+        return
+
     if "config" in data:
         state.init_from_packet(data)
 
