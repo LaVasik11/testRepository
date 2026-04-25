@@ -2,7 +2,7 @@ import json
 from playwright.sync_api import sync_playwright
 from keylog import wait_for_start
 from GameState import GameState
-from logics import detect_actions, handle_actions
+from logics import detect_actions, handle_actions, handle_contract
 
 
 state = GameState()
@@ -17,16 +17,26 @@ def ui_loop(page):
                 page.wait_for_timeout(200)
                 continue
 
+            if handle_contract(page, state):
+                page.wait_for_timeout(200)
+                continue
+
             if not state.is_my_turn_now():
+                page.wait_for_timeout(200)
+                continue
+
+            if page.locator(".TableAction").count() == 0:
                 page.wait_for_timeout(200)
                 continue
 
             print("=== MY TURN ===")
 
             actions = detect_actions(page)
+            print("ACTIONS:", actions)
+
             handle_actions(page, state, actions)
 
-            page.wait_for_timeout(100)
+            page.wait_for_timeout(200)
 
         except Exception as e:
             print("UI LOOP ERROR:", e)
@@ -34,16 +44,29 @@ def ui_loop(page):
 
 
 def handle_ws_message(raw):
+    # ---------- AUTH ----------
     if raw.startswith("4auth"):
-        data = json.loads(raw[5:])
-        state.set_me(data["user_data"]["user_id"])
-        print("MY ID:", state.me_id)
+        try:
+            data = json.loads(raw[5:])
+
+            user_data = data.get("user_data")
+            if user_data and "user_id" in user_data:
+                state.set_me(user_data["user_id"])
+                print("MY ID:", state.me_id)
+
+        except Exception as e:
+            print("AUTH PARSE ERROR:", e)
+
         return
 
+    # ---------- PACKET ----------
     if not raw.startswith("4packet"):
         return
 
-    data = json.loads(raw[7:])
+    try:
+        data = json.loads(raw[7:])
+    except:
+        return
 
     if "status" not in data:
         return
@@ -62,8 +85,6 @@ def handle_ws(ws):
 
     def on_recv(frame):
         data = frame if isinstance(frame, str) else frame.decode("utf-8", errors="ignore")
-
-        # --- ВАЖНО ---
         handle_ws_message(data)
 
     ws.on("framereceived", on_recv)

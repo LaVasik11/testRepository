@@ -30,8 +30,9 @@ class GameState:
         status = data["status"]
 
         players = status.get("players", [])
-
+        
         for p in players:
+            print("RAW PLAYER:", p)
             self.players[p["user_id"]] = p
 
             if p["user_id"] == self.me_id:
