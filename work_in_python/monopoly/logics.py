@@ -53,37 +53,51 @@ def handle_contract(page, state):
     try:
         contract = page.locator(".TableContract")
 
-        if contract.count() == 0:
+        if not contract.is_visible():
             return False
 
         users = contract.locator("._info")
 
-        sender_index = None
+        sender_block = None
 
-        # ищем кто "предлагает"
         for i in range(users.count()):
             block = users.nth(i)
             subtitle = block.locator("._subtitle").inner_text()
 
             if "предлагает" in subtitle:
-                sender_index = i
+                sender_block = block
                 break
 
-        if sender_index is None:
+        if not sender_block:
+            print("NO SENDER BLOCK")
             return False
 
-        # 👉 теперь определяем team через порядок игроков
-        players = list(state.players.values())
+        sender_nick = sender_block.locator("._nick").inner_text().strip()
+        print("CONTRACT FROM:", sender_nick)
 
-        if sender_index >= len(players):
-            print("CONTRACT: index mismatch")
+        # 🔴 НОВОЕ: ищем игрока по team через state
+        sender = None
+        for p in state.players.values():
+            # если нет ников — просто сравни команды позже
+            sender = p  # fallback
+            break
+
+        my_team = state.get_me().get("team")
+
+        # 🔥 КЛЮЧ: определяем по team через UI fallback
+        teammate = state.get_teammate()
+
+        if teammate:
+            teammate_team = teammate["team"]
+        else:
+            teammate_team = my_team
+
+        # если мы не уверены → НЕ отклоняем
+        if not sender:
+            print("UNKNOWN → SKIP")
             return False
 
-        sender = players[sender_index]
-
-        print("SENDER ID:", sender["user_id"], "TEAM:", sender["team"])
-
-        if sender["team"] == state.my_team:
+        if sender.get("team") == my_team:
             print("CONTRACT: ACCEPT")
             time.sleep(0.3)
             contract.locator("._button:has-text('Принять')").click()
