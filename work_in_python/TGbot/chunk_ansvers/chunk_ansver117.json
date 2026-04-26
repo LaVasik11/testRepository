@@ -1,0 +1,39 @@
+{
+  "participants": [
+    "GeorgeKan",
+    "QUETIAPINUM_BOY",
+    "gaysesg",
+    "oppionme"
+  ],
+  "message_count": {
+    "GeorgeKan": 40,
+    "QUETIAPINUM_BOY": 90,
+    "gaysesg": 20,
+    "oppionme": 5
+  },
+  "main_topics": [
+    "игры и игровые достижения (Dota, Mipo, FL Studio, музыка)",
+    "обзывания, шутки, оскорбления",
+    "внутренние шутки и прозвища (кирюха, жора, кериешка)",
+    "обсуждение соседей, звука, и наушников",
+    "создание музыки и автотюн"
+  ],
+  "communication_style": {
+    "GeorgeKan": "описательный, иногда ироничный, часто обращается к участникам по имени",
+    "QUETIAPINUM_BOY": "эмоциональный, использует много сленга и повторов, агрессивные и шутливые выражения",
+    "gaysesg": "короткие реплики, часто ироничные и провокационные",
+    "oppionme": "краткие ответы, иногда метафорические"
+  },
+  "interactions": [
+    {
+      "from": "QUETIAPINUM_BOY",
+      "to": "GeorgeKan",
+      "mentions": ["@GeorgeKan"]
+    },
+    {
+      "from": "QUETIAPINUM_BOY",
+      "to": "oppionme",
+      "mentions": ["@oppionme"]
+    }
+  ]
+}

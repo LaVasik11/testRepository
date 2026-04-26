@@ -1,0 +1,54 @@
+{
+"participants": [
+"gaysesg",
+"GeorgeKan",
+"QUETIAPINUM_BOY",
+"oppionme",
+"iris_cm_bot"
+],
+"message_counts": {
+"gaysesg": 39,
+"GeorgeKan": 37,
+"QUETIAPINUM_BOY": 44,
+"oppionme": 18,
+"iris_cm_bot": 5
+},
+"main_topics": [
+"Отношения и личная жизнь",
+"Школа и учеба",
+"Игры (Brawl Stars)",
+"Юмор и троллинг",
+"Сон и повседневные действия",
+"Время и синхронизация часов",
+"Обсуждение личности Панасенкова"
+],
+"communication_style": {
+"gaysesg": "неформальный, часто использует сокращения и команды бота, прямолинейный",
+"GeorgeKan": "ироничный, саркастичный, иногда пошлый юмор, активен в диалогах с другими участниками",
+"QUETIAPINUM_BOY": "эмоциональный, экспрессивный, иногда использует длинные монологи и капслок, юмор, троллинг",
+"oppionme": "спокойный, короткие ответы, иногда поддержка других участников",
+"iris_cm_bot": "автоматические системные сообщения бота, информативные"
+},
+"interactions": {
+"gaysesg": {
+"replies_to": ["GeorgeKan", "oppionme"],
+"quoted_by": ["GeorgeKan"]
+},
+"GeorgeKan": {
+"replies_to": ["gaysesg", "QUETIAPINUM_BOY", "oppionme"],
+"quoted_by": ["gaysesg", "QUETIAPINUM_BOY"]
+},
+"QUETIAPINUM_BOY": {
+"replies_to": ["GeorgeKan", "gaysesg", "oppionme"],
+"quoted_by": ["GeorgeKan"]
+},
+"oppionme": {
+"replies_to": ["gaysesg", "GeorgeKan"],
+"quoted_by": ["gaysesg"]
+},
+"iris_cm_bot": {
+"replies_to": [],
+"quoted_by": []
+}
+}
+}

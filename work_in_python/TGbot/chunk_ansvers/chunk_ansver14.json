@@ -1,0 +1,47 @@
+{
+"participants": [
+"GeorgeKan",
+"QUETIAPINUM_BOY",
+"oppionme",
+"gaysesg",
+"Mihail Grebnev"
+],
+"message_count": {
+"GeorgeKan": 40,
+"QUETIAPINUM_BOY": 65,
+"oppionme": 10,
+"gaysesg": 5,
+"Mihail Grebnev": 1
+},
+"main_topics": [
+"Обсуждение учебы и пар",
+"Новости и мемы",
+"Обсуждение ОС и игр (Steam, Linux)",
+"Юмор, шутки, сарказм",
+"Обсуждение личных ситуаций и поведения участников"
+],
+"communication_style": {
+"GeorgeKan": "Часто формулирует мнения и советы, серьезный с оттенком юмора и сарказма",
+"QUETIAPINUM_BOY": "Шутливый, эмоциональный, часто использует гиперболу и нецензурные выражения",
+"oppionme": "Кратко, в основном отвечает и комментирует",
+"gaysesg": "Коротко, лаконично, иногда саркастично",
+"Mihail Grebnev": "Информативно, без эмоций"
+},
+"interactions": {
+"replies_and_mentions": [
+{
+"from": "GeorgeKan",
+"to": ["QUETIAPINUM_BOY", "oppionme"]
+},
+{
+"from": "QUETIAPINUM_BOY",
+"to": ["GeorgeKan", "oppionme"]
+},
+{
+"from": "oppionme",
+"to": ["GeorgeKan", "QUETIAPINUM_BOY"]
+}
+],
+"quotes": []
+}
+}

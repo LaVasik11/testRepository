@@ -1,0 +1,48 @@
+{
+  "participants": [
+    "GeorgeKan",
+    "oppionme",
+    "QUETIAPINUM_BOY",
+    "gaysesg"
+  ],
+  "message_count": {
+    "GeorgeKan": 59,
+    "oppionme": 45,
+    "QUETIAPINUM_BOY": 13,
+    "gaysesg": 33
+  },
+  "topics": [
+    "Сортировки и алгоритмы (QuickSort, BubbleSort, ButterflySort, BigO)",
+    "Распределение прав и владение каналом в Telegram",
+    "Обсуждение сообщений и взаимодействие внутри группы",
+    "Шутки и рофлы между участниками"
+  ],
+  "communication_style": {
+    "GeorgeKan": "Длинные сообщения, объяснения и рассуждения, частые выражения эмоций через сленг и мат",
+    "oppionme": "Короткие фразы, вопросы и уточнения, часто использует жаргон",
+    "QUETIAPINUM_BOY": "Реакции и юмор, иногда длинные формальные тексты",
+    "gaysesg": "Команды, комментарии по действиям, короткие фразы, иногда сарказм"
+  },
+  "interactions": [
+    {
+      "from": "GeorgeKan",
+      "to": ["oppionme", "gaysesg", "QUETIAPINUM_BOY"],
+      "type": "реагирование и обсуждение идей, вопросов и рофлов"
+    },
+    {
+      "from": "oppionme",
+      "to": ["GeorgeKan", "QUETIAPINUM_BOY"],
+      "type": "вопросы и уточнения, шутки и комментарии"
+    },
+    {
+      "from": "QUETIAPINUM_BOY",
+      "to": ["GeorgeKan", "gaysesg", "oppionme"],
+      "type": "шутки, юмор, формальные заявления о действиях"
+    },
+    {
+      "from": "gaysesg",
+      "to": ["GeorgeKan", "QUETIAPINUM_BOY", "oppionme"],
+      "type": "команды, ответы на просьбы, обсуждение владения каналом"
+    }
+  ]
+}

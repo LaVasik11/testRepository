@@ -1,0 +1,37 @@
+{
+  "participants": [
+    "gaysesg",
+    "oppionme",
+    "bfcrazy",
+    "GeorgeKan"
+  ],
+  "message_counts": {
+    "gaysesg": 23,
+    "oppionme": 19,
+    "bfcrazy": 5,
+    "GeorgeKan": 33
+  },
+  "main_topics": [
+    "игровой процесс и уровни персонажей",
+    "финансовые вопросы и просьбы о деньгах",
+    "здоровье и медицинские вопросы",
+    "общение с элементами юмора и сленга"
+  ],
+  "communication_style": {
+    "gaysesg": "неформальный, часто короткие фразы, сленг, иногда агрессивный или шутливый тон",
+    "oppionme": "неформальный, эмоциональный, использует эмодзи и команды для бота",
+    "bfcrazy": "прямолинейный, иногда агрессивный и требовательный, с элементами ругательств",
+    "GeorgeKan": "интерактивный, задаёт вопросы, объясняет ситуации, использует юмор и длинные сообщения"
+  },
+  "interactions": {
+    "replies": [
+      {"from": "gaysesg", "to": "oppionme", "messages": [127]},
+      {"from": "gaysesg", "to": "GeorgeKan", "messages": [126, 125, 128]}
+    ],
+    "commands_and_mentions": [
+      {"from": "oppionme", "target": "GemidlyBot", "messages": [34]},
+      {"from": "gaysesg", "target": "oppionme", "messages": [127]},
+      {"from": "GeorgeKan", "target": "tg://user?id=7079963747", "messages": [23]}
+    ]
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "participants": [
+    "iris_cm_bot",
+    "oppionme",
+    "QUETIAPINUM_BOY",
+    "GeorgeKan",
+    "gaysesg",
+    "selfrapevictimbitchassnigga"
+  ],
+  "message_counts": {
+    "iris_cm_bot": 6,
+    "oppionme": 33,
+    "QUETIAPINUM_BOY": 42,
+    "GeorgeKan": 44,
+    "gaysesg": 4,
+    "selfrapevictimbitchassnigga": 15
+  },
+  "main_topics": [
+    "игры типа 'русская рулетка' и 'правда или действие'",
+    "повседневные разговоры, еда, бытовые ситуации",
+    "технические темы: скрипты, Linux, видео",
+    "обсуждение ссылок и файлов",
+    "шутки, троллинг и юмор с непристойностями"
+  ],
+  "communication_style": {
+    "iris_cm_bot": "формальный с эмодзи, уведомления и бот-сообщения",
+    "oppionme": "разговорный, эмоциональный, часто с матерными словами",
+    "QUETIAPINUM_BOY": "короткие сообщения, часто реакция на других участников",
+    "GeorgeKan": "подробные объяснения, повествовательный, информативный",
+    "gaysesg": "краткие, иногда оскорбительные высказывания",
+    "selfrapevictimbitchassnigga": "игровой, шутливый, упоминание действий и событий"
+  },
+  "interactions": [
+    {
+      "from": "oppionme",
+      "to": "iris_cm_bot",
+      "type": "команда или реакция на сообщение бота"
+    },
+    {
+      "from": "QUETIAPINUM_BOY",
+      "to": "oppionme",
+      "type": "ответ/реакция на сообщения в игре"
+    },
+    {
+      "from": "GeorgeKan",
+      "to": "QUETIAPINUM_BOY",
+      "type": "информационные сообщения, советы, пояснения"
+    },
+    {
+      "from": "selfrapevictimbitchassnigga",
+      "to": "GeorgeKan",
+      "type": "игровое взаимодействие и комментарии"
+    },
+    {
+      "from": "gaysesg",
+      "to": "GeorgeKan",
+      "type": "оскорбления/шутки"
+    }
+  ]
+}

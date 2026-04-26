@@ -1,0 +1,44 @@
+{
+  "participants": [
+    "GeorgeKan",
+    "QUETIAPINUM_BOY",
+    "bfcrazy",
+    "selfrapevictimbitchassnigga",
+    "oppionme",
+    "gaysesg",
+    "iris_cm_bot"
+  ],
+  "message_counts": {
+    "GeorgeKan": 66,
+    "QUETIAPINUM_BOY": 55,
+    "bfcrazy": 9,
+    "selfrapevictimbitchassnigga": 19,
+    "oppionme": 5,
+    "gaysesg": 10,
+    "iris_cm_bot": 3
+  },
+  "main_topics": [
+    "Внутренняя шутка и мемы группы",
+    "Обсуждение событий в чате и поведение участников",
+    "Сатирические и провокационные высказывания",
+    "Личные комментарии и реакции на действия других участников"
+  ],
+  "communication_style": {
+    "GeorgeKan": "часто саркастичный, экспрессивный, провокационный, иногда длинные объяснения",
+    "QUETIAPINUM_BOY": "эмоциональный, шутливый, иногда бессвязный, много личных обращений",
+    "bfcrazy": "короткие комментарии, реакция на действия других, сарказм",
+    "selfrapevictimbitchassnigga": "эмоциональный, иногда резкий, отвечает на обвинения или шутки",
+    "oppionme": "официальный, длинные формальные тексты с сатирическим оттенком",
+    "gaysesg": "краткие комментарии, реакция на шутки, сарказм",
+    "iris_cm_bot": "информационные сообщения, объявления, системные уведомления"
+  },
+  "interactions": {
+    "GeorgeKan": ["QUETIAPINUM_BOY", "selfrapevictimbitchassnigga", "gaysesg"],
+    "QUETIAPINUM_BOY": ["GeorgeKan", "selfrapevictimbitchassnigga"],
+    "bfcrazy": ["GeorgeKan"],
+    "selfrapevictimbitchassnigga": ["GeorgeKan", "QUETIAPINUM_BOY"],
+    "oppionme": ["GeorgeKan"],
+    "gaysesg": ["GeorgeKan"],
+    "iris_cm_bot": ["all"]
+  }
+}

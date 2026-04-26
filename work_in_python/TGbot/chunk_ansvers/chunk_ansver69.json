@@ -1,0 +1,49 @@
+{
+  "participants": [
+    "gaysesg",
+    "oppionme",
+    "GeorgeKan"
+  ],
+  "message_count": {
+    "gaysesg": 44,
+    "oppionme": 50,
+    "GeorgeKan": 56
+  },
+  "main_topics": [
+    "обмен ссылками на Telegram-каналы",
+    "обсуждение порно-сайтов и контента",
+    "общее общение с элементами шуток и мемов",
+    "реакции и ответы на действия других участников"
+  ],
+  "communication_style": {
+    "gaysesg": "краткие реплики, эмодзи и ссылки на пользователей, часто эмоциональные восклицания",
+    "oppionme": "слэнг, ругательства, реактивные комментарии, частые вопросы",
+    "GeorgeKan": "ссылки, уточнения, комментирование действий, иногда с юмором и сарказмом"
+  },
+  "interactions": [
+    {
+      "from": "GeorgeKan",
+      "to": "gaysesg",
+      "type": "mentions",
+      "count": 23
+    },
+    {
+      "from": "gaysesg",
+      "to": "GeorgeKan",
+      "type": "mentions",
+      "count": 15
+    },
+    {
+      "from": "oppionme",
+      "to": "GeorgeKan",
+      "type": "mentions",
+      "count": 9
+    },
+    {
+      "from": "oppionme",
+      "to": "gaysesg",
+      "type": "mentions",
+      "count": 12
+    }
+  ]
+}

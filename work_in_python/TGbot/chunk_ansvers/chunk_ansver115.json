@@ -1,0 +1,56 @@
+{
+"participants": [
+"gaysesg",
+"GeorgeKan",
+"oppionme",
+"QUETIAPINUM_BOY"
+],
+"message_counts": {
+"gaysesg": 12,
+"GeorgeKan": 43,
+"oppionme": 19,
+"QUETIAPINUM_BOY": 76
+},
+"main_topics": [
+"Музыка и FL Studio",
+"Игра на пианино",
+"Обсуждение комментариев на YouTube",
+"Личные взаимодействия и оскорбления",
+"Обсуждение возраста и друзей"
+],
+"communication_style": {
+"gaysesg": "Короткие эмоциональные фразы, иногда с эмодзи и оскорблениями",
+"GeorgeKan": "Длинные сообщения с объяснениями, комментарии к действиям других, эмоциональная реакция, ссылки на видео",
+"oppionme": "Короткие комментарии, часто эмоциональные, использует эмодзи, иногда сарказм",
+"QUETIAPINUM_BOY": "Много сообщений подряд, эмоциональные, оскорбительные, обсуждает действия и намерения"
+},
+"interactions": [
+{
+"from": "GeorgeKan",
+"to": "QUETIAPINUM_BOY",
+"type": "reply",
+"examples": [
+"Ты же не послушал?",
+"@QUETIAPINUM_BOY в коментах чел пишет..."
+]
+},
+{
+"from": "QUETIAPINUM_BOY",
+"to": "GeorgeKan",
+"type": "reply",
+"examples": [
+"да",
+"ясно"
+]
+},
+{
+"from": "oppionme",
+"to": "GeorgeKan",
+"type": "reply",
+"examples": [
+"вааььЩЕКОТНО",
+"ты нихуя неу меешь"
+]
+}
+]
+}

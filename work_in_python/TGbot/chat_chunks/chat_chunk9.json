@@ -1,0 +1,58 @@
+{
+  "chunk_analysis": {
+    "participants": [
+      "GeorgeKan",
+      "gaysesg",
+      "oppionme",
+      "iris_cm_bot"
+    ],
+    "message_counts": {
+      "GeorgeKan": 73,
+      "gaysesg": 53,
+      "oppionme": 22,
+      "iris_cm_bot": 9
+    },
+    "main_topics": [
+      "Игровые обсуждения (SAMP, РП, лидерки, бан)",
+      "Шутки и мемы",
+      "Общие сборы и координация группы",
+      "Боты и команды для бота",
+      "Обсуждение еды, витаминов и энергетиков"
+    ],
+    "communication_style": {
+      "GeorgeKan": "Активный, часто командует, использует сарказм, сленг и эмоции",
+      "gaysesg": "Эмоциональный, лаконичный, иногда шутит, отвечает на высказывания других",
+      "oppionme": "Короткие реплики, часто реакция на происходящее, иногда жалобы или ирония",
+      "iris_cm_bot": "Автоматические уведомления и цитаты участников"
+    },
+    "interactions": [
+      {
+        "from": "GeorgeKan",
+        "to": "gaysesg",
+        "type": "direct_reply_or_mention",
+        "examples": [
+          "Матвей ГА стал",
+          "@gaysesg там тема смешная в ио лайма"
+        ]
+      },
+      {
+        "from": "gaysesg",
+        "to": "GeorgeKan",
+        "type": "direct_reply",
+        "examples": [
+          "Че ты пиздишь тут",
+          "Не было"
+        ]
+      },
+      {
+        "from": "oppionme",
+        "to": "GeorgeKan",
+        "type": "reaction",
+        "examples": [
+          "Жора пиздец",
+          "ну у меня +2"
+        ]
+      }
+    ]
+  }
+}

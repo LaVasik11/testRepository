@@ -1,0 +1,56 @@
+{
+"participants": [
+"gaysesg",
+"GeorgeKan",
+"QUETIAPINUM_BOY",
+"oppionme",
+"iris_cm_bot"
+],
+"message_counts": {
+"gaysesg": 40,
+"GeorgeKan": 49,
+"QUETIAPINUM_BOY": 42,
+"oppionme": 11,
+"iris_cm_bot": 6
+},
+"main_topics": [
+"Обсуждение онлайн-игр и совместного времяпрепровождения",
+"Школьная жизнь, учеба, оценки и задания",
+"Шутки и ирония в общении",
+"Повседневные бытовые моменты и личные высказывания"
+],
+"communication_style": {
+"gaysesg": "Эмоциональный, часто ругательный, прямолинейный",
+"GeorgeKan": "Саркастический, ироничный, иногда агрессивный, активно планирует действия группы",
+"QUETIAPINUM_BOY": "Нетерпеливый, жалуется на школу, эмоциональный, часто использует сленг",
+"oppionme": "Короткие реакции, поддержка, эмоциональные комментарии",
+"iris_cm_bot": "Автоматические уведомления и бот-сообщения"
+},
+"interactions": [
+{
+"from": "GeorgeKan",
+"to": "gaysesg",
+"type": "reply/mention",
+"examples": [
+"не дай бог ты уёбок опять спиш"
+]
+},
+{
+"from": "QUETIAPINUM_BOY",
+"to": "GeorgeKan",
+"type": "response/interaction",
+"examples": [
+"если пойдет жора арсений я подтянусь"
+]
+},
+{
+"from": "iris_cm_bot",
+"to": "all",
+"type": "announcement",
+"examples": [
+"Общий сбор",
+"✅ Уважение оказано"
+]
+}
+]
+}

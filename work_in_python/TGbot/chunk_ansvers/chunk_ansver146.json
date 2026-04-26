@@ -1,0 +1,53 @@
+{
+  "participants": [
+    "gaysesg",
+    "GeorgeKan",
+    "QUETIAPINUM_BOY",
+    "oppionme"
+  ],
+  "message_counts": {
+    "gaysesg": 4,
+    "GeorgeKan": 14,
+    "QUETIAPINUM_BOY": 23,
+    "oppionme": 3
+  },
+  "themes": [
+    "Шутки и взаимные подколы",
+    "Обсуждение профиля и публичных фото",
+    "Еда и приготовление сосисок/макарон",
+    "Комментарий о счётчике в описании группы",
+    "Возвращение участника в чат и реакция на это"
+  ],
+  "communication_style": {
+    "gaysesg": "Короткие резкие сообщения, выражающие недовольство или сарказм.",
+    "GeorgeKan": "Спокойные подколы, бытовые обсуждения, попытки навести порядок.",
+    "QUETIAPINUM_BOY": "Наиболее активный, эмоциональный стиль, много коротких сообщений подряд, шутки и самоирония.",
+    "oppionme": "Редкие, но эмоционально окрашенные комментарии."
+  },
+  "interactions": [
+    {
+      "from": "GeorgeKan",
+      "to": "QUETIAPINUM_BOY",
+      "type": "mention",
+      "message_id": 80985
+    },
+    {
+      "from": "QUETIAPINUM_BOY",
+      "to": "GeorgeKan",
+      "type": "reply_context",
+      "message_ids": [80986, 80987, 80989, 80990, 80993]
+    },
+    {
+      "from": "GeorgeKan",
+      "to": "QUETIAPINUM_BOY",
+      "type": "direct_discussion",
+      "message_ids": [81003, 80996, 80999]
+    },
+    {
+      "from": "oppionme",
+      "to": "QUETIAPINUM_BOY",
+      "type": "reply_context",
+      "message_id": 81008
+    }
+  ]
+}

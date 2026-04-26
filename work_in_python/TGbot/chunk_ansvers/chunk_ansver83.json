@@ -1,0 +1,53 @@
+{
+  "participants": [
+    "iris_cm_bot",
+    "GeorgeKan",
+    "gaysesg",
+    "oppionme"
+  ],
+  "message_count": {
+    "iris_cm_bot": 30,
+    "GeorgeKan": 20,
+    "gaysesg": 15,
+    "oppionme": 25
+  },
+  "main_topics": [
+    "погода",
+    "городские объекты",
+    "обмен шутками и реакциями",
+    "поиск информации через бота"
+  ],
+  "communication_style": {
+    "iris_cm_bot": "формальный, информативный, выдаёт погодные сводки",
+    "GeorgeKan": "неформальный, короткие команды, иногда шутки",
+    "gaysesg": "короткие вопросы, уточнения, иногда юмор",
+    "oppionme": "интерактивный, реагирует на бота и других участников, иногда грубоватый юмор"
+  },
+  "interactions": [
+    {
+      "from": "GeorgeKan",
+      "to": "iris_cm_bot",
+      "type": "запрос погоды"
+    },
+    {
+      "from": "gaysesg",
+      "to": "iris_cm_bot",
+      "type": "запрос погоды"
+    },
+    {
+      "from": "oppionme",
+      "to": "iris_cm_bot",
+      "type": "запрос погоды"
+    },
+    {
+      "from": "GeorgeKan",
+      "to": "gaysesg",
+      "type": "комментарий/шутка"
+    },
+    {
+      "from": "oppionme",
+      "to": "GeorgeKan",
+      "type": "комментарий/шутка"
+    }
+  ]
+}

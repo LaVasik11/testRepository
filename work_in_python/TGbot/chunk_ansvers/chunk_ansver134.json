@@ -1,0 +1,45 @@
+{
+  "participants": [
+    "QUETIAPINUM_BOY",
+    "GeorgeKan",
+    "oppionme"
+  ],
+  "message_counts": {
+    "QUETIAPINUM_BOY": 22,
+    "GeorgeKan": 18,
+    "oppionme": 11
+  },
+  "main_topics": [
+    "здоровье и геморрой",
+    "шутки и оскорбления",
+    "обсуждение внешнего вида и поведения",
+    "пранки и действия с другими участниками"
+  ],
+  "communication_styles": {
+    "QUETIAPINUM_BOY": "короткие фразы, сарказм, грубый юмор, иногда провокационные высказывания",
+    "GeorgeKan": "аналитические и юмористические комментарии, выражение удивления и недовольства, иногда длинные размышления",
+    "oppionme": "ироничные и неформальные комментарии, вставки эмоций и междометий"
+  },
+  "interactions": [
+    {
+      "from": "QUETIAPINUM_BOY",
+      "to": "GeorgeKan",
+      "type": "ответ/комментарий"
+    },
+    {
+      "from": "GeorgeKan",
+      "to": "QUETIAPINUM_BOY",
+      "type": "ответ/комментарий"
+    },
+    {
+      "from": "oppionme",
+      "to": "GeorgeKan",
+      "type": "ответ/комментарий"
+    },
+    {
+      "from": "oppionme",
+      "to": "QUETIAPINUM_BOY",
+      "type": "ответ/комментарий"
+    }
+  ]
+}

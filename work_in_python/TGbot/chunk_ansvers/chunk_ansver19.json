@@ -1,0 +1,48 @@
+{
+  "participants": [
+    "QUETIAPINUM_BOY",
+    "gaysesg",
+    "GeorgeKan",
+    "oppionme"
+  ],
+  "message_counts": {
+    "QUETIAPINUM_BOY": 27,
+    "gaysesg": 6,
+    "GeorgeKan": 28,
+    "oppionme": 3
+  },
+  "topics": [
+    "Обсуждение покупки и содержания собак",
+    "Языковые навыки и международные отношения",
+    "Разговоры о технологиях и нейросетях",
+    "Личные шутки и оскорбления между участниками"
+  ],
+  "communication_style": {
+    "QUETIAPINUM_BOY": "Эмоциональный, саркастический, иногда агрессивный, использует сокращения и английские вставки",
+    "gaysesg": "Короткие вопросы и комментарии, иногда с юмором",
+    "GeorgeKan": "Разговорный, шутливый, иногда с сарказмом и личными наблюдениями",
+    "oppionme": "Прямолинейный, грубый, критический"
+  },
+  "interactions": [
+    {
+      "from": "QUETIAPINUM_BOY",
+      "to": "GeorgeKan",
+      "messages": ["И на Английском приговаривая «please no not this dog this bitch is mine please»", "Не отдавай"]
+    },
+    {
+      "from": "gaysesg",
+      "to": "GeorgeKan",
+      "messages": ["Ты в аренду его сдаёшь или че", "За собакеном"]
+    },
+    {
+      "from": "GeorgeKan",
+      "to": "QUETIAPINUM_BOY",
+      "messages": ["Так он еще и платит за него", "Мне надо будет с ним на инглише базарить"]
+    },
+    {
+      "from": "oppionme",
+      "to": "QUETIAPINUM_BOY",
+      "messages": ["ты тупая сука", "но тебе не платят"]
+    }
+  ]
+}

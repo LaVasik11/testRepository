@@ -1,0 +1,43 @@
+{
+  "participants": [
+    "oppionme",
+    "GeorgeKan",
+    "QUETIAPINUM_BOY",
+    "iris_cm_bot"
+  ],
+  "message_count": {
+    "oppionme": 25,
+    "GeorgeKan": 14,
+    "QUETIAPINUM_BOY": 12,
+    "iris_cm_bot": 2
+  },
+  "main_topics": [
+    "погода (Кобулети, Высокий)",
+    "шутки и подшучивания над участниками",
+    "спортивные темы (зал, штанга)",
+    "личные высказывания и комментарии на действия друг друга"
+  ],
+  "communication_style": {
+    "oppionme": "неформальный, эмоциональный, с юмором, иногда грубый",
+    "GeorgeKan": "ироничный, наблюдательный, использует короткие фразы",
+    "QUETIAPINUM_BOY": "эмоциональный, краткий, реактивный, использует сленг",
+    "iris_cm_bot": "автоматический, информативный, нейтральный стиль"
+  },
+  "interactions": [
+    {
+      "from": "oppionme",
+      "to": "GeorgeKan",
+      "type": "ответ/комментарий"
+    },
+    {
+      "from": "QUETIAPINUM_BOY",
+      "to": "oppionme",
+      "type": "ответ/комментарий"
+    },
+    {
+      "from": "GeorgeKan",
+      "to": "QUETIAPINUM_BOY",
+      "type": "ответ/комментарий"
+    }
+  ]
+}

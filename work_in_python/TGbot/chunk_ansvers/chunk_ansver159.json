@@ -1,0 +1,50 @@
+{
+  "participants": [
+    "GeorgeKan",
+    "bfcrazy",
+    "gaysesg",
+    "oppionme",
+    "iris_cm_bot"
+  ],
+  "message_count": {
+    "GeorgeKan": 29,
+    "bfcrazy": 22,
+    "gaysesg": 26,
+    "oppionme": 3,
+    "iris_cm_bot": 5
+  },
+  "topics": [
+    "Игры: карты, гартик, онлайн-игры",
+    "Общий сбор / созыв участников",
+    "Обсуждение кто дома / кто может играть",
+    "Шутки, ругань, троллинг",
+    "Ссылки на игры"
+  ],
+  "communication_style": {
+    "GeorgeKan": "неформальный, прямой, иногда ленивый/неохотный тон",
+    "bfcrazy": "агрессивно-шутливый, много мата, подгоняет других",
+    "gaysesg": "короткие фразы, зовёт играть, много обращений к другим",
+    "oppionme": "редкие короткие реплики",
+    "iris_cm_bot": "служебные уведомления о командах"
+  },
+  "interactions": [
+    {
+      "from": "gaysesg",
+      "to": "GeorgeKan",
+      "type": "mention",
+      "examples": ["@GeorgeKan"]
+    },
+    {
+      "from": "gaysesg",
+      "to": "bfcrazy",
+      "type": "mention",
+      "examples": ["[bfcrazyпоп](tg://user?id=8132541739)"]
+    },
+    {
+      "from": "iris_cm_bot",
+      "to": ["GeorgeKan", "gaysesg", "другие участники"],
+      "type": "system_notifications",
+      "examples": ["объявил общий сбор"]
+    }
+  ]
+}

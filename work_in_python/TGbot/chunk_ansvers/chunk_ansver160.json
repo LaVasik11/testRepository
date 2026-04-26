@@ -1,0 +1,59 @@
+{
+  "participants": [
+    "GeorgeKan",
+    "bfcrazy",
+    "oppionme",
+    "gaysesg"
+  ],
+  "message_counts": {
+    "GeorgeKan": 53,
+    "bfcrazy": 22,
+    "oppionme": 12,
+    "gaysesg": 10
+  },
+  "main_topics": [
+    "Рофлы и шуточные сообщения",
+    "Обсуждение форумной подписи и ссылок",
+    "Разговоры о школе, еде, каникулы",
+    "Обсуждение банов и форумных аккаунтов",
+    "Подшучивание друг над другом"
+  ],
+  "communication_style": {
+    "GeorgeKan": "Доминирующий в переписке, много шуток, рофлов, коротких сообщений, часто задаёт тон разговора.",
+    "bfcrazy": "Отвечает в стиле рофлов, иногда резко, много коротких реплик.",
+    "oppionme": "Шутливый стиль, реагирует на сообщения других, участвует в рофлах.",
+    "gaysesg": "Короткие эмоциональные сообщения, поддерживает разговор, делает уточнения."
+  },
+  "interactions": [
+    {
+      "from": "GeorgeKan",
+      "to": "bfcrazy",
+      "type": "mention",
+      "examples": ["id 22633"]
+    },
+    {
+      "from": "GeorgeKan",
+      "to": "gaysesg",
+      "type": "mention",
+      "examples": ["id 22632"]
+    },
+    {
+      "from": "gaysesg",
+      "to": "GeorgeKan",
+      "type": "direct_reply_in_context",
+      "examples": ["id 22567", "id 22600"]
+    },
+    {
+      "from": "oppionme",
+      "to": "GeorgeKan",
+      "type": "contextual_replies",
+      "examples": ["id 22652", "id 22617"]
+    },
+    {
+      "from": "bfcrazy",
+      "to": "GeorgeKan",
+      "type": "contextual_replies",
+      "examples": ["id 22642", "id 22641"]
+    }
+  ]
+}

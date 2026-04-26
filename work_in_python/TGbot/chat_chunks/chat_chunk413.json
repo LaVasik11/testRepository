@@ -1,0 +1,902 @@
+[
+  {
+    "id": 86058,
+    "date": "2025-09-22 09:10:28+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "да всё ровно хуёво видно"
+  },
+  {
+    "id": 86057,
+    "date": "2025-09-22 09:10:26+00:00",
+    "sender_name": "oppionme",
+    "text": "уебак ты ничего не сделал"
+  },
+  {
+    "id": 86056,
+    "date": "2025-09-22 09:10:19+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "builtin_export(t_minishell *sh);int     builtin_uns\net(t_minishell \n*sh);int     set_env_value(char ***envp, const char *key, const ch\nar *value);char    *copy_escaped_char(char *line, int *i);ch\n\nar    *append_segment(t_minishe\nll *sh, int *i, int end, char *result);char    *handle_backslash_dqu\note(t_minishell *sh, int *i, int end,\\    char *res\nult);char    *handle_dollar_dquote(t_minishell\n *sh, int *i, char *result);char   \n *process_dollar(t_minishell *sh, int *i, char \n*result);int     is_builtin_cmd(char *cmd);vo\nid    execute_builtin_in_parent(t_minishell *sh, in\nt start, int end);char    **\nadd_en\nv_entry(char **envp, char *new_entry);int     print_working_directory(t_minishell *sh);int     builtin_echo(t_minishell *sh);void    update_fds(t_minishell *sh, int *prev_fd);int     is_redirections(t_minishell *sh, int i);void    check_no_command_redirection(t_minishell *sh);void    free_array(char **arr);#endif"
+  },
+  {
+    "id": 86055,
+    "date": "2025-09-22 09:10:19+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "/* ************************************************************************** */\n/*                                                                            */\n/*                                                        :::      ::::::::   */\n/*   minishell.h                                        :+:      :+:    :+:   */\n/*                                                    +:+ +:+         +:+     */\n/*   By: georgy-kankiya <georgy-kankiya@student.    +#+  +:+       +#+        */\n/*                                                +#+#+#+#+#+   +#+           */\n/*   Created: 2025/05/16 17:56:22 by gkankia           #+#    #+#             */\n/*   Updated: 2025/09/22 11:52:40 by georgy-kank      ###   ########.fr       */\n/*                                                                            */\n/* ************************************************************************** */\n\n#ifndef MINISHELL_H\n# define MINISHELL_H\n\n# include <stdio.h>\n# include <errno.h>\n# include <stdlib.h>\n# include <unistd.h>\n# include <readline/readline.h>\n# include <readline/history.h>\n# include <string.h>\n# include <sys/wait.h>\n# include <limits.h>\n# include <linux/limits.h>\n# include \"libft.h\"\n# include <signal.h>\n# include <fcntl.h>\n# include <sys/stat.h>\n\n# define MAX_ARGS 100\n# define RESET      \"\\001\\033[0m\\002\"\n# define RED  \"\\001\\033[1;31m\\002\"\n# define CYAN   \"\\001\\033[1;36m\\002\"\n\ntypedef struct s_minishell\n{\n    char    \n*line;    cha\nr    **args; \n   char    *\n*envp;    int\n     in_fd;    in\nt     out_fd;   \n int     is_runn\ning;    int   \n\n  exit_code;    pid_t   last_pid\n;\n}   t_minishell;t\nypedef struct s\n_subprocess_\ndata{    int     p\nipe_fd[2];    int   \n\n  has_pipe;    char    **cmd;\n \n   int     redir_\nerror;}   t_s\nubprocess_d\nata;typedef struct \ns_builtin_exec{    t\n_minishell *sh;   \n int         star\n\nt;    int         end;    int    \n     saved_stdin;    int         saved_stdou\nt;    char        **cmd_a\nrgv;}   t_builtin_exec;void    init\n_shell(t_minishell *sh);int     init_e\nnv(t_minishell *sh, char **envp);void\n    setup_signals(void);void   \n check_signal(t_minishell *\nsh);void    execute_command(t_minishel\nl *sh);void    free_minishell(t_minishell *sh);int     here_doc(char \n*delimiter);int     has_pipe(char **args);int     execut\ne_builtin(t_minishell *sh);vo\n\nid    handle_child_fds(t_minishell *sh, int pipe_fd\n[2], int has_pipe);void    handle_parent_fds(t_minishell *sh, \nint pipe_fd[2],\\    int has_pipe, in\nt *prev_fd);char    **build_argv(char **args, \nint start, int end);int     handle_redirections(t_minishell *sh, int\n\n start, int end);void    child_proce\nss(t_minishell *sh,\\    t_subprocess_data *data, int start, in\nt end);void    exec_subcmd(t_minishell *sh, int\n start, int end, int *prev_fd);char    **parse_in\nput(t_minishell *sh);int     append_arg(char **args, int *k\n, t_minishell *sh, int *i);char    *copy_quoted_arg(t_m\ninishell *sh, int *i);ch\nar    *copy_unquoted_arg(t_minishell *sh, in\nt *i);char    *copy_double_quoted(t_minishell *sh, int\n *i, int end);char    *copy_double_quoted_part(t_mi\nnishell *sh, int *i,\\    int end, char *result);\nchar    *parse_dollar(t_minishell *s\nh, int *i);char    *copy_single_quoted(char *line, int \n*i, int end);char    *\ncopy_segment(char *line,\n int start, int end);char    *copy_unq\nuoted_segment(char *line, int *i);int   \n  skip_spaces(char *line, int i);int     find\n_closing_quote(char *line, int i, char quote);int\n\n     is_quote(char c);int     is_speci\nal(char c);void    free_all(\nchar **args, int count);char    *s\ntr_join_free(char *s1, char *s2);char    *get_e\nnv_value(char **envp, char *name);int \n    check_infiles(char **args, t_minishell *sh);void    free_all(char \n\n**args, int count);void    free_args(ch\nar **args);char    *get_prompt(t_mi\nnishell *sh);char    *find_in_path\n(t_minishell *sh, char *cmd);char    \n*join_path(char *dir, char *cmd);voi\n\nd    exit_with_error(t_minishell *sh, char *msg, int status, int num)\n;int     change_directory(t_minishell *sh);i\nnt     builtin_exit(t_minishell *sh);int     builtin_env(t_minishell \n*sh);int"
+  },
+  {
+    "id": 86054,
+    "date": "2025-09-22 09:09:59+00:00",
+    "sender_name": "oppionme",
+    "text": "поствьь"
+  },
+  {
+    "id": 86053,
+    "date": "2025-09-22 09:09:58+00:00",
+    "sender_name": "oppionme",
+    "text": "моноширмнный"
+  },
+  {
+    "id": 86052,
+    "date": "2025-09-22 09:09:55+00:00",
+    "sender_name": "oppionme",
+    "text": "и в форматирование"
+  },
+  {
+    "id": 86051,
+    "date": "2025-09-22 09:09:50+00:00",
+    "sender_name": "oppionme",
+    "text": "выдели его"
+  },
+  {
+    "id": 86050,
+    "date": "2025-09-22 09:09:48+00:00",
+    "sender_name": "gaysesg",
+    "text": "Удали"
+  },
+  {
+    "id": 86049,
+    "date": "2025-09-22 09:09:46+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "ну круто видно"
+  },
+  {
+    "id": 86048,
+    "date": "2025-09-22 09:09:46+00:00",
+    "sender_name": "oppionme",
+    "text": "ебат"
+  },
+  {
+    "id": 86047,
+    "date": "2025-09-22 09:09:43+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "а"
+  },
+  {
+    "id": 86046,
+    "date": "2025-09-22 09:09:40+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "`builtin_export(t_minishell *sh);int     builtin_uns\net(t_minishell \n*sh);int    ` `set_env_value(char ***envp, const char *key, const ch\nar *value);char    *copy_e`s`caped_char(char *line, int *i);ch\n\nar    *append_segment(t_minishe\nll *sh, int *`i`, int end, char *result);char    *handle_backslash_dqu\note(t_minishell *sh, int `*`i, int end,\\    char *res\nult);char    *handle_dollar_dquote(t_minishell\n *sh, i`n`t *i, char *result);char   \n *process_dollar(t_minishell *sh, int *i, char \n*res`u`lt);int     is_builtin_cmd(char *cmd);vo\nid    execute_builtin_in_parent(t_minis`h`ell *sh, in\nt start, int end);char    **\nadd_en\nv_entry(char **envp, char *new_e`n`try);int     print_working_directory(t_minishell *sh);int     builtin_echo(t_min`i`shell *sh);void    update_fds(t_minishell *sh, int *prev_fd);int     is_redirect`i`ons(t_minishell *sh, int i);void    check_no_command_redirection(t_minishell *sh`);void    free_array(char **arr);#endif"
+  },
+  {
+    "id": 86045,
+    "date": "2025-09-22 09:09:40+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "`/* ************************************************************************** */`\n`/*                                                                            */`\n`/*                                                        :::      ::::::::   */`\n`/*   minishell.h                                        :+:      :+:    :+:   */`\n`/*                                                    +:+ +:+         +:+     */`\n`/*   By: georgy-kankiya <georgy-kankiya@student.    +#+  +:+       +#+        */`\n`/*                                                +#+#+#+#+#+   +#+           */`\n`/*   Created: 2025/05/16 17:56:22 by gkankia           #+#    #+#             */`\n`/*   Updated: 2025/09/22 11:52:40 by georgy-kank      ###   ########.fr       */`\n`/*                                                                            */`\n`/* ************************************************************************** */`\n\n#ifndef MINISHELL_H\n# define MINISHELL_H\n\n# include <stdio.h>\n# include <errno`.h>\n# include <stdl`i`b.h>\n# include <unis`td`.h>\n# include <read`l`ine/readline.h>\n# i`n`clude <readline/hist`o`ry.h>\n# include <str`i`ng.h>\n# include <sys/wait.h>\n# `i`nclude <limits.h>\n# include <l`i`nux/limits.h>\n# incl`u`de \"libft.h\"\n# include` `<signal.h>\n# include` `<fcntl.h>\n# include <sys/s`t`at.h>\n\n# define MAX`_`ARGS 100\n# define RE`S`ET      \"\\001\\033[0`m`\\002\"\n# define RED  \"\\`00`1\\033[1;31m\\002\"\n# de`f`ine CYAN   \"\\001\\033[1;36m\\002\"\n\ntype`d`ef struct s_minishell\n{\n    char  ` ` \n*line;    cha\nr    **args; \n   cha`r `   *\n*envp;    int\n     in`_`f`d`;    in\nt     out_`f`d;   \n int     is_r`u`nn\ning;    int   \n\n`  `exit_code;    pid_`t`   last_pid\n;\n}   t`_`minishell;t\nypedef stru`ct` s\n_subprocess_\ndata{ `  ` int     p\nipe_fd[2];`  `  int   \n\n  has_pipe;    char    **cmd;\n \n   int`   `  redir_\nerror;}   t_s\nu`b`process_d\nata;typedef` s`truct \ns_builtin_e`x`ec{    t\n_minishell *sh;`  ` \n int         star\n\nt`; `   int         end;    int   ` `\n     saved_stdin;   ` `int         saved_stdo`u\nt`;    char        **cmd_a\nrgv;}   t_builtin_exec;`v`oid    init\n_shell(t_minishel`l` *sh);int     init_e\nnv(t_m`i`nishell *sh, char **envp);void\n    setup_signals(void);`v`oid   \n check_signal(t_minishell *\nsh);void    `e`xecute_command(t_minishel\nl `*`sh);void    free_minishell(t_minishell` *`sh);int     here_doc(char \n*delimiter);in`t`     has_pipe(char **args);int     execut\ne_builtin(t_minishell *sh);vo\n\ni`d`    handle_child_fds(t_minishell *sh, int pipe_fd\n[2], int has_pipe);vo`i`d    handle_parent_fds(t_minishell *sh, \nint pipe_fd[2],\\    int has_pip`e, `in\nt *prev_fd);char    **build_argv(char **args, \nint start`,` int end);int     handle_redirec`t`ions(t_minishell *sh, int\n\n start, int end);void    ch`i`ld_proce\nss(t_minishell *sh,\\    t_subprocess_data *data, int sta`rt`, in\nt end);void    exec_subcmd(t_minis`h`ell *sh, int\n start, int end, int *prev_fd);char ` `  **parse_in\nput(t_minishell *sh);int     append_arg(char **args, int *`k`\n, t_minishell *sh, int *i);char    *co`p`y_quoted_arg(t_m\ninishell *sh, int *i);ch\nar    *copy_unquoted_ar`g`(t_minishell *sh, in\nt *i);char    *copy_double_qu`o`ted(t_minishell *sh, int\n *i, int end);char    *copy`_d`ouble_quoted_part(t_mi\nnishell *sh, int *i,\\    int end, char `*`result);\nchar    *parse_dollar(t_minishell *s\nh, int *i);c`h`ar    *copy_single_quoted(c`h`ar *line, int \n*i, int end);char    *\ncopy_segm`e`nt(char *line,\n int start, int end);char    *copy_unq\nuot`e`d_segment(char *line, int *i);int   \n  skip_spaces(cha`r `*line, int i);int     find\n_closing_quote(char *lin`e`, int i, char quote);int\n\n     is_quote`(`char c);int     is_speci\nal(char c);void    free_all(\nchar` `**args, int count);char  `  `*s\ntr_join_free(char *s1, c`h`ar *s2);char    *get_e\nnv_value(char **en`v`p, char *name);int \n    check_infiles(char `*`*args, t_minishell *sh);void    free_all(char \n\n`*`*args, int count);void    free_args(ch\nar **args);ch`a`r    *get_prompt(t_mi\nnishell *sh);char  `  `*find_in_path\n(t_minishell *sh,` `char *cmd);char    \n*join_path(char *`d`ir, char *cmd);voi\n\nd    exit_with_error(t_minishe`l`l *sh, char *msg, int status, int num)\n;i`n`t     change_directory(t_minishell *sh);i\nnt     builtin_exit(t_minishell` *s`h);int     builtin_env(t_minishell \n*sh);int`"
+  },
+  {
+    "id": 86043,
+    "date": "2025-09-22 09:09:26+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "ща скину свой заголовочный файл"
+  },
+  {
+    "id": 86042,
+    "date": "2025-09-22 09:09:20+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "пупупу"
+  },
+  {
+    "id": 86041,
+    "date": "2025-09-22 09:09:19+00:00",
+    "sender_name": "oppionme",
+    "text": "что бы написать минищел"
+  },
+  {
+    "id": 86040,
+    "date": "2025-09-22 09:09:14+00:00",
+    "sender_name": "oppionme",
+    "text": "сколько ты библиотек.юзаешь"
+  },
+  {
+    "id": 86038,
+    "date": "2025-09-22 09:09:01+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "у меня другой проект на с++"
+  },
+  {
+    "id": 86037,
+    "date": "2025-09-22 09:08:57+00:00",
+    "sender_name": "oppionme",
+    "text": "фуу"
+  },
+  {
+    "id": 86036,
+    "date": "2025-09-22 09:08:53+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "да"
+  },
+  {
+    "id": 86035,
+    "date": "2025-09-22 09:08:46+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "ну пол года где то"
+  },
+  {
+    "id": 86034,
+    "date": "2025-09-22 09:08:17+00:00",
+    "sender_name": "oppionme",
+    "text": "что ли"
+  },
+  {
+    "id": 86033,
+    "date": "2025-09-22 09:08:15+00:00",
+    "sender_name": "oppionme",
+    "text": "а чё ты на си пишешь его"
+  },
+  {
+    "id": 86032,
+    "date": "2025-09-22 09:08:14+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "А сколько ты там живешь"
+  },
+  {
+    "id": 86031,
+    "date": "2025-09-22 09:08:11+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Подожди"
+  },
+  {
+    "id": 86030,
+    "date": "2025-09-22 09:02:27+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "вот полы мыть я хз, не разу не делал"
+  },
+  {
+    "id": 86029,
+    "date": "2025-09-22 09:01:57+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "а дальше даже кайф"
+  },
+  {
+    "id": 86028,
+    "date": "2025-09-22 09:01:53+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "просто самое заёбное начать"
+  },
+  {
+    "id": 86027,
+    "date": "2025-09-22 09:01:47+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "самая изечная работа"
+  },
+  {
+    "id": 86026,
+    "date": "2025-09-22 09:01:42+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "а хуйли тебе посуду то лень помыть"
+  },
+  {
+    "id": 86025,
+    "date": "2025-09-22 09:00:23+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Посуду потом помой"
+  },
+  {
+    "id": 86024,
+    "date": "2025-09-22 09:00:21+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Вся хуйня"
+  },
+  {
+    "id": 86023,
+    "date": "2025-09-22 09:00:20+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Поперчить"
+  },
+  {
+    "id": 86022,
+    "date": "2025-09-22 09:00:18+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Посолить"
+  },
+  {
+    "id": 86021,
+    "date": "2025-09-22 09:00:16+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "15 штук"
+  },
+  {
+    "id": 86020,
+    "date": "2025-09-22 09:00:13+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Можешь мне пельменей сварить"
+  },
+  {
+    "id": 86019,
+    "date": "2025-09-22 09:00:09+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Жора"
+  },
+  {
+    "id": 86018,
+    "date": "2025-09-22 08:58:31+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "это если поймают спортики интузиасты которм не нравится что у них на раёне наркоту покупают"
+  },
+  {
+    "id": 86017,
+    "date": "2025-09-22 08:58:31+00:00",
+    "sender_name": "gaysesg",
+    "text": "Жора стань агентом кгб"
+  },
+  {
+    "id": 86016,
+    "date": "2025-09-22 08:58:11+00:00",
+    "sender_name": "gaysesg",
+    "text": "По ебалу"
+  },
+  {
+    "id": 86015,
+    "date": "2025-09-22 08:58:00+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "сколько дают за снятие клада"
+  },
+  {
+    "id": 86014,
+    "date": "2025-09-22 08:57:55+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "и будешь сидеть"
+  },
+  {
+    "id": 86013,
+    "date": "2025-09-22 08:57:51+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "надеюсь тебя поймают легавые"
+  },
+  {
+    "id": 86012,
+    "date": "2025-09-22 08:57:40+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "На дорожку чисто хапануть"
+  },
+  {
+    "id": 86011,
+    "date": "2025-09-22 08:57:36+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Перед собесом"
+  },
+  {
+    "id": 86010,
+    "date": "2025-09-22 08:57:34+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Я хапану на дорожнику"
+  },
+  {
+    "id": 86009,
+    "date": "2025-09-22 08:57:25+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Надо"
+  },
+  {
+    "id": 86008,
+    "date": "2025-09-22 08:57:23+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "2700"
+  },
+  {
+    "id": 86007,
+    "date": "2025-09-22 08:57:21+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "27хх"
+  },
+  {
+    "id": 86006,
+    "date": "2025-09-22 08:57:19+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Бля может скинетесь мне на хапулю"
+  },
+  {
+    "id": 86005,
+    "date": "2025-09-22 08:57:10+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Ох Жора 😆😆😆"
+  },
+  {
+    "id": 86004,
+    "date": "2025-09-22 08:57:08+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "кто жзнал то"
+  },
+  {
+    "id": 86003,
+    "date": "2025-09-22 08:57:05+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "бля уже реально не знаю"
+  },
+  {
+    "id": 86002,
+    "date": "2025-09-22 08:56:56+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "сваркой🤣😂😂😅🤣😆😁"
+  },
+  {
+    "id": 86001,
+    "date": "2025-09-22 08:56:55+00:00",
+    "sender_name": "gaysesg",
+    "text": "Из холодильника достать надо"
+  },
+  {
+    "id": 86000,
+    "date": "2025-09-22 08:56:42+00:00",
+    "sender_name": "gaysesg",
+    "text": "Жора домой когда"
+  },
+  {
+    "id": 85999,
+    "date": "2025-09-22 08:56:39+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Как варить пельмени"
+  },
+  {
+    "id": 85998,
+    "date": "2025-09-22 08:56:37+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Жора"
+  },
+  {
+    "id": 85997,
+    "date": "2025-09-22 08:56:31+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "по хуйне пофиксить"
+  },
+  {
+    "id": 85996,
+    "date": "2025-09-22 08:56:28+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "там чуть чуть осталось"
+  },
+  {
+    "id": 85995,
+    "date": "2025-09-22 08:56:22+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "я заебался"
+  },
+  {
+    "id": 85994,
+    "date": "2025-09-22 08:56:21+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "сеня сделай за меня проект"
+  },
+  {
+    "id": 85993,
+    "date": "2025-09-22 08:56:16+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "ты уже выучил си?"
+  },
+  {
+    "id": 85992,
+    "date": "2025-09-22 08:56:12+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "сеня"
+  },
+  {
+    "id": 85991,
+    "date": "2025-09-22 08:56:10+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "столько моментов есть которые надо пророботать из а всем услежить"
+  },
+  {
+    "id": 85990,
+    "date": "2025-09-22 08:55:55+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "ебучая тварина"
+  },
+  {
+    "id": 85989,
+    "date": "2025-09-22 08:55:50+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "я ненавижу эту суку"
+  },
+  {
+    "id": 85988,
+    "date": "2025-09-22 08:55:47+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "оффицально"
+  },
+  {
+    "id": 85987,
+    "date": "2025-09-22 08:55:45+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "я хейнтер минишела"
+  },
+  {
+    "id": 85984,
+    "date": "2025-09-22 08:54:57+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "А потом на работу"
+  },
+  {
+    "id": 85983,
+    "date": "2025-09-22 08:54:54+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "До 6 утра"
+  },
+  {
+    "id": 85982,
+    "date": "2025-09-22 08:54:51+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Думай о суициде"
+  },
+  {
+    "id": 85981,
+    "date": "2025-09-22 08:54:49+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Но тебе нельзя спать до 6 утра"
+  },
+  {
+    "id": 85980,
+    "date": "2025-09-22 08:54:45+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "У тебя завтра к 7 утра работа"
+  },
+  {
+    "id": 85979,
+    "date": "2025-09-22 08:54:43+00:00",
+    "sender_name": "oppionme",
+    "text": "AT EASE"
+  },
+  {
+    "id": 85977,
+    "date": "2025-09-22 08:54:39+00:00",
+    "sender_name": "gaysesg",
+    "text": "Понял"
+  },
+  {
+    "id": 85976,
+    "date": "2025-09-22 08:54:37+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "?"
+  },
+  {
+    "id": 85975,
+    "date": "2025-09-22 08:54:31+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Никита ты запомнил"
+  },
+  {
+    "id": 85974,
+    "date": "2025-09-22 08:54:27+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "@gaysesg"
+  },
+  {
+    "id": 85973,
+    "date": "2025-09-22 08:47:39+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Надо еще обязательно как то пьяному обосрать белые штаны и так ходить по центру"
+  },
+  {
+    "id": 85972,
+    "date": "2025-09-22 08:47:20+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "можешь еще какой то периуд побомжевать и учить жизни проходящих миомо детей"
+  },
+  {
+    "id": 85971,
+    "date": "2025-09-22 08:47:10+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "И пиздит. Их"
+  },
+  {
+    "id": 85970,
+    "date": "2025-09-22 08:47:09+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Чем у тебя"
+  },
+  {
+    "id": 85969,
+    "date": "2025-09-22 08:47:06+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Ведь у них больше шансов на гомо секс"
+  },
+  {
+    "id": 85968,
+    "date": "2025-09-22 08:47:02+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Завидуя что ты не такой молодой и красивый"
+  },
+  {
+    "id": 85967,
+    "date": "2025-09-22 08:46:58+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Доебываться до длинноволосых парней"
+  },
+  {
+    "id": 85966,
+    "date": "2025-09-22 08:46:54+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "А потом после тюрьмы будучи пидором"
+  },
+  {
+    "id": 85965,
+    "date": "2025-09-22 08:46:50+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "это надо"
+  },
+  {
+    "id": 85964,
+    "date": "2025-09-22 08:46:50+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "И стать гомиком там же"
+  },
+  {
+    "id": 85963,
+    "date": "2025-09-22 08:46:48+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "оо это да"
+  },
+  {
+    "id": 85962,
+    "date": "2025-09-22 08:46:36+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Обязательно не забыть еще сесть в тюрьму"
+  },
+  {
+    "id": 85961,
+    "date": "2025-09-22 08:45:42+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "надесюсь ты записывал"
+  },
+  {
+    "id": 85960,
+    "date": "2025-09-22 08:45:37+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "вцелом я думаю это все"
+  },
+  {
+    "id": 85959,
+    "date": "2025-09-22 08:45:25+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "не обезательно 1 семью создавать и ливать с нее"
+  },
+  {
+    "id": 85958,
+    "date": "2025-09-22 08:45:18+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "кста во тпока у тебя сын рос ты мог проделывать это все еще несколько раз"
+  },
+  {
+    "id": 85957,
+    "date": "2025-09-22 08:45:11+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "И попасть в вальгаллу"
+  },
+  {
+    "id": 85956,
+    "date": "2025-09-22 08:45:08+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "В которой ты умрешь"
+  },
+  {
+    "id": 85955,
+    "date": "2025-09-22 08:45:04+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "И устроить поножовщину"
+  },
+  {
+    "id": 85954,
+    "date": "2025-09-22 08:45:01+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "дада"
+  },
+  {
+    "id": 85953,
+    "date": "2025-09-22 08:45:01+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Объебаться на хате"
+  },
+  {
+    "id": 85952,
+    "date": "2025-09-22 08:44:58+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Солей"
+  },
+  {
+    "id": 85951,
+    "date": "2025-09-22 08:44:56+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Купить не знаю"
+  },
+  {
+    "id": 85950,
+    "date": "2025-09-22 08:44:53+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "А после отказа надо с полученных денег"
+  },
+  {
+    "id": 85949,
+    "date": "2025-09-22 08:44:45+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "и начинаешь унижатся и просить деньги"
+  },
+  {
+    "id": 85948,
+    "date": "2025-09-22 08:44:33+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "что бы не вырос тряпкой"
+  },
+  {
+    "id": 85947,
+    "date": "2025-09-22 08:44:30+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "и то что броил его только что бы он вкус жизни почувствовал"
+  },
+  {
+    "id": 85946,
+    "date": "2025-09-22 08:44:21+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "когда у тебя сын вырастит и станет успешным, нужно будет вернутся бухущим и начать затирать про то как сильно ты его любишь"
+  },
+  {
+    "id": 85945,
+    "date": "2025-09-22 08:44:07+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Ибо тебя наебали"
+  },
+  {
+    "id": 85944,
+    "date": "2025-09-22 08:44:03+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Которая завтра развалится"
+  },
+  {
+    "id": 85943,
+    "date": "2025-09-22 08:43:59+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Какую то"
+  },
+  {
+    "id": 85942,
+    "date": "2025-09-22 08:43:58+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Ну и на машину тоже взять"
+  },
+  {
+    "id": 85941,
+    "date": "2025-09-22 08:43:51+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Который ты пьяный утопишь в толчке"
+  },
+  {
+    "id": 85940,
+    "date": "2025-09-22 08:43:45+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "И пару кредитов еще не забыть на хуйню какую то вроде последнего айфона"
+  },
+  {
+    "id": 85939,
+    "date": "2025-09-22 08:43:41+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "что бы не только ребёнка ей оставить но и ипатеку"
+  },
+  {
+    "id": 85938,
+    "date": "2025-09-22 08:43:32+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "офформить можешь на жену"
+  },
+  {
+    "id": 85937,
+    "date": "2025-09-22 08:43:26+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "лет на 30"
+  },
+  {
+    "id": 85936,
+    "date": "2025-09-22 08:43:24+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "но перед зраводом ОБЕЗАТЕЛЬНО тебе надо будет взять ипотеку"
+  },
+  {
+    "id": 85935,
+    "date": "2025-09-22 08:40:04+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "И по возможности не плати алименты"
+  },
+  {
+    "id": 85934,
+    "date": "2025-09-22 08:39:58+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "И чтобы ты развелся только как она забеременеет последним ребенком"
+  },
+  {
+    "id": 85933,
+    "date": "2025-09-22 08:39:49+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Деритесь часто"
+  },
+  {
+    "id": 85932,
+    "date": "2025-09-22 08:39:47+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Типо друг друга не любите"
+  },
+  {
+    "id": 85931,
+    "date": "2025-09-22 08:39:44+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Только не забудь чтобы у вас были хуевые отношения"
+  },
+  {
+    "id": 85930,
+    "date": "2025-09-22 08:39:31+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Штуки 3-4"
+  },
+  {
+    "id": 85929,
+    "date": "2025-09-22 08:39:29+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "И с ней деток делаешь"
+  },
+  {
+    "id": 85928,
+    "date": "2025-09-22 08:39:27+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Нормальную работящую бабу"
+  },
+  {
+    "id": 85927,
+    "date": "2025-09-22 08:39:24+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Не альтушку какую нибудь"
+  },
+  {
+    "id": 85926,
+    "date": "2025-09-22 08:39:20+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Ближе к 25-30 короче находишь себе нормальную бабу"
+  },
+  {
+    "id": 85925,
+    "date": "2025-09-22 08:38:51+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "я думаю не стоит обьеснять что выходить на улицу и заводить какие то знакомства тебе не разрешено?"
+  },
+  {
+    "id": 85924,
+    "date": "2025-09-22 08:38:23+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "все"
+  },
+  {
+    "id": 85923,
+    "date": "2025-09-22 08:38:21+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "и в единственный выходной сидишь смотришь"
+  },
+  {
+    "id": 85922,
+    "date": "2025-09-22 08:38:15+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "с единственным первым каналом"
+  },
+  {
+    "id": 85921,
+    "date": "2025-09-22 08:38:08+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "ставишь себе телик"
+  },
+  {
+    "id": 85920,
+    "date": "2025-09-22 08:38:04+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "интерент у тебя в хате мы уже отключили"
+  },
+  {
+    "id": 85919,
+    "date": "2025-09-22 08:37:55+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Грузчик"
+  },
+  {
+    "id": 85918,
+    "date": "2025-09-22 08:37:54+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Раз грузчик"
+  },
+  {
+    "id": 85917,
+    "date": "2025-09-22 08:37:52+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Этот"
+  },
+  {
+    "id": 85916,
+    "date": "2025-09-22 08:37:50+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "В воскресенье как"
+  },
+  {
+    "id": 85915,
+    "date": "2025-09-22 08:37:46+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "6/1"
+  },
+  {
+    "id": 85914,
+    "date": "2025-09-22 08:37:43+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Хахаа да"
+  },
+  {
+    "id": 85913,
+    "date": "2025-09-22 08:37:39+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "офисным клерком выходишь завтра на работу"
+  },
+  {
+    "id": 85912,
+    "date": "2025-09-22 08:37:36+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Это нам не надо"
+  },
+  {
+    "id": 85911,
+    "date": "2025-09-22 08:37:33+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "По факту творцы мало получают"
+  },
+  {
+    "id": 85910,
+    "date": "2025-09-22 08:37:28+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Это хуйня всп"
+  },
+  {
+    "id": 85909,
+    "date": "2025-09-22 08:37:25+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Не дай даже и шанса своей творческой душе"
+  },
+  {
+    "id": 85908,
+    "date": "2025-09-22 08:37:18+00:00",
+    "sender_name": "QUETIAPINUM_BOY",
+    "text": "Музыкой позанимайся рисованием позанимайся неделю и потом все что купил для этого уничтожь короче"
+  },
+  {
+    "id": 85907,
+    "date": "2025-09-22 08:37:07+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "что бы татуировки сведены были"
+  },
+  {
+    "id": 85906,
+    "date": "2025-09-22 08:37:03+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "не ебёт"
+  },
+  {
+    "id": 85905,
+    "date": "2025-09-22 08:36:58+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "если нету то набиваешь потом сводишь"
+  },
+  {
+    "id": 85904,
+    "date": "2025-09-22 08:36:52+00:00",
+    "sender_name": "GeorgeKan",
+    "text": "свводишь татуировки"
+  }
+]

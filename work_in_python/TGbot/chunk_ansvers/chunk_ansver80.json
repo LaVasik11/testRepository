@@ -1,0 +1,37 @@
+{
+  "participants": [
+    "gaysesg",
+    "GemidlyBot",
+    "oppionme",
+    "QUETIAPINUM_BOY",
+    "GeorgeKan"
+  ],
+  "message_count": {
+    "gaysesg": 33,
+    "GemidlyBot": 11,
+    "oppionme": 36,
+    "QUETIAPINUM_BOY": 24,
+    "GeorgeKan": 46
+  },
+  "main_topics": [
+    "взаимодействие с ботом GemidlyBot",
+    "обсуждение котов и кошек",
+    "шутки и оскорбления между участниками",
+    "тематические мемы и игры",
+    "обсуждение веса и диет"
+  ],
+  "communication_style": {
+    "gaysesg": "агрессивный, провокационный, часто оскорбительный",
+    "GemidlyBot": "нейтральный, информативный, сдержанный",
+    "oppionme": "шутливый, разговорный, иногда грубый",
+    "QUETIAPINUM_BOY": "шутливый, провокационный, часто с эротическим подтекстом",
+    "GeorgeKan": "активный, ироничный, иногда провокационный"
+  },
+  "interactions": {
+    "gaysesg": ["GemidlyBot", "GeorgeKan", "QUETIAPINUM_BOY"],
+    "GemidlyBot": ["gaysesg", "GeorgeKan", "QUETIAPINUM_BOY"],
+    "oppionme": ["GeorgeKan", "QUETIAPINUM_BOY", "gaysesg"],
+    "QUETIAPINUM_BOY": ["gaysesg", "GeorgeKan", "oppionme"],
+    "GeorgeKan": ["gaysesg", "GemidlyBot", "oppionme", "QUETIAPINUM_BOY"]
+  }
+}

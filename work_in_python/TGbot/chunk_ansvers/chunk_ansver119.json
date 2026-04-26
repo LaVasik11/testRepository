@@ -1,0 +1,45 @@
+{
+"participants": [
+"oppionme",
+"GeorgeKan",
+"gaysesg",
+"QUETIAPINUM_BOY"
+],
+"message_counts": {
+"oppionme": 56,
+"GeorgeKan": 35,
+"gaysesg": 41,
+"QUETIAPINUM_BOY": 21
+},
+"main_topics": [
+"Обсуждение аниме и манги (Берсерк)",
+"Сюжет и логика действий персонажей",
+"Юмор и оскорбления между участниками",
+"Повседневные и бытовые ситуации (готовка, мытьё яиц)",
+"Личные взаимодействия и эмоции участников"
+],
+"communication_style": {
+"oppionme": "эмоциональный, часто ругательный, саркастический, выражает удивление и недовольство",
+"GeorgeKan": "ироничный, повествовательный, часто комментирует сюжет и физические действия персонажей",
+"gaysesg": "шутливый, разговорный, иногда оскорбительный, упоминает личные бытовые привычки",
+"QUETIAPINUM_BOY": "агрессивно-шутливый, демонстративный, использует альфа-выражения и сарказм"
+},
+"interactions": [
+{
+"from": "oppionme",
+"to": ["GeorgeKan", "gaysesg", "QUETIAPINUM_BOY"]
+},
+{
+"from": "GeorgeKan",
+"to": ["oppionme", "gaysesg"]
+},
+{
+"from": "gaysesg",
+"to": ["oppionme", "GeorgeKan", "QUETIAPINUM_BOY"]
+},
+{
+"from": "QUETIAPINUM_BOY",
+"to": ["oppionme", "gaysesg"]
+}
+]
+}

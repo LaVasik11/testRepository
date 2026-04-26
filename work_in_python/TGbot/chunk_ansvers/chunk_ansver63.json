@@ -1,0 +1,37 @@
+{
+  "participants": [
+    "GeorgeKan",
+    "gaysesg",
+    "QUETIAPINUM_BOY",
+    "oppionme"
+  ],
+  "message_count": {
+    "GeorgeKan": 54,
+    "gaysesg": 41,
+    "QUETIAPINUM_BOY": 33,
+    "oppionme": 22
+  },
+  "main_topics": [
+    "игры и внутриигровые взаимодействия (Brawl Stars, Fortnite, Team fights)",
+    "животные (голуби, попугаи, другие птицы)",
+    "шутки, юмор и лёгкий троллинг между участниками",
+    "названия и прозвища животных",
+    "повседневные взаимодействия и короткие реплики"
+  ],
+  "communication_style": {
+    "GeorgeKan": "неформальный, прямолинейный, часто резкий, использует сленг и ругательства, комментирует действия других",
+    "gaysesg": "неформальный, дружелюбный, иногда провокационный, активное участие в обсуждениях, использует эмодзи и упоминания",
+    "QUETIAPINUM_BOY": "неформальный, лаконичный, иногда юмористический, даёт советы и делится наблюдениями",
+    "oppionme": "игривый, шутливый, предлагает варианты и идеи, участвует в обсуждениях прозвищ и игр"
+  },
+  "interactions": [
+    {"from": "gaysesg", "to": "GeorgeKan", "type": "mention/response"},
+    {"from": "oppionme", "to": "gaysesg", "type": "mention/response"},
+    {"from": "GeorgeKan", "to": "QUETIAPINUM_BOY", "type": "discussion about birds"},
+    {"from": "QUETIAPINUM_BOY", "to": "GeorgeKan", "type": "discussion about birds"},
+    {"from": "GeorgeKan", "to": "gaysesg", "type": "discussion about games"},
+    {"from": "gaysesg", "to": "GeorgeKan", "type": "discussion about games"},
+    {"from": "oppionme", "to": "GeorgeKan", "type": "joking/response"},
+    {"from": "oppionme", "to": "QUETIAPINUM_BOY", "type": "discussion about birds"}
+  ]
+}

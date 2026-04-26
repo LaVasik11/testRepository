@@ -1,0 +1,41 @@
+{
+  "participants": [
+    "QUETIAPINUM_BOY",
+    "GeorgeKan",
+    "gaysesg",
+    "oppionme"
+  ],
+  "message_count": {
+    "QUETIAPINUM_BOY": 77,
+    "GeorgeKan": 63,
+    "gaysesg": 1,
+    "oppionme": 9
+  },
+  "main_topics": [
+    "Еда и столовка",
+    "Дом, жилье и переезд",
+    "Школа и обучение",
+    "Игры (Minecraft, Dota)",
+    "Шутки и ругань между участниками"
+  ],
+  "communication_style": {
+    "QUETIAPINUM_BOY": "Эмоциональный, часто шутливый, саркастический, использует сленг и ругань, короткие сообщения и вопросы",
+    "GeorgeKan": "Разговорный, повествовательный, иногда наставнический, поясняет ситуации, более структурированные сообщения",
+    "gaysesg": "Минимальное участие, короткие реплики",
+    "oppionme": "Импульсивный, эмоциональный, короткие сообщения, ругань и команды"
+  },
+  "interactions": [
+    {
+      "from": "GeorgeKan",
+      "to": "gaysesg",
+      "type": "mention",
+      "examples": ["@gaysesg доту когда"]
+    },
+    {
+      "from": "GeorgeKan",
+      "to": "QUETIAPINUM_BOY",
+      "type": "mention",
+      "examples": ["@QUETIAPINUM_BOY дозу не подскажешь?"]
+    }
+  ]
+}

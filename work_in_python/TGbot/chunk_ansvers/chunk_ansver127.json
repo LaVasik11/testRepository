@@ -1,0 +1,34 @@
+{
+  "participants": [
+    "QUETIAPINUM_BOY",
+    "GeorgeKan",
+    "oppionme",
+    "gaysesg"
+  ],
+  "message_counts": {
+    "QUETIAPINUM_BOY": 86,
+    "GeorgeKan": 57,
+    "oppionme": 17,
+    "gaysesg": 1
+  },
+  "main_topics": [
+    "повседневное общение и шутки",
+    "еда и готовка",
+    "ванная и туалетные ситуации",
+    "оплата и покупки",
+    "игровые и смешные моменты",
+    "обсуждение программирования (Котлин, Python, C++)"
+  ],
+  "communication_style": {
+    "QUETIAPINUM_BOY": "эмоциональный, экспрессивный, часто использует сленг и шутки, много коротких сообщений",
+    "GeorgeKan": "ироничный и юмористический, часто продолжает тему собеседника, использует длинные сообщения и детали",
+    "oppionme": "короткие ответы, иногда сарказм, реагирует на события и других участников",
+    "gaysesg": "редкие и минимальные комментарии, нейтральный стиль"
+  },
+  "interactions": {
+    "QUETIAPINUM_BOY": ["GeorgeKan", "oppionme"],
+    "GeorgeKan": ["QUETIAPINUM_BOY", "oppionme"],
+    "oppionme": ["QUETIAPINUM_BOY", "GeorgeKan"],
+    "gaysesg": []
+  }
+}

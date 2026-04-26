@@ -1,0 +1,40 @@
+{
+"participants": [
+"iris_cm_bot",
+"GeorgeKan",
+"gaysesg",
+"oppionme"
+],
+"message_counts": {
+"iris_cm_bot": 35,
+"GeorgeKan": 36,
+"gaysesg": 27,
+"oppionme": 52
+},
+"main_topics": [
+"дуэли и стрельба в Telegram-боте",
+"общение о личных ситуациях и приколах",
+"обсуждение планов и действий в жизни",
+"шутки и мемы между участниками"
+],
+"communication_style": {
+"iris_cm_bot": "формальный, автоматические уведомления и действия в игре",
+"GeorgeKan": "неформальный, саркастический, иногда грубый юмор, активно участвует в дискуссиях",
+"gaysesg": "неформальный, краткие фразы, часто с юмором, добавляет комментарии и оценки",
+"oppionme": "неформальный, эмоциональный, использует сленг, активно участвует в обсуждениях и ответах"
+},
+"interactions": {
+"GeorgeKan": {
+"replies_to": ["oppionme", "gaysesg"]
+},
+"oppionme": {
+"replies_to": ["GeorgeKan", "gaysesg"]
+},
+"gaysesg": {
+"replies_to": ["GeorgeKan", "oppionme"]
+},
+"iris_cm_bot": {
+"replies_to": []
+}
+}
+}

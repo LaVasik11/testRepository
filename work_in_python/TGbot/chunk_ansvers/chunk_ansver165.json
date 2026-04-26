@@ -1,0 +1,39 @@
+{
+  "participants": [
+    "oppionme",
+    "GeorgeKan",
+    "QUETIAPINUM_BOY"
+  ],
+  "message_counts": {
+    "oppionme": 62,
+    "GeorgeKan": 53,
+    "QUETIAPINUM_BOY": 35
+  },
+  "main_topics": [
+    "Физические упражнения и тренировки дома",
+    "Обсуждение зала и его пользы",
+    "Видеоуроки и лекции",
+    "Игры и воспоминания о прохождении по памяти",
+    "Шутки, мемы и легкий юмор в общении",
+    "Повседневные ситуации и личные действия"
+  ],
+  "communication_styles": {
+    "oppionme": "Разговорный, с юмором и неформальными выражениями, часто короткие реплики и междометия",
+    "GeorgeKan": "Подробные комментарии и рассказы, иногда с ссылками и личными наблюдениями, эмоциональные вставки",
+    "QUETIAPINUM_BOY": "Короткие прямолинейные фразы, часто с юмором и сарказмом, эмоциональные восклицания"
+  },
+  "interactions": [
+    {
+      "sender": "oppionme",
+      "replies_to": ["GeorgeKan", "QUETIAPINUM_BOY"]
+    },
+    {
+      "sender": "GeorgeKan",
+      "replies_to": ["oppionme", "QUETIAPINUM_BOY"]
+    },
+    {
+      "sender": "QUETIAPINUM_BOY",
+      "replies_to": ["GeorgeKan", "oppionme"]
+    }
+  ]
+}

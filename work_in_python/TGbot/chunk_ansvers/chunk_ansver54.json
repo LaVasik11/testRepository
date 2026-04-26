@@ -1,0 +1,39 @@
+{
+  "participants": [
+    "GeorgeKan",
+    "QUETIAPINUM_BOY",
+    "selfrapevictimbitchassnigga",
+    "oppionme",
+    "gaysesg"
+  ],
+  "message_count": {
+    "GeorgeKan": 65,
+    "QUETIAPINUM_BOY": 63,
+    "selfrapevictimbitchassnigga": 3,
+    "oppionme": 1,
+    "gaysesg": 6
+  },
+  "main_topics": [
+    "Воспоминания и истории из детства",
+    "Обсуждение фильмов и съемок (Форсаж, актеры)",
+    "Юмор, оскорбления, ругательства",
+    "Обсуждение школьных/кружковых ситуаций",
+    "Планы на лето, поездки в Тбилиси",
+    "Взаимные шутки и провокации, иногда эротического характера"
+  ],
+  "communication_style": {
+    "GeorgeKan": "Разговорный, подробный, иногда повествовательный, с юмором и сарказмом",
+    "QUETIAPINUM_BOY": "Краткий, прямой, иногда провокационный и грубый, с юмором",
+    "selfrapevictimbitchassnigga": "Короткие, эмоциональные, ругательные комментарии",
+    "oppionme": "Краткое и лаконичное",
+    "gaysesg": "Короткие вопросы и реакции на происходящее"
+  },
+  "interactions": [
+    {"from": "GeorgeKan", "to": "QUETIAPINUM_BOY"},
+    {"from": "QUETIAPINUM_BOY", "to": "GeorgeKan"},
+    {"from": "GeorgeKan", "to": "gaysesg"},
+    {"from": "QUETIAPINUM_BOY", "to": "gaysesg"},
+    {"from": "selfrapevictimbitchassnigga", "to": "GeorgeKan"},
+    {"from": "oppionme", "to": "QUETIAPINUM_BOY"}
+  ]
+}

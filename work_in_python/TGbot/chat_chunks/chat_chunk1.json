@@ -1,0 +1,44 @@
+{
+  "participants": [
+    "GeorgeKan",
+    "QUETIAPINUM_BOY",
+    "gaysesg",
+    "oppionme"
+  ],
+  "message_counts": {
+    "GeorgeKan": 90,
+    "QUETIAPINUM_BOY": 22,
+    "gaysesg": 34,
+    "oppionme": 12
+  },
+  "main_topics": [
+    "Обсуждение здоровья и болезней (шутки про рак)",
+    "Техническая помощь и инструкции (перенос файлов, использование приложений)",
+    "Споры и конфликты между участниками",
+    "Обмен мнениями и оценками действий друг друга"
+  ],
+  "communication_style": {
+    "GeorgeKan": "активный, саркастический, часто командует, иногда шутит; прямолинейный",
+    "QUETIAPINUM_BOY": "реактивный, эмоциональный, часто восклицает и смеется; отвечает на шутки и провокации",
+    "gaysesg": "критичный, наставнический, иногда шутливый; подчеркивает ошибки других",
+    "oppionme": "редкий участник, короткие комментарии и реакции, иногда шутит"
+  },
+  "interactions": {
+    "GeorgeKan": {
+      "replies_to": ["QUETIAPINUM_BOY", "gaysesg", "oppionme"],
+      "quoted_or_addressed": ["QUETIAPINUM_BOY", "gaysesg", "oppionme"]
+    },
+    "QUETIAPINUM_BOY": {
+      "replies_to": ["GeorgeKan"],
+      "quoted_or_addressed": ["GeorgeKan"]
+    },
+    "gaysesg": {
+      "replies_to": ["GeorgeKan"],
+      "quoted_or_addressed": ["GeorgeKan"]
+    },
+    "oppionme": {
+      "replies_to": ["GeorgeKan"],
+      "quoted_or_addressed": ["GeorgeKan"]
+    }
+  }
+}

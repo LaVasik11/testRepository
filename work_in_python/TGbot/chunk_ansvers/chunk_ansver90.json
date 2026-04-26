@@ -1,0 +1,36 @@
+{
+  "participants": [
+    "oppionme",
+    "QUETIAPINUM_BOY",
+    "GeorgeKan",
+    "gaysesg",
+    "bfcrazy"
+  ],
+  "message_counts": {
+    "oppionme": 4,
+    "QUETIAPINUM_BOY": 13,
+    "GeorgeKan": 17,
+    "gaysesg": 10,
+    "bfcrazy": 2
+  },
+  "main_topics": [
+    "Планы на совместные игры (DS, Кристаликс)",
+    "Обсуждение выхода серий/премьер",
+    "Шутки и мемы, иногда с ругательствами",
+    "Личные разговоры и взаимодействия между участниками",
+    "Сексуальные или провокационные комментарии"
+  ],
+  "communication_style": {
+    "oppionme": "Краткие, саркастические или сомневающиеся фразы",
+    "QUETIAPINUM_BOY": "Экспрессивный, иногда агрессивный или шутливый, с длинными монологами",
+    "GeorgeKan": "Информативный, иногда шутливый, прямой стиль, отвечает на вопросы",
+    "gaysesg": "Игривый, эмоциональный, часто вставляет эмодзи и ссылки",
+    "bfcrazy": "Кратко и резко, иногда с упоминанием других участников"
+  },
+  "interactions": [
+    {"from": "bfcrazy", "to": "gaysesg", "type": "mention"},
+    {"from": "QUETIAPINUM_BOY", "to": "GeorgeKan", "type": "conversation_reply"},
+    {"from": "GeorgeKan", "to": "QUETIAPINUM_BOY", "type": "conversation_reply"},
+    {"from": "gaysesg", "to": "GeorgeKan", "type": "conversation_reply"}
+  ]
+}

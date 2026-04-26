@@ -1,0 +1,47 @@
+{
+  "participants": [
+    "QUETIAPINUM_BOY",
+    "gaysesg",
+    "GeorgeKan",
+    "oppionme",
+    "iris_cm_bot"
+  ],
+  "message_count": {
+    "QUETIAPINUM_BOY": 46,
+    "gaysesg": 21,
+    "GeorgeKan": 72,
+    "oppionme": 12,
+    "iris_cm_bot": 4
+  },
+  "main_topics": [
+    "Конфликты и угрозы в чате",
+    "Обсуждение участников, упоминание имен",
+    "Игровые моменты и личные действия (Дота, проекты, задания)",
+    "Шутки и мемы между участниками",
+    "Административные действия бота (бан, уведомления)"
+  ],
+  "communication_style": {
+    "QUETIAPINUM_BOY": "часто шутливый, прямой, использует эмодзи и сленг",
+    "gaysesg": "короткие ответы, иногда уточняющие вопросы и комментарии, эмодзи",
+    "GeorgeKan": "подробные сообщения, часто эмоциональные, включает описание действий, агрессивные шутки",
+    "oppionme": "короткие, иногда саркастичные или уточняющие реплики",
+    "iris_cm_bot": "официозные уведомления и системные сообщения"
+  },
+  "interactions": {
+    "GeorgeKan": {
+      "replies_to": ["gaysesg", "oppionme"]
+    },
+    "gaysesg": {
+      "replies_to": ["GeorgeKan"]
+    },
+    "QUETIAPINUM_BOY": {
+      "replies_to": ["GeorgeKan"]
+    },
+    "oppionme": {
+      "replies_to": ["GeorgeKan", "gaysesg"]
+    },
+    "iris_cm_bot": {
+      "replies_to": []
+    }
+  }
+}

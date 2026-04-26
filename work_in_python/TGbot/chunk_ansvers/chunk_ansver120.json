@@ -1,0 +1,47 @@
+{
+"participants": [
+"oppionme",
+"GeorgeKan",
+"QUETIAPINUM_BOY",
+"gaysesg",
+"GemidlyBot"
+],
+"message_counts": {
+"oppionme": 36,
+"GeorgeKan": 38,
+"QUETIAPINUM_BOY": 45,
+"gaysesg": 19,
+"GemidlyBot": 1
+},
+"main_topics": [
+"готовка, яйца, омлет, скрембл",
+"школьные и домашние дела",
+"шутки, мемы и юмор",
+"игры и развлечения",
+"общение с использованием эмодзи и сленга"
+],
+"communication_styles": {
+"oppionme": "неформальный, юмористический, иногда агрессивный, активно использует сленг и эмодзи",
+"GeorgeKan": "информативный и эмоциональный, часто включает мемы и сарказм, использует команды и инструкции",
+"QUETIAPINUM_BOY": "активный, эмоциональный, юмористический, много восклицаний и вопросов, часто отвечает на других",
+"gaysesg": "шутливый, иногда провокационный, использует эмодзи, краткие сообщения",
+"GemidlyBot": "формальный, отвечает сдержанно, нейтральный стиль"
+},
+"interactions": {
+"oppionme": {
+"replies_to": ["QUETIAPINUM_BOY", "GeorgeKan", "gaysesg"]
+},
+"GeorgeKan": {
+"replies_to": ["QUETIAPINUM_BOY", "oppionme", "GemidlyBot"]
+},
+"QUETIAPINUM_BOY": {
+"replies_to": ["GeorgeKan", "oppionme"]
+},
+"gaysesg": {
+"replies_to": ["GeorgeKan", "oppionme"]
+},
+"GemidlyBot": {
+"replies_to": ["GeorgeKan"]
+}
+}
+}

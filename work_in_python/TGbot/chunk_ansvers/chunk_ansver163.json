@@ -1,0 +1,49 @@
+{
+  "participants": [
+    "oppionme",
+    "QUETIAPINUM_BOY",
+    "GeorgeKan",
+    "Mihail Grebnev"
+  ],
+  "message_counts": {
+    "oppionme": 54,
+    "QUETIAPINUM_BOY": 50,
+    "GeorgeKan": 47,
+    "Mihail Grebnev": 6
+  },
+  "main_topics": [
+    "вес и физическая форма участников",
+    "спорт и тренировки",
+    "шутки и юмор",
+    "взаимные подколы и обсуждение внешности",
+    "личные характеристики и генетика"
+  ],
+  "communication_style": {
+    "oppionme": "неформальный, разговорный, часто короткие фразы, юмор, вопросы и уточнения",
+    "QUETIAPINUM_BOY": "активный, шутливый, саркастический, иногда провокационный",
+    "GeorgeKan": "подробный, уверенный, часто описывает действия и факты, иногда шутит",
+    "Mihail Grebnev": "редко участвует, кратко и по делу, эмоциональные вставки"
+  },
+  "interactions": [
+    {
+      "from": "oppionme",
+      "to": ["GeorgeKan", "QUETIAPINUM_BOY"],
+      "type": "ответы и вопросы"
+    },
+    {
+      "from": "QUETIAPINUM_BOY",
+      "to": ["oppionme", "GeorgeKan"],
+      "type": "шутки, ответы, подколы"
+    },
+    {
+      "from": "GeorgeKan",
+      "to": ["oppionme", "QUETIAPINUM_BOY"],
+      "type": "информативные ответы и комментарии"
+    },
+    {
+      "from": "Mihail Grebnev",
+      "to": ["QUETIAPINUM_BOY", "oppionme"],
+      "type": "краткие комментарии, эмоциональные реакции"
+    }
+  ]
+}

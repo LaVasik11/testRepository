@@ -1,0 +1,45 @@
+{
+  "participants": [
+    "GeorgeKan",
+    "oppionme"
+  ],
+  "message_counts": {
+    "GeorgeKan": 68,
+    "oppionme": 20
+  },
+  "topics": [
+    "обсуждение языка C, C++, Python и ассемблера",
+    "проект minishell и сложность программирования",
+    "шутки, мемы и игровое общение",
+    "тема военных сборов",
+    "разговоры о друзьях и повседневные темы"
+  ],
+  "styles": {
+    "GeorgeKan": "технические объяснения, шутливый тон, эмоциональные реакции, много сообщений подряд",
+    "oppionme": "короткие реплики, шутки, иногда резкий стиль общения"
+  },
+  "interactions": [
+    {
+      "from": "oppionme",
+      "to": "GeorgeKan",
+      "type": "reply_or_contextual",
+      "examples": [
+        19415,
+        19412,
+        19407,
+        19401
+      ]
+    },
+    {
+      "from": "GeorgeKan",
+      "to": "oppionme",
+      "type": "reply_or_contextual",
+      "examples": [
+        19441,
+        19435,
+        19426,
+        19420
+      ]
+    }
+  ]
+}

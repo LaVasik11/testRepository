@@ -6,17 +6,17 @@ clock = p.time.Clock()
 p.init()
 screen = p.display.set_mode((612, 344))
 p.display.set_caption("Симулятор СФа(начало)")
-icon = p.image.load('../инструменты/images/DotaИконка.png').convert_alpha()
+icon = p.image.load('../tools/images/DotaИконка.png').convert_alpha()
 p.display.set_icon(icon)
 
-bg = p.image.load('../инструменты/images/МИДдота2.png').convert()
+bg = p.image.load('../tools/images/МИДдота2.png').convert()
 
-walk_left = p.image.load('../инструменты/images/СФ_лево.png')
-walk_right = p.image.load('../инструменты/images/СФ_право.png')
-stand_SF = p.image.load('../инструменты/images/СФ_стоит.png')
-give_coil_anim = p.image.load('../инструменты/images/СФ_руки_вверх.png')
+walk_left = p.image.load('../tools/images/СФ_лево.png')
+walk_right = p.image.load('../tools/images/СФ_право.png')
+stand_SF = p.image.load('../tools/images/СФ_стоит.png')
+give_coil_anim = p.image.load('../tools/images/СФ_руки_вверх.png')
 
-Spirit_Breaker = p.image.load('../инструменты/images/Бара.png').convert_alpha()
+Spirit_Breaker = p.image.load('../tools/images/Бара.png').convert_alpha()
 
 ghost_list_in_game = []
 
@@ -31,14 +31,14 @@ player_y = 150
 is_jump = False
 jump_count = 8
 
-# bg_sound = p.mixer.Sound('../инструменты/Sound/y2mate.com - Sewerslvt  Lexapro Delirium.mp3')
+# bg_sound = p.mixer.Sound('../tools/Sound/y2mate.com - Sewerslvt  Lexapro Delirium.mp3')
 # bg_sound.play()
 
 ghost_timer = p.USEREVENT + 1
 p.time.set_timer(ghost_timer, 7000)
 
 
-label = p.font.Font('../инструменты/fonts/sfns-display-bold.ttf', 40)
+label = p.font.Font('../tools/fonts/sfns-display-bold.ttf', 40)
 lose_label = label.render('Вы проиграли', False, (193, 196, 199))
 restart_label = label.render('Играть заново', True, (115, 132, 148))
 restart_label_rect = restart_label.get_rect(topleft=(170, 200))
@@ -47,13 +47,12 @@ continue_label = label.render('Продолжить', False, (255, 255, 255))
 pause_label = label.render('Пауза', False, (230, 71, 71))
 win_label = label.render('Вы победили!', False, (255, 255, 255))
 
-coil_icon = p.imag
-e.load('../инструменты/images/imgonline-com-ua-Resize-N7OfOJ17iCHh9XPK.jpg')
+coil_icon = p.image.load('../tools/images/coil2.png').convert_alpha()
 coil_count = 10
 speed_bara = 10
 count_enemies_killed = 0
 old_count_enemies_killed = 0
-coil = p.image.load('../инструменты/images/coil2.png').convert_alpha()
+coil = p.image.load('../tools/images/coil2.png').convert_alpha()
 bullets = []
 t = 0
 

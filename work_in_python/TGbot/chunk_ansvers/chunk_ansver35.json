@@ -1,0 +1,33 @@
+{
+  "participants": [
+    "QUETIAPINUM_BOY",
+    "GeorgeKan",
+    "oppionme"
+  ],
+  "message_counts": {
+    "QUETIAPINUM_BOY": 43,
+    "GeorgeKan": 12,
+    "oppionme": 3
+  },
+  "main_topics": [
+    "Оскорбления и насмешки между участниками",
+    "Обсуждение английских слов для 'ученик' и 'школьник'"
+  ],
+  "communication_style": {
+    "QUETIAPINUM_BOY": "агрессивный, эмоциональный, использует много оскорбительных слов",
+    "GeorgeKan": "саркастический, ироничный, отвечает на провокации",
+    "oppionme": "объясняет, информативный, нейтральный стиль"
+  },
+  "interactions": [
+    {
+      "from": "QUETIAPINUM_BOY",
+      "to": "GeorgeKan",
+      "type": "оскорбления"
+    },
+    {
+      "from": "oppionme",
+      "to": "GeorgeKan",
+      "type": "объяснение"
+    }
+  ]
+}

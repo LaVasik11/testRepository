@@ -1,0 +1,34 @@
+{
+  "participants": [
+    "GeorgeKan",
+    "oppionme",
+    "gaysesg",
+    "bfcrazy"
+  ],
+  "message_counts": {
+    "GeorgeKan": 64,
+    "oppionme": 63,
+    "gaysesg": 32,
+    "bfcrazy": 1
+  },
+  "main_topics": [
+    "Игры (Dota 2, CS2, Genshin Impact, CS, KС)",
+    "Религия и религиозные размышления",
+    "Школьные и подростковые темы",
+    "Взаимные подколы и оскорбления",
+    "Социальные взаимодействия и мемы"
+  ],
+  "communication_style": {
+    "GeorgeKan": "Прямой, ироничный, часто с юмором и обсценной лексикой, склонен к философским и религиозным размышлениям, часто ведет повествование",
+    "oppionme": "Ироничный, саркастичный, использует короткие фразы, эмоции и мемы, активно реагирует на других участников",
+    "gaysesg": "Лаконичный, иногда агрессивный или оценочный, добавляет религиозные и культурные комментарии",
+    "bfcrazy": "Короткие эмоциональные ответы, минимальное участие"
+  },
+  "interactions": [
+    {"from": "GeorgeKan", "to": "gaysesg", "type": "reply/mention"},
+    {"from": "GeorgeKan", "to": "oppionme", "type": "reply/mention"},
+    {"from": "oppionme", "to": "GeorgeKan", "type": "reply/mention"},
+    {"from": "gaysesg", "to": "GeorgeKan", "type": "reply/mention"},
+    {"from": "gaysesg", "to": "oppionme", "type": "reply/mention"}
+  ]
+}

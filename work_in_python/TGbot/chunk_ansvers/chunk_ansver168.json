@@ -1,0 +1,36 @@
+{
+  "participants": [
+    "GeorgeKan",
+    "gaysesg",
+    "QUETIAPINUM_BOY",
+    "oppionme"
+  ],
+  "message_count": {
+    "GeorgeKan": 63,
+    "gaysesg": 40,
+    "QUETIAPINUM_BOY": 41,
+    "oppionme": 17
+  },
+  "topics": [
+    "игровые обсуждения (неждан, бан, счета)",
+    "шутки и мемы",
+    "внутригрупповые споры и администрирование",
+    "взаимодействия через эмодзи и короткие реплики"
+  ],
+  "communication_style": {
+    "GeorgeKan": "Активно участвует, часто отвечает и комментирует действия других, использует команды и эмоции.",
+    "gaysesg": "Эмоциональный стиль, часто выражает желание действовать, краткие фразы и смайлы.",
+    "QUETIAPINUM_BOY": "Игривый, часто шутит, использует эмодзи и короткие реплики.",
+    "oppionme": "Короткие комментарии, часто реагирует на происходящее, иногда юмористически."
+  },
+  "interactions": [
+    {"from": "gaysesg", "to": "GeorgeKan"},
+    {"from": "GeorgeKan", "to": "gaysesg"},
+    {"from": "QUETIAPINUM_BOY", "to": "GeorgeKan"},
+    {"from": "GeorgeKan", "to": "QUETIAPINUM_BOY"},
+    {"from": "oppionme", "to": "GeorgeKan"},
+    {"from": "gaysesg", "to": "QUETIAPINUM_BOY"},
+    {"from": "QUETIAPINUM_BOY", "to": "gaysesg"},
+    {"from": "oppionme", "to": "gaysesg"}
+  ]
+}

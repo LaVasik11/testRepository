@@ -1,0 +1,35 @@
+{
+  "participants": [
+    "GeorgeKan",
+    "gaysesg",
+    "QUETIAPINUM_BOY",
+    "oppionme"
+  ],
+  "message_count": {
+    "GeorgeKan": 70,
+    "gaysesg": 22,
+    "QUETIAPINUM_BOY": 46,
+    "oppionme": 7
+  },
+  "main_topics": [
+    "Приготовление и обсуждение еды",
+    "Игра в доту и координация действий",
+    "Шутки и сарказм между участниками",
+    "Личные воспоминания и внутренние мемы",
+    "Обсуждение отношений и поведения участников"
+  ],
+  "communication_style": {
+    "GeorgeKan": "Активный, ироничный, часто саркастический, быстро меняет темы, выражает эмоции через сленг и сокращения",
+    "gaysesg": "Короткие комментарии, лаконичные описания действий, эмоционально окрашенные слова",
+    "QUETIAPINUM_BOY": "Длинные рассуждения, ирония, подшучивание, иногда провокационный тон",
+    "oppionme": "Короткие, эмоциональные реакции, иногда удивление или недовольство"
+  },
+  "interactions": [
+    {"from": "GeorgeKan", "to": "gaysesg"},
+    {"from": "GeorgeKan", "to": "QUETIAPINUM_BOY"},
+    {"from": "QUETIAPINUM_BOY", "to": "GeorgeKan"},
+    {"from": "QUETIAPINUM_BOY", "to": "gaysesg"},
+    {"from": "oppionme", "to": "GeorgeKan"},
+    {"from": "gaysesg", "to": "GeorgeKan"}
+  ]
+}

@@ -1,0 +1,41 @@
+{
+"participants": [
+"GeorgeKan",
+"QUETIAPINUM_BOY",
+"gaysesg",
+"oppionme",
+"selfrapevictimbitchassnigga",
+"Mihail Grebnev"
+],
+"message_counts": {
+"GeorgeKan": 83,
+"QUETIAPINUM_BOY": 21,
+"gaysesg": 22,
+"oppionme": 8,
+"selfrapevictimbitchassnigga": 1,
+"Mihail Grebnev": 1
+},
+"main_topics": [
+"Обсуждение видео и приколов",
+"Оценки и рейтинги",
+"Игры (Dota и внутриигровые стратегии)",
+"Переписка о домашних животных и их продажа",
+"Личные комментарии и реакции участников"
+],
+"communication_style": {
+"GeorgeKan": "активный, много сообщений подряд, использует упоминания и оценки, эмоциональный стиль, часто даёт инструкции",
+"QUETIAPINUM_BOY": "короткие, реактивные сообщения, юмор, оценки",
+"gaysesg": "кратко, по сути, часто эмоциональные комментарии, выражает мнение и сомнения",
+"oppionme": "короткие реакции, вопросы, эмоции",
+"selfrapevictimbitchassnigga": "эмоциональное, одно сообщение",
+"Mihail Grebnev": "один комментарий, утверждение"
+},
+"interactions": [
+{"from": "GeorgeKan", "to": "gaysesg", "type": "mention", "count": 2},
+{"from": "GeorgeKan", "to": "oppionme", "type": "mention", "count": 1},
+{"from": "GeorgeKan", "to": "QUETIAPINUM_BOY", "type": "reaction", "count": 5},
+{"from": "gaysesg", "to": "GeorgeKan", "type": "reply/discussion", "count": 7},
+{"from": "QUETIAPINUM_BOY", "to": "GeorgeKan", "type": "reaction/evaluation", "count": 6},
+{"from": "oppionme", "to": "GeorgeKan", "type": "reaction/question", "count": 3}
+]
+}

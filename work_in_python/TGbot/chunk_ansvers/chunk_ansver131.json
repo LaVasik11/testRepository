@@ -1,0 +1,40 @@
+{
+  "participants": [
+    "GeorgeKan",
+    "oppionme",
+    "gaysesg",
+    "QUETIAPINUM_BOY",
+    "iris_cm_bot"
+  ],
+  "message_counts": {
+    "GeorgeKan": 28,
+    "oppionme": 35,
+    "gaysesg": 52,
+    "QUETIAPINUM_BOY": 17,
+    "iris_cm_bot": 1
+  },
+  "main_topics": [
+    "Удаление файлов в Linux и Windows",
+    "Проблемы с интернетом и VPN",
+    "Использование различных браузеров и приложений",
+    "Техническая помощь и инструкции",
+    "Обсуждение ошибок и ограничений Telegram"
+  ],
+  "communication_style": {
+    "GeorgeKan": "Пошаговые объяснения, иногда сарказм, короткие сообщения",
+    "oppionme": "Быстрые ответы, шутки, раздражение, прямой стиль",
+    "gaysesg": "Разговорный стиль, эмоциональный, вопросы и жалобы, использование эмодзи",
+    "QUETIAPINUM_BOY": "Критика и оскорбления, сарказм, длинные эмоциональные высказывания",
+    "iris_cm_bot": "Автоматические уведомления, формальный стиль"
+  },
+  "interactions": [
+    {"from": "GeorgeKan", "to": "oppionme"},
+    {"from": "oppionme", "to": "GeorgeKan"},
+    {"from": "gaysesg", "to": "GeorgeKan"},
+    {"from": "GeorgeKan", "to": "gaysesg"},
+    {"from": "oppionme", "to": "gaysesg"},
+    {"from": "QUETIAPINUM_BOY", "to": "gaysesg"},
+    {"from": "gaysesg", "to": "QUETIAPINUM_BOY"},
+    {"from": "iris_cm_bot", "to": "gaysesg"}
+  ]
+}

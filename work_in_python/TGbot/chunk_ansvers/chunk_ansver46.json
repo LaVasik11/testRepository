@@ -1,0 +1,46 @@
+{
+  "participants": [
+    "GeorgeKan",
+    "oppionme",
+    "gaysesg",
+    "bfcrazy",
+    "iris_cm_bot"
+  ],
+  "message_count": {
+    "GeorgeKan": 53,
+    "oppionme": 44,
+    "gaysesg": 46,
+    "bfcrazy": 8,
+    "iris_cm_bot": 1
+  },
+  "main_topics": [
+    "Обсуждение аниме и персонажей",
+    "Шутки и мемы",
+    "Личные перепалки и оскорбления",
+    "Реакции на действия участников (забанил, добавление в канал, просмотр контента)"
+  ],
+  "communication_style": {
+    "GeorgeKan": "агрессивно-шутливый, саркастический, часто перебивает и вставляет свои комментарии",
+    "oppionme": "ироничный, часто использует мемы, краткие ответы, экспрессивный язык",
+    "gaysesg": "критичный и саркастичный, иногда агрессивный, активно участвует в обсуждениях",
+    "bfcrazy": "эмоциональный, использует сленг и сокращения, жалуется на повседневные вещи",
+    "iris_cm_bot": "формальный, нейтральный, автоматическая реакция"
+  },
+  "interactions": {
+    "GeorgeKan": {
+      "replies_to": ["gaysesg", "oppionme"]
+    },
+    "oppionme": {
+      "replies_to": ["GeorgeKan", "gaysesg"]
+    },
+    "gaysesg": {
+      "replies_to": ["GeorgeKan", "oppionme"]
+    },
+    "bfcrazy": {
+      "replies_to": []
+    },
+    "iris_cm_bot": {
+      "replies_to": []
+    }
+  }
+}

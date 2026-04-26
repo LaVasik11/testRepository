@@ -1,0 +1,32 @@
+{
+  "participants": [
+    "gaysesg",
+    "GeorgeKan",
+    "oppionme",
+    "bfcrazy"
+  ],
+  "message_count": {
+    "gaysesg": 80,
+    "GeorgeKan": 20,
+    "oppionme": 35,
+    "bfcrazy": 15
+  },
+  "main_topics": [
+    "Игры: Roblox, Tower Defense, Metro 2033 Redux",
+    "Шутки, мемы и троллинг среди участников",
+    "Обсуждение действий друг друга в играх",
+    "Эмоциональные реакции, использование смайлов"
+  ],
+  "communication_style": {
+    "gaysesg": "Эмоциональный, командующий, часто использует сленг и шутки, стимулирует действия других",
+    "GeorgeKan": "Прямой, саркастичный, иногда грубый",
+    "oppionme": "Игривый, хаотичный, использует эмоции и смайлы, реагирует на сообщения других",
+    "bfcrazy": "Краткий, иногда грубый, вставляет команды или оценки"
+  },
+  "interactions": [
+    {"from": "gaysesg", "to": "GeorgeKan", "type": "ответ/упоминание"},
+    {"from": "gaysesg", "to": "oppionme", "type": "упоминание, инициирует совместную игру"},
+    {"from": "GeorgeKan", "to": "oppionme", "type": "ответ/обсуждение"},
+    {"from": "bfcrazy", "to": "gaysesg", "type": "ответ на сообщение или комментарий"}
+  ]
+}

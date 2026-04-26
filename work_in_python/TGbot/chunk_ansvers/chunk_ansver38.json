@@ -1,0 +1,46 @@
+{
+"participants": [
+"oppionme",
+"GeorgeKan",
+"iris_cm_bot",
+"gaysesg"
+],
+"message_counts": {
+"oppionme": 70,
+"GeorgeKan": 61,
+"iris_cm_bot": 3,
+"gaysesg": 1
+},
+"main_topics": [
+"шутки и мемы",
+"животные (кот)",
+"школа и общение с одноклассниками",
+"личные взаимодействия между участниками",
+"игры и онлайн-контент (Wordle, Twitch, YouTube)",
+"сообщения бота с статистикой и ссылками"
+],
+"communication_style": {
+"oppionme": "эмоциональный, экспрессивный, часто использует сленг, сарказм и мат",
+"GeorgeKan": "ироничный, иногда агрессивный, прямой, иногда повествует истории",
+"iris_cm_bot": "формальный, информативный, стандартные сообщения от бота",
+"gaysesg": "краткий, лаконичный"
+},
+"interactions": {
+"oppionme": {
+"replies_to": ["GeorgeKan"],
+"quotes": ["GeorgeKan"]
+},
+"GeorgeKan": {
+"replies_to": ["oppionme"],
+"quotes": ["oppionme"]
+},
+"iris_cm_bot": {
+"replies_to": [],
+"quotes": []
+},
+"gaysesg": {
+"replies_to": [],
+"quotes": []
+}
+}
+}

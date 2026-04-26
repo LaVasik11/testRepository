@@ -1,0 +1,35 @@
+{
+  "participants": [
+    "GeorgeKan",
+    "gaysesg",
+    "QUETIAPINUM_BOY",
+    "oppionme"
+  ],
+  "message_count": {
+    "GeorgeKan": 57,
+    "gaysesg": 28,
+    "QUETIAPINUM_BOY": 14,
+    "oppionme": 51
+  },
+  "topics": [
+    "игры (Brawl, Crystalix, Castle Fight, DS)",
+    "скачивание программ и лаунчеров",
+    "шутки и юмор, включая черный юмор",
+    "здоровье и паразиты",
+    "обсуждение личных планов и действий",
+    "взаимные поддразнивания и ругань"
+  ],
+  "communication_style": {
+    "GeorgeKan": "активный, шутливый, саркастичный, часто использует эмодзи и сленг",
+    "gaysesg": "короткие фразы, прямолинейный тон, ругательства, иногда советы",
+    "QUETIAPINUM_BOY": "короткие, быстрые ответы, часто односложные, иногда шутки",
+    "oppionme": "разговорный, экспрессивный, эмоциональный, длинные сообщения, часто шутки и ругань"
+  },
+  "interactions": [
+    {"from": "GeorgeKan", "to": "gaysesg"},
+    {"from": "GeorgeKan", "to": "QUETIAPINUM_BOY"},
+    {"from": "oppionme", "to": "GeorgeKan"},
+    {"from": "oppionme", "to": "gaysesg"},
+    {"from": "QUETIAPINUM_BOY", "to": "GeorgeKan"}
+  ]
+}

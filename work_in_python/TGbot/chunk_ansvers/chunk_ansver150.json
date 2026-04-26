@@ -1,0 +1,53 @@
+{
+  "participants": [
+    "GeorgeKan",
+    "QUETIAPINUM_BOY",
+    "oppionme",
+    "gaysesg"
+  ],
+  "message_counts": {
+    "GeorgeKan": 20,
+    "QUETIAPINUM_BOY": 15,
+    "oppionme": 14,
+    "gaysesg": 4
+  },
+  "topics": [
+    "обсуждение прочности стекла и способов его разбить",
+    "шутки и абсурдные комментарии",
+    "реакции на сообщения других участников",
+    "физика и жизненные ситуации, связанные со стеклом"
+  ],
+  "communication_style": {
+    "GeorgeKan": "саркастичный, реактивный, задаёт вопросы, формирует тему обсуждения",
+    "QUETIAPINUM_BOY": "хаотичный, гиперболизированный юмор, нередко провокационный стиль",
+    "oppionme": "объяснительный, рассуждающий, местами резкий и прямолинейный",
+    "gaysesg": "вопросительный, осторожный, поддерживает тему уточняющими репликами"
+  },
+  "interactions": [
+    {
+      "from": "GeorgeKan",
+      "to": "QUETIAPINUM_BOY",
+      "type": "reactive_comment"
+    },
+    {
+      "from": "GeorgeKan",
+      "to": "oppionme",
+      "type": "reactive_comment"
+    },
+    {
+      "from": "QUETIAPINUM_BOY",
+      "to": "GeorgeKan",
+      "type": "response"
+    },
+    {
+      "from": "oppionme",
+      "to": "gaysesg",
+      "type": "answer_to_question"
+    },
+    {
+      "from": "gaysesg",
+      "to": "oppionme",
+      "type": "follow_up_question"
+    }
+  ]
+}

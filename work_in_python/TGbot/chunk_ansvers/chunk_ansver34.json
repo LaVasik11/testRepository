@@ -1,0 +1,53 @@
+{
+"participants": [
+"QUETIAPINUM_BOY",
+"GeorgeKan",
+"oppionme",
+"gaysesg"
+],
+"message_counts": {
+"QUETIAPINUM_BOY": 79,
+"GeorgeKan": 30,
+"oppionme": 21,
+"gaysesg": 20
+},
+"main_topics": [
+"личные взаимоотношения и эмоции",
+"путешествия и планы на переезд",
+"тренировки и спорт",
+"шутки и оскорбления между участниками",
+"обсуждение внешности и поведения участников"
+],
+"communication_style": {
+"QUETIAPINUM_BOY": "эмоциональный, агрессивный, часто использует прямые оскорбления и сленг, активно вовлекает других в дискуссии",
+"GeorgeKan": "пассивно-агрессивный, саркастичный, часто комментирует и реагирует на сообщения других, иногда аналитический тон",
+"oppionme": "короткие, лаконичные ответы, иногда эмоциональные восклицания, участвует в дискуссии умеренно",
+"gaysesg": "краткий, прямой стиль, иногда ироничный, часто даёт советы и реагирует на действия других"
+},
+"interactions": [
+{
+"from": "QUETIAPINUM_BOY",
+"to": "GeorgeKan",
+"type": "direct_address",
+"count": 8
+},
+{
+"from": "GeorgeKan",
+"to": "QUETIAPINUM_BOY",
+"type": "reply/response",
+"count": 6
+},
+{
+"from": "oppionme",
+"to": "gaysesg",
+"type": "reply/response",
+"count": 3
+},
+{
+"from": "gaysesg",
+"to": "GeorgeKan",
+"type": "advice/comment",
+"count": 4
+}
+]
+}

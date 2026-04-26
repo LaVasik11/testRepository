@@ -1,0 +1,30 @@
+{
+  "participants": [
+    "GeorgeKan",
+    "oppionme",
+    "QUETIAPINUM_BOY"
+  ],
+  "message_count": {
+    "GeorgeKan": 57,
+    "oppionme": 46,
+    "QUETIAPINUM_BOY": 33
+  },
+  "main_topics": [
+    "борьба и боевые искусства",
+    "опыт личного общения и отношений",
+    "здоровье и закаливание организма",
+    "шутки и мемы, юмор",
+    "информация из TikTok и личного опыта"
+  ],
+  "communication_style": {
+    "GeorgeKan": "краткие высказывания, сарказм, юмор, часто уточняет или пересказывает опыт",
+    "oppionme": "живой, эмоциональный, много междометий и смеха, активно реагирует на события",
+    "QUETIAPINUM_BOY": "подробные рассуждения, логическое объяснение, иногда юмор, вопросы о здоровье и опыте"
+  },
+  "interactions": [
+    {"from": "GeorgeKan", "to": "oppionme"},
+    {"from": "oppionme", "to": "GeorgeKan"},
+    {"from": "QUETIAPINUM_BOY", "to": "GeorgeKan"},
+    {"from": "QUETIAPINUM_BOY", "to": "oppionme"}
+  ]
+}

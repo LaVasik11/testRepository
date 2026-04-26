@@ -1,0 +1,53 @@
+{
+"participants": [
+"GeorgeKan",
+"gaysesg",
+"oppionme",
+"QUETIAPINUM_BOY",
+"Mihail Grebnev",
+"iris_cm_bot"
+],
+"message_counts": {
+"GeorgeKan": 53,
+"gaysesg": 42,
+"oppionme": 17,
+"QUETIAPINUM_BOY": 12,
+"Mihail Grebnev": 2,
+"iris_cm_bot": 3
+},
+"main_topics": [
+"Проблемы с подключением VPN и мессенджеров",
+"Приветствия и добавление новых участников",
+"Обсуждение взаимодействия в чате и активности участников",
+"Личные и шутливые сообщения с неформальным языком",
+"Обсуждение технических вопросов и приложений"
+],
+"communication_style": {
+"GeorgeKan": "Активный, задает вопросы, дает инструкции, использует жаргон",
+"gaysesg": "Короткие ответы, иногда эмоциональные, использует сленг",
+"oppionme": "Краткие реплики, иногда эмоциональные, поддерживает общение",
+"QUETIAPINUM_BOY": "Комментарийный стиль, иногда шутливый и провокационный",
+"Mihail Grebnev": "Редко участвует, короткие ответы",
+"iris_cm_bot": "Автоматические сообщения, информативные"
+},
+"interactions": [
+{
+"from": "GeorgeKan",
+"to": "Mihail Grebnev",
+"type": "mention",
+"text": "миша правила простые..."
+},
+{
+"from": "GeorgeKan",
+"to": "oppionme",
+"type": "mention",
+"text": "Добавляй @oppionme"
+},
+{
+"from": "iris_cm_bot",
+"to": "Mihail Grebnev",
+"type": "greeting",
+"text": "Коротко про Mihail Grebnev"
+}
+]
+}

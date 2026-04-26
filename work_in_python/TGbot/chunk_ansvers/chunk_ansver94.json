@@ -1,0 +1,32 @@
+{
+  "participants": [
+    "gaysesg",
+    "GeorgeKan",
+    "oppionme",
+    "QUETIAPINUM_BOY"
+  ],
+  "message_counts": {
+    "gaysesg": 18,
+    "GeorgeKan": 21,
+    "oppionme": 8,
+    "QUETIAPINUM_BOY": 2
+  },
+  "main_topics": [
+    "Обмен мемами и сообщениями",
+    "Обсуждение названий/терминов (ZOVOS, ZOVОС)",
+    "Технические/программные проблемы (пиратские программы, английские буквы)",
+    "Юмористические/игровые перепалки и сленг"
+  ],
+  "communication_style": {
+    "gaysesg": "короткие фразы, юмор, эмоциональные восклицания",
+    "GeorgeKan": "часто шутливый и саркастический, вопросы и уточнения, эмоциональные комментарии",
+    "oppionme": "эмоциональные, грубые или сленговые выражения, короткие реплики",
+    "QUETIAPINUM_BOY": "короткие поддерживающие или предложенные варианты, юмор"
+  },
+  "interactions": [
+    {"from": "gaysesg", "to": "GeorgeKan"},
+    {"from": "GeorgeKan", "to": "gaysesg"},
+    {"from": "oppionme", "to": "GeorgeKan"},
+    {"from": "QUETIAPINUM_BOY", "to": "GeorgeKan"}
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "participants": [
+    "oppionme",
+    "QUETIAPINUM_BOY",
+    "GeorgeKan"
+  ],
+  "message_counts": {
+    "oppionme": 25,
+    "QUETIAPINUM_BOY": 17,
+    "GeorgeKan": 9
+  },
+  "main_topics": [
+    "волосы и прически",
+    "шутки и юмор",
+    "зима и холод",
+    "взаимные подколки и мемы"
+  ],
+  "communication_styles": {
+    "oppionme": "короткие фразы, эмодзи, смайлы, выражение эмоций и реакций",
+    "QUETIAPINUM_BOY": "энергичные, эмоциональные сообщения с восклицательными знаками, шутки, мемы",
+    "GeorgeKan": "комментарии, вопросы, добавление юмора и сарказма"
+  },
+  "interactions": [
+    {
+      "from": "QUETIAPINUM_BOY",
+      "to": "GeorgeKan",
+      "type": "ответ/подколка"
+    },
+    {
+      "from": "GeorgeKan",
+      "to": "oppionme",
+      "type": "комментарий/шутка"
+    },
+    {
+      "from": "oppionme",
+      "to": "QUETIAPINUM_BOY",
+      "type": "ответ/реакция"
+    }
+  ]
+}

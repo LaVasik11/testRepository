@@ -1,0 +1,35 @@
+{
+  "participants": [
+    "QUETIAPINUM_BOY",
+    "GeorgeKan",
+    "oppionme",
+    "gaysesg"
+  ],
+  "message_counts": {
+    "QUETIAPINUM_BOY": 62,
+    "GeorgeKan": 77,
+    "oppionme": 16,
+    "gaysesg": 8
+  },
+  "main_topics": [
+    "животные и их способности (мулы, ослы)",
+    "школьная жизнь и обучение",
+    "эмоции, эмпатия и личные переживания",
+    "наркотики и алкоголь",
+    "технические и игровые темы (VSCode, Dota, заказ доставки)"
+  ],
+  "communication_style": {
+    "QUETIAPINUM_BOY": "разговорный, эмоциональный, с вкраплениями сленга, сарказма и шуток",
+    "GeorgeKan": "много аналитики и рассуждений, эмоциональные реакции и юмор, иногда обсценная лексика",
+    "oppionme": "короткие фразы, реактивный стиль, иногда вставляет юмор или сарказм",
+    "gaysesg": "краткие, лаконичные комментарии, иногда с подтверждением и реакцией на других"
+  },
+  "interactions": [
+    {"from": "GeorgeKan", "to": "QUETIAPINUM_BOY", "type": "ответ/комментарий"},
+    {"from": "QUETIAPINUM_BOY", "to": "GeorgeKan", "type": "ответ/комментарий"},
+    {"from": "GeorgeKan", "to": "oppionme", "type": "упоминание @"},
+    {"from": "GeorgeKan", "to": "gaysesg", "type": "упоминание @"},
+    {"from": "oppionme", "to": "GeorgeKan", "type": "комментарий/ответ"},
+    {"from": "QUETIAPINUM_BOY", "to": "oppionme", "type": "комментарий/ответ"}
+  ]
+}

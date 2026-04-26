@@ -1,0 +1,37 @@
+{
+  "participants": [
+    "GeorgeKan",
+    "QUETIAPINUM_BOY",
+    "GemidlyBot",
+    "oppionme",
+    "gaysesg"
+  ],
+  "message_count": {
+    "GeorgeKan": 15,
+    "QUETIAPINUM_BOY": 29,
+    "GemidlyBot": 1,
+    "oppionme": 5,
+    "gaysesg": 2
+  },
+  "main_topics": [
+    "Обсуждение еды и вкусов (колбаса, сыр, хлеб, тосты)",
+    "Шутки, мемы и оскорбления между участниками",
+    "Повседневные события и реакции на контент (анекдоты, обзоры)",
+    "Взаимодействия с контентом (боты и изображения)",
+    "Эмоциональные реакции и личные комментарии"
+  ],
+  "communication_style": {
+    "GeorgeKan": "короткие комментарии, сарказм, реакция на сообщения других",
+    "QUETIAPINUM_BOY": "эмоциональные, длинные сообщения, юмор, частые повторы и оскорбления",
+    "GemidlyBot": "описательный, нейтральный",
+    "oppionme": "вставки комментариев с оценкой действий других, краткие фразы",
+    "gaysesg": "вопросы и уточнения"
+  },
+  "interactions": [
+    {"from": "GeorgeKan", "to": "QUETIAPINUM_BOY"},
+    {"from": "QUETIAPINUM_BOY", "to": "GeorgeKan"},
+    {"from": "QUETIAPINUM_BOY", "to": "GemidlyBot"},
+    {"from": "oppionme", "to": "QUETIAPINUM_BOY"},
+    {"from": "gaysesg", "to": "QUETIAPINUM_BOY"}
+  ]
+}

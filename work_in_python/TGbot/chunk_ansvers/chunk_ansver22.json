@@ -1,0 +1,54 @@
+{
+  "participants": [
+    "GeorgeKan",
+    "QUETIAPINUM_BOY",
+    "oppionme",
+    "gaysesg",
+    "QUETIAPINUM_BOY"
+  ],
+  "message_count": {
+    "GeorgeKan": 54,
+    "QUETIAPINUM_BOY": 60,
+    "oppionme": 22,
+    "gaysesg": 14
+  },
+  "main_topics": [
+    "Игра с карточками и подсчет очков",
+    "Обсуждение ходов и стратегий",
+    "Использование смайликов и реакции на действия других",
+    "Шутки, мемы и юмор в переписке",
+    "Упоминание предметов (баклажан, краб, бритва)"
+  ],
+  "communication_style": {
+    "GeorgeKan": "Активно участвует в игре, даёт оценки, комментирует действия других, использует смайлики и эмодзи",
+    "QUETIAPINUM_BOY": "Шутливый, активно реагирует на игру, часто использует эмодзи, комментирует ходы и стратегию, весёлый стиль",
+    "oppionme": "Короткие и эмоциональные реплики, часто выражает реакцию на игру и действия других, использует смайлики",
+    "gaysesg": "Короткие комментарии, часто реагирует на других участников, использует эмодзи"
+  },
+  "interactions": [
+    {
+      "from": "QUETIAPINUM_BOY",
+      "to": "gaysesg",
+      "type": "mention",
+      "examples": ["@gaysesg"]
+    },
+    {
+      "from": "GeorgeKan",
+      "to": "oppionme",
+      "type": "game_response",
+      "examples": ["Это ответный"]
+    },
+    {
+      "from": "oppionme",
+      "to": "GeorgeKan",
+      "type": "game_response",
+      "examples": ["значит я победитель"]
+    },
+    {
+      "from": "gaysesg",
+      "to": "QUETIAPINUM_BOY",
+      "type": "reaction",
+      "examples": ["А чем отвечать можно"]
+    }
+  ]
+}

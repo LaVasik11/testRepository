@@ -1,0 +1,39 @@
+{
+"participants": [
+"GeorgeKan",
+"gaysesg",
+"QUETIAPINUM_BOY",
+"oppionme",
+"GemidlyBot",
+"iris_cm_bot"
+],
+"message_counts": {
+"GeorgeKan": 52,
+"gaysesg": 26,
+"QUETIAPINUM_BOY": 50,
+"oppionme": 25,
+"GemidlyBot": 1,
+"iris_cm_bot": 2
+},
+"main_topics": [
+"Просмотр видео/игры вместе",
+"Организация совместного времени (кто куда идет, когда собираются)",
+"Обсуждение игр (Minecraft, Crystalix)",
+"Работа с документами и программами (Word, PowerPoint, Excel)",
+"Повседневные действия и планирование (посуду помыть, тренажеры)"
+],
+"communication_style": {
+"GeorgeKan": "Часто использует шутки, сарказм, короткие эмоциональные фразы, метки участников (@), и немного мемов",
+"gaysesg": "Короткие ответы, иногда вопросы, подталкивает к действию",
+"QUETIAPINUM_BOY": "Эмоциональный, экспрессивный, часто пишет капсом, использует длинные сообщения, мемы и смайлы",
+"oppionme": "Довольно прямолинейный, информативный, задает вопросы и уточняет детали",
+"GemidlyBot": "Описывает сообщения от ботов/игр",
+"iris_cm_bot": "Автоматические уведомления о сборах"
+},
+"interactions": [
+{"from": "GeorgeKan", "to": "gaysesg", "type": "mention"},
+{"from": "QUETIAPINUM_BOY", "to": "GeorgeKan", "type": "mention"},
+{"from": "oppionme", "to": "QUETIAPINUM_BOY", "type": "mention"},
+{"from": "GeorgeKan", "to": ["oppionme", "gaysesg"], "type": "mention"}
+]
+}

@@ -1,0 +1,35 @@
+{
+"participants": [
+"GeorgeKan",
+"QUETIAPINUM_BOY",
+"oppionme"
+],
+"message_counts": {
+"GeorgeKan": 38,
+"QUETIAPINUM_BOY": 16,
+"oppionme": 2
+},
+"main_topics": [
+"анонимность и использование Tor",
+"создание мультифлешки с несколькими ОС",
+"установка ОС на флешку и её использование",
+"технические вопросы и помощь с флешками и Tor"
+],
+"communication_style": {
+"GeorgeKan": "объяснительный, даёт подробные инструкции, иногда использует шутливые фразы",
+"QUETIAPINUM_BOY": "краткий, вопросы и комментарии, иногда эмоции и неформальные выражения",
+"oppionme": "кратко, задаёт уточняющие вопросы"
+},
+"interactions": [
+{
+"from": "QUETIAPINUM_BOY",
+"to": "GeorgeKan",
+"context": "вопросы про флешку и Tor"
+},
+{
+"from": "oppionme",
+"to": "GeorgeKan",
+"context": "вопрос про сохранность данных на флешке"
+}
+]
+}

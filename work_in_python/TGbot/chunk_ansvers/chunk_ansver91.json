@@ -1,0 +1,38 @@
+{
+  "participants": [
+    "oppionme",
+    "QUETIAPINUM_BOY",
+    "GeorgeKan"
+  ],
+  "message_count": {
+    "oppionme": 63,
+    "QUETIAPINUM_BOY": 46,
+    "GeorgeKan": 41
+  },
+  "main_topics": [
+    "Обсуждение анализа кала и паразитов",
+    "Процесс сдачи анализов и сбор образцов",
+    "Разговоры о ChatGPT и бесплатных версиях",
+    "Юмор, оскорбления и эмоциональные реакции участников",
+    "Взаимодействия по вопросам и советам друг другу"
+  ],
+  "communication_style": {
+    "oppionme": "эмоциональный, часто ругательный, панический, с использованием сленга и выражений удивления/страха",
+    "QUETIAPINUM_BOY": "длинные объяснения, научно-юмористический стиль, наставления, подробные инструкции",
+    "GeorgeKan": "комментарии краткие и логичные, иногда сарказм, даёт советы и уточнения"
+  },
+  "interactions": [
+    {
+      "from": "oppionme",
+      "to": ["QUETIAPINUM_BOY", "GeorgeKan"]
+    },
+    {
+      "from": "QUETIAPINUM_BOY",
+      "to": ["oppionme", "GeorgeKan"]
+    },
+    {
+      "from": "GeorgeKan",
+      "to": ["oppionme", "QUETIAPINUM_BOY"]
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "participants": [
+    "GeorgeKan",
+    "oppionme",
+    "QUETIAPINUM_BOY",
+    "gaysesg",
+    "GemidlyBot",
+    "Mihail Grebnev"
+  ],
+  "message_counts": {
+    "GeorgeKan": 72,
+    "oppionme": 14,
+    "QUETIAPINUM_BOY": 18,
+    "gaysesg": 21,
+    "GemidlyBot": 2,
+    "Mihail Grebnev": 9
+  },
+  "main_topics": [
+    "Обсуждение игр (DND, пчк, стратегия, механики)",
+    "Онлайн vs реальная жизнь (игры, взаимодействие)",
+    "Юмор и мемы",
+    "Повседневные обсуждения (школа, домашка, сессия)",
+    "Взаимные подшучивания и оскорбления"
+  ],
+  "communication_style": {
+    "GeorgeKan": "активный, экспрессивный, часто саркастический, использует эмодзи и сленг",
+    "oppionme": "короткие ответы, уточнения, иногда ругательства, подыгрывает обсуждению игр",
+    "QUETIAPINUM_BOY": "ироничный, эмоциональный, иногда агрессивный язык, комментирует игровые ситуации",
+    "gaysesg": "вопросы, уточнения, комментирует игровые и повседневные ситуации, использует сленг и эмодзи",
+    "GemidlyBot": "формальный, информативный, выдаёт описания и листы персонажей",
+    "Mihail Grebnev": "короткие сообщения, отвечает на вопросы, описывает действия и намерения, иногда уточняет детали"
+  },
+  "interactions": {
+    "GeorgeKan": {
+      "replies_to": ["QUETIAPINUM_BOY", "oppionme", "gaysesg", "Mihail Grebnev"],
+      "mentions": ["@QUETIAPINUM_BOY"]
+    },
+    "oppionme": {
+      "replies_to": ["GeorgeKan", "QUETIAPINUM_BOY"]
+    },
+    "QUETIAPINUM_BOY": {
+      "replies_to": ["GeorgeKan", "oppionme"]
+    },
+    "gaysesg": {
+      "replies_to": ["GeorgeKan"]
+    },
+    "GemidlyBot": {
+      "replies_to": []
+    },
+    "Mihail Grebnev": {
+      "replies_to": ["GeorgeKan"]
+    }
+  }
+}

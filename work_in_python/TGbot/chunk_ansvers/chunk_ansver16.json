@@ -1,0 +1,57 @@
+{
+  "participants": [
+    "oppionme",
+    "GeorgeKan",
+    "selfrapevictimbitchassnigga",
+    "gaysesg",
+    "QUETIAPINUM_BOY"
+  ],
+  "message_counts": {
+    "oppionme": 30,
+    "GeorgeKan": 51,
+    "selfrapevictimbitchassnigga": 7,
+    "gaysesg": 13,
+    "QUETIAPINUM_BOY": 36
+  },
+  "main_topics": [
+    "Скандинавская мифология (Тор, Зевс, Фенрир, Рагнарёк)",
+    "Видеоигры (Dota, кратос, игровые обсуждения)",
+    "Общение о домашних животных и их поведении",
+    "Личные шутки и мемы между участниками",
+    "Повседневные разговоры и юмор"
+  ],
+  "communication_style": {
+    "oppionme": "неформальный, шутливый, эмодзи, короткие фразы, иногда сарказм",
+    "GeorgeKan": "эмоциональный, активное участие в обсуждениях, часто цитирует события и факты, юмор",
+    "selfrapevictimbitchassnigga": "короткие и прямые комментарии, иногда вопросительные",
+    "gaysesg": "короткие ответы, шутливый стиль, иногда уточнения",
+    "QUETIAPINUM_BOY": "эмоциональный, выражает реакцию на события, часто смайлики и смех"
+  },
+  "interactions": [
+    {
+      "from": "GeorgeKan",
+      "to": "QUETIAPINUM_BOY",
+      "context": "упоминание в сообщении с @"
+    },
+    {
+      "from": "oppionme",
+      "to": "GeorgeKan",
+      "context": "обсуждение мифологии и ответ на сообщения"
+    },
+    {
+      "from": "selfrapevictimbitchassnigga",
+      "to": "GeorgeKan",
+      "context": "комментарии к игровым персонажам"
+    },
+    {
+      "from": "gaysesg",
+      "to": "GeorgeKan",
+      "context": "обсуждение скандинавской мифологии"
+    },
+    {
+      "from": "QUETIAPINUM_BOY",
+      "to": "GeorgeKan",
+      "context": "реакция на шутки и действия других участников"
+    }
+  ]
+}

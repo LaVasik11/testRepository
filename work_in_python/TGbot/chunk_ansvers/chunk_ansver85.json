@@ -1,0 +1,34 @@
+{
+  "participants": [
+    "GeorgeKan",
+    "oppionme",
+    "QUETIAPINUM_BOY",
+    "gaysesg"
+  ],
+  "message_count": {
+    "GeorgeKan": 58,
+    "oppionme": 57,
+    "QUETIAPINUM_BOY": 22,
+    "gaysesg": 3
+  },
+  "main_topics": [
+    "Обсуждение анкет и формальностей",
+    "Личные шутки и черный юмор",
+    "Обсуждение фотографий и внешности",
+    "Повседневные события участников (учёба, усталость, планы)",
+    "Игровые или фантазийные обсуждения (лазер, золото, тоннель)"
+  ],
+  "communication_style": {
+    "GeorgeKan": "Прямой, саркастический, часто с ругательствами и черным юмором",
+    "oppionme": "Неформальный, быстрые фразы, часто эмоциональные или с шутками",
+    "QUETIAPINUM_BOY": "Игривый, иногда абсурдный, добавляет комментарии к событиям других",
+    "gaysesg": "Короткие, лаконичные ответы, минимальное участие"
+  },
+  "interactions": [
+    {"from": "GeorgeKan", "to": "oppionme", "type": "ответ/реакция на сообщение"},
+    {"from": "oppionme", "to": "GeorgeKan", "type": "ответ/реакция на сообщение"},
+    {"from": "QUETIAPINUM_BOY", "to": "GeorgeKan", "type": "ответ/реакция"},
+    {"from": "QUETIAPINUM_BOY", "to": "oppionme", "type": "ответ/реакция"},
+    {"from": "GeorgeKan", "to": "QUETIAPINUM_BOY", "type": "ответ/реакция"}
+  ]
+}

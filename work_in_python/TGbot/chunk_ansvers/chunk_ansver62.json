@@ -1,0 +1,46 @@
+{
+"participants": [
+"GeorgeKan",
+"gaysesg",
+"oppionme",
+"iris_cm_bot"
+],
+"message_counts": {
+"GeorgeKan": 32,
+"gaysesg": 9,
+"oppionme": 4,
+"iris_cm_bot": 6
+},
+"main_topics": [
+"Карты и игры",
+"Общие сборы/организация встреч",
+"Философские и шутливые высказывания",
+"Сообщения бота о действиях участников"
+],
+"communication_style": {
+"GeorgeKan": "Часто использует краткие фразы, эмодзи, философские и шутливые высказывания, агрессивные или язвительные комментарии",
+"gaysesg": "Короткие, эмоциональные реакции, иногда агрессивные или провокационные",
+"oppionme": "Краткие комментарии, реактивные ответы",
+"iris_cm_bot": "Информативный, нейтральный, автоматические уведомления"
+},
+"interactions": [
+{
+"from": "GeorgeKan",
+"to": "gaysesg",
+"type": "reply/mention",
+"examples": ["Ты тупой", "Все молчали потому что согластны были на условия"]
+},
+{
+"from": "iris_cm_bot",
+"to": "GeorgeKan",
+"type": "announcement",
+"examples": ["📢  [Георгий](https://t.me/georgekan) объявил общий сбор!"]
+},
+{
+"from": "gaysesg",
+"to": "GeorgeKan",
+"type": "comment",
+"examples": ["Только ты после этих слов сразу въебал"]
+}
+]
+}

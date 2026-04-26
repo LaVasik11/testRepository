@@ -1,0 +1,47 @@
+{
+"participants": [
+"GeorgeKan",
+"gaysesg",
+"QUETIAPINUM_BOY",
+"oppionme",
+"iris_cm_bot"
+],
+"message_count": {
+"GeorgeKan": 46,
+"gaysesg": 41,
+"QUETIAPINUM_BOY": 35,
+"oppionme": 22,
+"iris_cm_bot": 2
+},
+"main_topics": [
+"Видеоигры (LoL, Dota, мобильные версии игр)",
+"Сбор группы/события (общие сборы, команды)",
+"Разговоры о действиях и поведении участников (отжимания, взаимодействия, распоряжения)",
+"Эмоциональные высказывания, оскорбления и ругань",
+"Технические обсуждения (установка ОС, вебка)"
+],
+"communication_style": {
+"GeorgeKan": "Директивный, эмоциональный, часто шутливый и саркастический, использует оскорбления и юмор",
+"gaysesg": "Эмоциональный, экспрессивный, часто ругается, иногда комментирует действия других",
+"QUETIAPINUM_BOY": "Короткие, эмоциональные сообщения, часто с эмодзи и повторяющимися словами/цифрами, иногда оскорбления",
+"oppionme": "Командный стиль, даёт указания, использует CapsLock для выражения эмоций",
+"iris_cm_bot": "Автоматические сообщения о событиях в группе"
+},
+"interactions": {
+"GeorgeKan": {
+"replies_to": ["gaysesg", "QUETIAPINUM_BOY", "oppionme"]
+},
+"gaysesg": {
+"replies_to": ["GeorgeKan", "QUETIAPINUM_BOY"]
+},
+"QUETIAPINUM_BOY": {
+"replies_to": ["gaysesg"]
+},
+"oppionme": {
+"replies_to": ["GeorgeKan", "gaysesg"]
+},
+"iris_cm_bot": {
+"replies_to": []
+}
+}
+}

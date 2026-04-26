@@ -1,0 +1,53 @@
+{
+"participants": [
+"GeorgeKan",
+"gaysesg",
+"oppionme",
+"iris_cm_bot"
+],
+"message_count": {
+"GeorgeKan": 80,
+"gaysesg": 34,
+"oppionme": 25,
+"iris_cm_bot": 6
+},
+"main_topics": [
+"Игры и игровые серверы (Лайм, Блу, лидерки)",
+"Взаимодействия и общие сборы участников",
+"Личные взаимоотношения участников (дружба, брак, отношения)",
+"Обсуждение видео и контента",
+"Форумные активности и конкурсы"
+],
+"communication_style": {
+"GeorgeKan": "Активный, быстрые реплики, часто использует сленг и экспрессивные выражения, обсуждает события и стратегии",
+"gaysesg": "Краткие, лаконичные ответы, иногда с юмором или эмоциональными комментариями, уточнения и пояснения",
+"oppionme": "Вопросительные и реактивные сообщения, иногда эмоциональные, участвует в обсуждениях и уточнениях",
+"iris_cm_bot": "Автоматические сообщения с уведомлениями о действиях и событиях"
+},
+"interactions": [
+{
+"from": "GeorgeKan",
+"to": "gaysesg",
+"type": "direct mentions and replies",
+"examples": ["брак @gaysesg", "/ask Кузя привет"]
+},
+{
+"from": "oppionme",
+"to": "GeorgeKan",
+"type": "direct mentions and questions",
+"examples": ["@GeorgeKan это мы?", "так у тебя деньги есть"]
+},
+{
+"from": "oppionme",
+"to": "gaysesg",
+"type": "direct mentions",
+"examples": ["@gaysesg мы?"]
+},
+{
+"from": "gaysesg",
+"to": "GeorgeKan",
+"type": "replies and commentary",
+"examples": ["Выебать", "end."]
+}
+]
+}

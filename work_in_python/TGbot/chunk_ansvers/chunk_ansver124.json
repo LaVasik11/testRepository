@@ -1,0 +1,49 @@
+{
+  "participants": [
+    "oppionme",
+    "gaysesg",
+    "GeorgeKan",
+    "QUETIAPINUM_BOY"
+  ],
+  "message_count": {
+    "oppionme": 33,
+    "gaysesg": 39,
+    "GeorgeKan": 49,
+    "QUETIAPINUM_BOY": 29
+  },
+  "main_topics": [
+    "Игры и игровые платформы (CS Nexon, Zombies, Steam)",
+    "Операционные системы (Windows, Linux, macOS)",
+    "Личные разговоры и шутки между участниками",
+    "Сбор информации/форм (форма для ДС)",
+    "Обсуждение внешности и причесок"
+  ],
+  "communication_style": {
+    "oppionme": "неформальный, краткий, часто с шутками и эмоциями",
+    "gaysesg": "разговорный, эмоциональный, иногда использует сарказм и прямую критику",
+    "GeorgeKan": "информативный и объяснительный, часто даёт инструкции и выражает мнение",
+    "QUETIAPINUM_BOY": "шутливый, провокационный и эпатажный, часто оскорбительный"
+  },
+  "interactions": [
+    {
+      "from": "gaysesg",
+      "to": "QUETIAPINUM_BOY",
+      "context": "отмечает или упоминает в сообщении"
+    },
+    {
+      "from": "GeorgeKan",
+      "to": "oppionme",
+      "context": "часто отвечает на вопросы или комментарии о играх и ОС"
+    },
+    {
+      "from": "oppionme",
+      "to": "gaysesg",
+      "context": "реагирует на личные шутки и разговоры"
+    },
+    {
+      "from": "QUETIAPINUM_BOY",
+      "to": "GeorgeKan",
+      "context": "провокационные и шутливые ответы"
+    }
+  ]
+}

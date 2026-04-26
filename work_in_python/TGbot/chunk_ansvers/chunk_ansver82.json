@@ -1,0 +1,40 @@
+{
+  "participants": [
+    "QUETIAPINUM_BOY",
+    "GeorgeKan",
+    "oppionme",
+    "gaysesg",
+    "GemidlyBot",
+    "iris_cm_bot"
+  ],
+  "message_count": {
+    "QUETIAPINUM_BOY": 21,
+    "GeorgeKan": 7,
+    "oppionme": 14,
+    "gaysesg": 6,
+    "GemidlyBot": 2,
+    "iris_cm_bot": 1
+  },
+  "main_topics": [
+    "Обсуждение платформ и токенов",
+    "Взаимодействие с игровыми элементами (Minecraft, кристаликс)",
+    "Личные комментарии и эмоции участников",
+    "Обмен шутками и грубым языком",
+    "Работа ботов и уведомления об ошибках"
+  ],
+  "communication_style": {
+    "QUETIAPINUM_BOY": "разговорный, эмоциональный, часто с эмодзи и краткими фразами",
+    "GeorgeKan": "информативный и прямой, иногда упоминания других участников",
+    "oppionme": "разговорный, саркастический, иногда с оскорблениями",
+    "gaysesg": "короткие реплики, грубый стиль, прямой язык",
+    "GemidlyBot": "описательный, информативный, формальный",
+    "iris_cm_bot": "формальный, уведомления о действиях в чате"
+  },
+  "interactions": [
+    {
+      "from": "GeorgeKan",
+      "to": ["oppionme", "QUETIAPINUM_BOY"],
+      "type": "mention"
+    }
+  ]
+}

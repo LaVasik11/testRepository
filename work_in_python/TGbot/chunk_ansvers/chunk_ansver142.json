@@ -1,0 +1,33 @@
+{
+  "participants": [
+    "oppionme",
+    "GeorgeKan",
+    "bfcrazy",
+    "iris_cm_bot"
+  ],
+  "message_counts": {
+    "oppionme": 19,
+    "GeorgeKan": 18,
+    "bfcrazy": 10,
+    "iris_cm_bot": 2
+  },
+  "main_topics": [
+    "обсуждение повседневных ситуаций и юмора",
+    "внутренняя шутливая переписка о задачах и стратегиях",
+    "упоминания физических действий и ситуаций",
+    "реакции на игровые/виртуальные события (бот-уведомления)"
+  ],
+  "communication_style": {
+    "oppionme": "неформальный, резкий, с юмором и сарказмом, использует сленг",
+    "GeorgeKan": "разговорный, подробный, иногда саркастичный, объясняет действия",
+    "bfcrazy": "прямолинейный, грубый, с юмором",
+    "iris_cm_bot": "официальный, уведомляющий, информативный"
+  },
+  "interactions": [
+    {"from": "oppionme", "to": "GeorgeKan"},
+    {"from": "GeorgeKan", "to": "oppionme"},
+    {"from": "bfcrazy", "to": "GeorgeKan"},
+    {"from": "GeorgeKan", "to": "bfcrazy"},
+    {"from": "iris_cm_bot", "to": "all"}
+  ]
+}

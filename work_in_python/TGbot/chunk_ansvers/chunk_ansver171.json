@@ -1,0 +1,40 @@
+{
+  "participants": [
+    "QUETIAPINUM_BOY",
+    "oppionme",
+    "selfrapevictimbitchassnigga",
+    "GeorgeKan",
+    "gaysesg",
+    "iris_cm_bot"
+  ],
+  "message_count": {
+    "QUETIAPINUM_BOY": 66,
+    "oppionme": 31,
+    "selfrapevictimbitchassnigga": 24,
+    "GeorgeKan": 30,
+    "gaysesg": 11,
+    "iris_cm_bot": 5
+  },
+  "main_topics": [
+    "шутки и мемы",
+    "обсуждение сексуальных тем и презервативов",
+    "школа и учеба",
+    "игры и развлечение",
+    "общение в формате рофлов и сарказма"
+  ],
+  "communication_style": {
+    "QUETIAPINUM_BOY": "часто эмоциональные, экспрессивные сообщения, использование ругательств, мемов, смайликов",
+    "oppionme": "краткие, иногда агрессивные или саркастические сообщения, вопросы и уточнения",
+    "selfrapevictimbitchassnigga": "агрессивные и грубые выражения, юмор на грани фола, сарказм",
+    "GeorgeKan": "аналитический и саркастический стиль, часто делает длинные поясняющие сообщения, мемологический подход",
+    "gaysesg": "краткие сообщения, комментарии к обсуждению, вопросы",
+    "iris_cm_bot": "автоматические сообщения с уведомлениями, реакциями на действия пользователей"
+  },
+  "interactions": [
+    {"from": "QUETIAPINUM_BOY", "to": "GeorgeKan"},
+    {"from": "oppionme", "to": "GeorgeKan"},
+    {"from": "QUETIAPINUM_BOY", "to": "selfrapevictimbitchassnigga"},
+    {"from": "GeorgeKan", "to": "QUETIAPINUM_BOY"},
+    {"from": "gaysesg", "to": "GeorgeKan"}
+  ]
+}

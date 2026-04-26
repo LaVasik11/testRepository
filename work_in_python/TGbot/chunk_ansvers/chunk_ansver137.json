@@ -1,0 +1,46 @@
+{
+  "participants": [
+    "GeorgeKan",
+    "oppionme",
+    "gaysesg",
+    "iris_cm_bot"
+  ],
+  "message_counts": {
+    "GeorgeKan": 95,
+    "oppionme": 19,
+    "gaysesg": 23,
+    "iris_cm_bot": 2
+  },
+  "main_topics": [
+    "Татуировки и мнения о них",
+    "Обсуждение видео и контента на YouTube",
+    "Повседневные разговоры о жилье и соседях",
+    "Сообщения о приложениях и регистрации в Max",
+    "Юмор и оскорбления в переписке",
+    "Концертные и культурные упоминания"
+  ],
+  "communication_style": {
+    "GeorgeKan": "Эмоциональный, агрессивный и юмористический стиль, часто использует сарказм, мат и короткие фразы. Активно вовлекает других в диалог и подшучивает.",
+    "oppionme": "Лаконичный, иногда саркастический, отвечает кратко и по делу, использует эмоции в виде междометий.",
+    "gaysesg": "Нейтрально-юмористический, часто реагирует на шутки и вопросы, поддерживает диалог, иногда выражает недовольство.",
+    "iris_cm_bot": "Формальный и уведомляющий, не проявляет эмоций, информативный стиль."
+  },
+  "interactions": {
+    "GeorgeKan": {
+      "replies_to": ["gaysesg", "oppionme", "iris_cm_bot"],
+      "quoted_by": ["gaysesg", "oppionme"]
+    },
+    "oppionme": {
+      "replies_to": ["GeorgeKan", "gaysesg"],
+      "quoted_by": ["GeorgeKan"]
+    },
+    "gaysesg": {
+      "replies_to": ["GeorgeKan", "oppionme"],
+      "quoted_by": ["GeorgeKan", "oppionme"]
+    },
+    "iris_cm_bot": {
+      "replies_to": [],
+      "quoted_by": ["GeorgeKan"]
+    }
+  }
+}

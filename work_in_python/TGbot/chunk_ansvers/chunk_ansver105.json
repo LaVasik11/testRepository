@@ -1,0 +1,37 @@
+{
+"participants": [
+"QUETIAPINUM_BOY",
+"GeorgeKan",
+"oppionme",
+"iris_cm_bot",
+"gaysesg"
+],
+"message_counts": {
+"QUETIAPINUM_BOY": 66,
+"GeorgeKan": 38,
+"oppionme": 18,
+"iris_cm_bot": 6,
+"gaysesg": 9
+},
+"main_topics": [
+"приготовление пищи (пельмени, яйца, наггетсы)",
+"шутки и юмор между участниками",
+"игровые и интернет-ситуации",
+"взаимные поддразнивания и манипуляции",
+"домашние/бытовые темы и обсуждение места проживания участников"
+],
+"communication_style": {
+"QUETIAPINUM_BOY": "неформальный, юмористический, быстрые реакции, часто использует смайлы и шутки",
+"GeorgeKan": "ироничный, саркастический, иногда агрессивный, быстрые реплики",
+"oppionme": "эмоциональный, провокационный, часто использует угрозы в шутливой форме",
+"iris_cm_bot": "автоматические уведомления, формальные сообщения о ошибках или ограничениях",
+"gaysesg": "краткие комментарии, шутки, иногда вмешательство в разговоры других участников"
+},
+"interactions": [
+{"from": "QUETIAPINUM_BOY", "to": "GeorgeKan", "type": "mention", "count": 3},
+{"from": "GeorgeKan", "to": "oppionme", "type": "mention", "count": 2},
+{"from": "oppionme", "to": "QUETIAPINUM_BOY", "type": "mention", "count": 1},
+{"from": "gaysesg", "to": "oppionme", "type": "comment", "count": 2},
+{"from": "iris_cm_bot", "to": "all", "type": "notification", "count": 6}
+]
+}

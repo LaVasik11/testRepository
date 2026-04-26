@@ -1,0 +1,38 @@
+{
+  "participants": [
+    "QUETIAPINUM_BOY",
+    "GeorgeKan",
+    "gaysesg",
+    "Mihail Grebnev",
+    "oppionme"
+  ],
+  "message_counts": {
+    "QUETIAPINUM_BOY": 60,
+    "GeorgeKan": 53,
+    "gaysesg": 32,
+    "Mihail Grebnev": 4,
+    "oppionme": 9
+  },
+  "main_topics": [
+    "Взаимные оскорбления и шутки",
+    "Роли и админка в группе",
+    "Создание и управление группой",
+    "Обсуждение еды (чебупели, пельмени, мясо)",
+    "Обсуждение физического состояния участников",
+    "Случайные бытовые и эмоциональные комментарии"
+  ],
+  "communication_style": {
+    "QUETIAPINUM_BOY": "Эмоциональный, с юмором, часто использует агрессивные шутки и смайлики",
+    "GeorgeKan": "Напористый, часто в споре и возражает, иногда саркастичный",
+    "gaysesg": "Остроумный и саркастичный, часто отвечает короткими фразами и возражает",
+    "Mihail Grebnev": "Короткие нейтральные сообщения, уточнения и комментарии",
+    "oppionme": "Краткие наблюдения и комментарии, иногда эмоциональные"
+  },
+  "interactions": [
+    {"from": "GeorgeKan", "to": "QUETIAPINUM_BOY", "context": "Ответы и комментарии на шутки и обсуждения ролей"},
+    {"from": "gaysesg", "to": "GeorgeKan", "context": "Возражения и критика действий"},
+    {"from": "QUETIAPINUM_BOY", "to": "gaysesg", "context": "Шутки и агрессивные комментарии"},
+    {"from": "GeorgeKan", "to": "Mihail Grebnev", "context": "Присваивание роли и похвала"},
+    {"from": "QUETIAPINUM_BOY", "to": "GeorgeKan", "context": "Эмоциональные комментарии, часто повторяющие темы"}
+  ]
+}

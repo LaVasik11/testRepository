@@ -1,0 +1,53 @@
+{
+  "participants": [
+    "GeorgeKan",
+    "QUETIAPINUM_BOY",
+    "gaysesg",
+    "selfrapevictimbitchassnigga"
+  ],
+  "message_counts": {
+    "GeorgeKan": 53,
+    "QUETIAPINUM_BOY": 74,
+    "gaysesg": 22,
+    "selfrapevictimbitchassnigga": 1
+  },
+  "main_topics": [
+    "школьные и подростковые шутки",
+    "обсуждение физкультуры и роли учителя",
+    "бытовые сцены и мелкие происшествия",
+    "доставки еды и личные истории",
+    "выражение эмоций и оскорбления в шуточной форме"
+  ],
+  "communication_style": {
+    "GeorgeKan": "ироничные и шутливые комментарии, сарказм, ответы на провокации",
+    "QUETIAPINUM_BOY": "подробные описания ситуаций, юмор, драматизация, активные ответы на шутки и провокации",
+    "gaysesg": "короткие комментарии, часто в формате шуток или подыгрывания, использование сленга",
+    "selfrapevictimbitchassnigga": "однократное резкое сообщение"
+  },
+  "interactions": [
+    {
+      "from": "GeorgeKan",
+      "to": "QUETIAPINUM_BOY",
+      "type": "direct_reply_or_mention",
+      "examples": ["@QUETIAPINUM_BOY я самую малось вьебался"]
+    },
+    {
+      "from": "QUETIAPINUM_BOY",
+      "to": "GeorgeKan",
+      "type": "storytelling_or_response",
+      "examples": ["Вы оба по факту обкурились спайса и сейчас в судорогах валяетесь..."]
+    },
+    {
+      "from": "gaysesg",
+      "to": "GeorgeKan",
+      "type": "reactive_comments",
+      "examples": ["ты псих", "я физрук"]
+    },
+    {
+      "from": "GeorgeKan",
+      "to": "gaysesg",
+      "type": "reactive_comments",
+      "examples": ["Ты просто очкастый задрот который толчек мыл"]
+    }
+  ]
+}

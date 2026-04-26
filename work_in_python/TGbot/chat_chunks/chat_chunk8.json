@@ -1,0 +1,27 @@
+{
+  "chunk_summary": {
+    "participants": ["gaysesg", "GeorgeKan", "oppionme"],
+    "message_count": {
+      "gaysesg": 54,
+      "GeorgeKan": 84,
+      "oppionme": 21
+    },
+    "main_topics": [
+      "Использование и настройка бота GemidlyBot для ответов смайликами и сексуальных намёков",
+      "Обсуждение конкретных действий участников (в том числе игровые моменты, смена никнеймов, нарезки видео)",
+      "Юмор, пранки, сарказм и шутки",
+      "Обсуждение личных или спорных тем с элементами агрессии или провокации"
+    ],
+    "communication_style": {
+      "GeorgeKan": "Активный, часто использует команды для бота, длинные сообщения с описанием действий, шутки, сарказм, иногда агрессивная или экспрессивная речь",
+      "gaysesg": "Часто реагирует на действия GeorgeKan, использует короткие сообщения, эмодзи, поддерживает шутливый или провокационный тон",
+      "oppionme": "Короткие и экспрессивные комментарии, иногда агрессивные или ироничные, редко участвует в длинных обсуждениях"
+    },
+    "interactions": [
+      {"from": "gaysesg", "to": "GeorgeKan", "type": "response_or_reaction"},
+      {"from": "GeorgeKan", "to": "gaysesg", "type": "response_or_direct_command"},
+      {"from": "oppionme", "to": "GeorgeKan", "type": "response_or_comment"},
+      {"from": "oppionme", "to": "gaysesg", "type": "response_or_comment"}
+    ]
+  }
+}

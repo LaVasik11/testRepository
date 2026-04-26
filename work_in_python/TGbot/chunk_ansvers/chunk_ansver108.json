@@ -1,0 +1,38 @@
+{
+  "participants": [
+    "GeorgeKan",
+    "oppionme",
+    "gaysesg",
+    "iris_cm_bot",
+    "bfcrazy"
+  ],
+  "message_counts": {
+    "GeorgeKan": 46,
+    "oppionme": 30,
+    "gaysesg": 17,
+    "iris_cm_bot": 26,
+    "bfcrazy": 3
+  },
+  "main_topics": [
+    "обсуждение общего сбора/встреч",
+    "шутки и оскорбления между участниками",
+    "упоминания действий с объектами (бамбук, кристаллы, химические реакции)",
+    "игровые и шутливые высказывания",
+    "технические сообщения бота (iris_cm_bot)"
+  ],
+  "communication_style": {
+    "GeorgeKan": "агрессивно-шутливый, часто использует прямые вопросы и оскорбления",
+    "oppionme": "ироничный и провокационный, иногда ругательства и эмоциональные выражения",
+    "gaysesg": "короткие комментарии, реагирует на действия других, иногда инструкции",
+    "iris_cm_bot": "официальный, информативный, сообщения формальные, системные",
+    "bfcrazy": "краткие оценки событий, нейтрально или с недовольством"
+  },
+  "interactions": [
+    {"from": "GeorgeKan", "to": "gaysesg", "type": "mention"},
+    {"from": "GeorgeKan", "to": "iris_cm_bot", "type": "mention"},
+    {"from": "oppionme", "to": "GeorgeKan", "type": "direct_response"},
+    {"from": "gaysesg", "to": "GeorgeKan", "type": "response"},
+    {"from": "iris_cm_bot", "to": "all", "type": "broadcast"},
+    {"from": "bfcrazy", "to": "all", "type": "commentary"}
+  ]
+}

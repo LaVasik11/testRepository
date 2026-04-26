@@ -1,0 +1,57 @@
+{
+  "participants": [
+    "QUETIAPINUM_BOY",
+    "GeorgeKan",
+    "selfrapevictimbitchassnigga",
+    "oppionme",
+    "iris_cm_bot"
+  ],
+  "message_counts": {
+    "QUETIAPINUM_BOY": 16,
+    "GeorgeKan": 17,
+    "selfrapevictimbitchassnigga": 14,
+    "oppionme": 9,
+    "iris_cm_bot": 1
+  },
+  "main_topics": [
+    "Игры (Dota, Гордые рыцари)",
+    "Шутки и мемы между участниками",
+    "Личное общение и повседневные комментарии",
+    "Обсуждение погоды через бота",
+    "Использование матов и экспрессивной лексики"
+  ],
+  "communication_style": {
+    "QUETIAPINUM_BOY": "Легкомысленный, шутливый, иногда провокационный",
+    "GeorgeKan": "Игровой и разговорный стиль, часто с историческими отсылками и шутками",
+    "selfrapevictimbitchassnigga": "Эмоциональный, экспрессивный, часто реагирует на других участников",
+    "oppionme": "Прямолинейный, иногда саркастичный, вовлекается в споры",
+    "iris_cm_bot": "Формальный и информативный, автоматические сообщения"
+  },
+  "interactions": [
+    {
+      "from": "QUETIAPINUM_BOY",
+      "to": ["GeorgeKan", "selfrapevictimbitchassnigga"],
+      "type": "ответ/реакция"
+    },
+    {
+      "from": "GeorgeKan",
+      "to": ["QUETIAPINUM_BOY", "selfrapevictimbitchassnigga", "oppionme"],
+      "type": "ответ/обсуждение"
+    },
+    {
+      "from": "selfrapevictimbitchassnigga",
+      "to": ["GeorgeKan", "QUETIAPINUM_BOY"],
+      "type": "ответ/реакция"
+    },
+    {
+      "from": "oppionme",
+      "to": ["GeorgeKan", "QUETIAPINUM_BOY"],
+      "type": "ответ/цитирование"
+    },
+    {
+      "from": "iris_cm_bot",
+      "to": ["все"],
+      "type": "информационное сообщение"
+    }
+  ]
+}

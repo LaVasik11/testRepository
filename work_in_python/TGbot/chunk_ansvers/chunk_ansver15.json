@@ -1,0 +1,54 @@
+{
+  "participants": [
+    "GeorgeKan",
+    "oppionme",
+    "QUETIAPINUM_BOY",
+    "gaysesg"
+  ],
+  "message_count": {
+    "GeorgeKan": 13,
+    "oppionme": 8,
+    "QUETIAPINUM_BOY": 25,
+    "gaysesg": 8
+  },
+  "main_topics": [
+    "Военная служба и отсрочка от армии",
+    "Личное местожительство и прописка",
+    "Юмор и шутки о национальностях",
+    "Игровые метафоры (Minecraft) и советы для жизни",
+    "Взаимные комментарии и оценки действий участников"
+  ],
+  "communication_style": {
+    "GeorgeKan": "Прямой, саркастический, иногда с юмором",
+    "oppionme": "Неофициальный, эмоциональный, краткий",
+    "QUETIAPINUM_BOY": "Детализированный, объяснительный, наставнический тон",
+    "gaysesg": "Критический, наблюдательный, саркастический"
+  },
+  "interactions": [
+    {
+      "from": "oppionme",
+      "to": "GeorgeKan",
+      "type": "комментарий/ответ"
+    },
+    {
+      "from": "QUETIAPINUM_BOY",
+      "to": "oppionme",
+      "type": "совет/объяснение"
+    },
+    {
+      "from": "GeorgeKan",
+      "to": "QUETIAPINUM_BOY",
+      "type": "ответ/комментарий"
+    },
+    {
+      "from": "gaysesg",
+      "to": "GeorgeKan",
+      "type": "вопрос/оценка"
+    },
+    {
+      "from": "QUETIAPINUM_BOY",
+      "to": "всем",
+      "type": "общее руководство/гайд"
+    }
+  ]
+}

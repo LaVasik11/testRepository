@@ -1,0 +1,52 @@
+{
+  "participants": [
+    "GeorgeKan",
+    "QUETIAPINUM_BOY",
+    "oppionme"
+  ],
+  "message_count": {
+    "GeorgeKan": 17,
+    "QUETIAPINUM_BOY": 23,
+    "oppionme": 20
+  },
+  "main_topics": [
+    "Курение и здоровье",
+    "Личные оскорбления и шутки",
+    "Исследования/эксперименты (кал, микроскоп)",
+    "Обсуждение жизни и смерти, философские рассуждения"
+  ],
+  "communication_style": {
+    "GeorgeKan": "Спокойный, рассуждающий, иногда саркастический",
+    "QUETIAPINUM_BOY": "Эмоциональный, экспрессивный, иногда агрессивный",
+    "oppionme": "Грубый, провокационный, иногда шутливый"
+  },
+  "interactions": [
+    {
+      "from": "GeorgeKan",
+      "to": "QUETIAPINUM_BOY",
+      "type": "direct_response",
+      "examples": [
+        "Опять ты со своими опзициоными предложениями",
+        "@QUETIAPINUM_BOY за сколько бв пересадил бы себе в жопу говно рандомного бомжа?"
+      ]
+    },
+    {
+      "from": "QUETIAPINUM_BOY",
+      "to": "GeorgeKan",
+      "type": "direct_response",
+      "examples": [
+        "Тимоха а че ты резко вдруг про сигареты заговорил",
+        "Че то я даже забыл что я курящий"
+      ]
+    },
+    {
+      "from": "oppionme",
+      "to": "QUETIAPINUM_BOY",
+      "type": "direct_response",
+      "examples": [
+        "у тебя же вялый член",
+        "так ты не курящий"
+      ]
+    }
+  ]
+}

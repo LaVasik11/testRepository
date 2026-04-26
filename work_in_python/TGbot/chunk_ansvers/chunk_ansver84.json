@@ -1,0 +1,52 @@
+{
+"participants": [
+"GeorgeKan",
+"iris_cm_bot",
+"gaysesg",
+"oppionme",
+"QUETIAPINUM_BOY"
+],
+"message_counts": {
+"GeorgeKan": 75,
+"iris_cm_bot": 4,
+"gaysesg": 12,
+"oppionme": 21,
+"QUETIAPINUM_BOY": 18
+},
+"main_topics": [
+"Погода в разных городах",
+"Шутки и мемы",
+"Обсуждение учебы и работы",
+"Повседневная жизнь и взаимоотношения",
+"Гипотезы и парадоксы, иногда абсурдного характера"
+],
+"communication_style": {
+"GeorgeKan": "активный, часто с юмором и сарказмом, эмоциональный, иногда нецензурный, много реакций и комментариев на происходящее",
+"iris_cm_bot": "автоматические сообщения с информацией о погоде и статистике",
+"gaysesg": "краткие, прямолинейные сообщения, иногда оскорбительные или негативные",
+"oppionme": "краткие комментарии, реактивный стиль, иногда саркастический, часто использует юмор или эмодзи",
+"QUETIAPINUM_BOY": "выражает свои мысли развернуто, иногда философские или абсурдные, часто реагирует на шутки и события"
+},
+"interactions": {
+"GeorgeKan": {
+"replies_to": ["oppionme", "QUETIAPINUM_BOY", "gaysesg"],
+"quoted_by": ["oppionme", "QUETIAPINUM_BOY"]
+},
+"iris_cm_bot": {
+"replies_to": [],
+"quoted_by": ["GeorgeKan", "gaysesg"]
+},
+"gaysesg": {
+"replies_to": ["GeorgeKan"],
+"quoted_by": ["GeorgeKan"]
+},
+"oppionme": {
+"replies_to": ["GeorgeKan", "QUETIAPINUM_BOY"],
+"quoted_by": ["GeorgeKan"]
+},
+"QUETIAPINUM_BOY": {
+"replies_to": ["GeorgeKan", "oppionme"],
+"quoted_by": ["GeorgeKan"]
+}
+}
+}

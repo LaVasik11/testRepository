@@ -1,0 +1,40 @@
+{
+  "participants": [
+    "QUETIAPINUM_BOY",
+    "GeorgeKan",
+    "oppionme"
+  ],
+  "message_counts": {
+    "QUETIAPINUM_BOY": 21,
+    "GeorgeKan": 28,
+    "oppionme": 9
+  },
+  "main_topics": [
+    "Обсуждение еды и роллов",
+    "Шутки и мемы",
+    "Взаимодействие и советы друг другу",
+    "Игровые или повседневные ситуации"
+  ],
+  "communication_style": {
+    "QUETIAPINUM_BOY": "Эмоциональный, часто краткие фразы, юмор, использование заглавных букв",
+    "GeorgeKan": "Активный, подробные объяснения, шутки, сарказм, комментарии на действия других",
+    "oppionme": "Краткие ответы, эмоциональная окраска, сленг, иногда недовольство или удивление"
+  },
+  "interactions": [
+    {
+      "from": "GeorgeKan",
+      "to": "QUETIAPINUM_BOY",
+      "type": "ответ/комментарий"
+    },
+    {
+      "from": "oppionme",
+      "to": "GeorgeKan",
+      "type": "ответ/комментарий"
+    },
+    {
+      "from": "QUETIAPINUM_BOY",
+      "to": "GeorgeKan",
+      "type": "ответ/комментарий"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+"participants": [
+"GeorgeKan",
+"QUETIAPINUM_BOY",
+"gaysesg",
+"oppionme"
+],
+"message_count": {
+"GeorgeKan": 72,
+"QUETIAPINUM_BOY": 52,
+"gaysesg": 35,
+"oppionme": 19
+},
+"main_topics": [
+"Игры (SAMP, Дота, шахматы, мобилки)",
+"Взаимные шутки и оскорбления",
+"Личные обсуждения и истории участников",
+"Донаты и траты в играх",
+"Армия и военные действия"
+],
+"communication_style": {
+"GeorgeKan": "Легкая и ироничная манера, часто вставляет смех, краткие ответы и реакции",
+"QUETIAPINUM_BOY": "Оскорбительный, агрессивный стиль, провокационные вопросы",
+"gaysesg": "Информативный, уточняет детали, иногда саркастичен",
+"oppionme": "Короткие реплики, вопросы, эмоциональная вовлеченность"
+},
+"interactions": [
+{
+"from": "QUETIAPINUM_BOY",
+"to": "GeorgeKan",
+"type": "ответы и оскорбления"
+},
+{
+"from": "GeorgeKan",
+"to": "QUETIAPINUM_BOY",
+"type": "ответы, шутки, реакции"
+},
+{
+"from": "gaysesg",
+"to": "GeorgeKan",
+"type": "обсуждение игровых и личных событий"
+},
+{
+"from": "oppionme",
+"to": "GeorgeKan",
+"type": "вопросы и комментарии"
+},
+{
+"from": "oppionme",
+"to": "gaysesg",
+"type": "комментарии и уточнения"
+}
+]
+}
