@@ -3,7 +3,7 @@ import time
 
 
 last_action_time = 0
-
+waiting_for_money = False
 
 def get_pay_amount(page):
     try:
@@ -11,8 +11,45 @@ def get_pay_amount(page):
         return parse_number(text)
     except:
         return 0
+
+def get_buy_amount(page):
+    try:
+        text = page.locator("div._action:has-text('Купить за')").inner_text()
+        return parse_number(text)
+    except:
+        return 0
+
+
+def send_message(page, text):
+    try:
+        input_box = page.locator("input[placeholder='Введите сообщение']")
+
+        if not input_box.is_visible():
+            print("CHAT INPUT NOT FOUND")
+            return False
+
+        input_box.click()
+        input_box.fill(text)
+
+        page.keyboard.press("Enter")
+
+        print("MESSAGE SENT:", text)
+        return True
+
+    except Exception as e:
+        print("SEND MESSAGE ERROR:", e)
+        return False
     
-def open_contract_with_teammate(page, state):
+
+waiting_for_money = False
+
+
+def open_contract_with_teammate(page, state, need):
+    global waiting_for_money
+
+    if waiting_for_money:
+        return
+
     try:
         me = state.get_me()
         if not me:
@@ -22,30 +59,56 @@ def open_contract_with_teammate(page, state):
         my_team = me["team"]
 
         cards = page.locator(".table-body-players-card-body")
-
         players = list(state.players.values())
 
         for i in range(cards.count()):
-            card = cards.nth(i)
-
             if i >= len(players):
                 continue
 
             player = players[i]
+            card = cards.nth(i)
 
-            # ищем тимейта (тот же team, но не я)
             if player.get("team") == my_team and player.get("user_id") != my_id:
                 print("FOUND TEAMMATE:", player.get("user_id"))
 
+                waiting_for_money = True
+
+                # открыть меню
                 card.click()
+                time.sleep(0.3)
+
+                menu = card.locator("xpath=following-sibling::div[contains(@class, 'table-body-players-card-menu')]")
+                menu.locator("._contract").click()
+
+                page.wait_for_selector(".TableContract", timeout=2000)
+
+                contract = page.locator(".TableContract")
+
+                # 🔥 правильный клик
+                contract.locator("._cash ._title").click()
                 time.sleep(0.2)
 
-                page.locator(".table-body-players-card-menu ._contract").click()
+                need_k = max(1, int(need / 1000))
+                print("TYPE:", need_k)
+
+                page.keyboard.press("Control+A")
+                page.keyboard.press("Backspace")
+
+                page.keyboard.insert_text(str(need_k))
+
+                time.sleep(0.3)
+
+                contract.locator("._button:has-text('Предложить')").click()
+
+                print("CONTRACT SENT:", need)
+
+                waiting_for_money = False
                 return
 
         print("TEAMMATE NOT FOUND")
 
     except Exception as e:
+        waiting_for_money = False
         print("CONTRACT OPEN ERROR:", e)
 
 
@@ -56,55 +119,64 @@ def handle_contract(page, state):
         if not contract.is_visible():
             return False
 
-        users = contract.locator("._info")
+        me = state.get_me()
+        if not me:
+            return False
 
-        sender_block = None
+        my_team = me["team"]
+
+        # 1. берём ник sender из контракта
+        sender_nick = None
+
+        users = contract.locator("._info")
 
         for i in range(users.count()):
             block = users.nth(i)
-            subtitle = block.locator("._subtitle").inner_text()
+
+            subtitle = block.locator("._subtitle").inner_text().lower()
 
             if "предлагает" in subtitle:
-                sender_block = block
+                sender_nick = block.locator("._nick").inner_text().strip()
                 break
 
-        if not sender_block:
-            print("NO SENDER BLOCK")
+        if not sender_nick:
+            print("NO SENDER NICK")
             return False
 
-        sender_nick = sender_block.locator("._nick").inner_text().strip()
-        print("CONTRACT FROM:", sender_nick)
+        print("SENDER NICK:", sender_nick)
 
-        # 🔴 НОВОЕ: ищем игрока по team через state
-        sender = None
-        for p in state.players.values():
-            # если нет ников — просто сравни команды позже
-            sender = p  # fallback
-            break
+        # 2. ищем этого игрока в таблице игроков
+        players = page.locator(".table-body-players-card")
 
-        my_team = state.get_me().get("team")
+        sender_team = None
 
-        # 🔥 КЛЮЧ: определяем по team через UI fallback
-        teammate = state.get_teammate()
+        for i in range(players.count()):
+            card = players.nth(i)
 
-        if teammate:
-            teammate_team = teammate["team"]
-        else:
-            teammate_team = my_team
+            nick = card.locator("._nick").inner_text().strip()
 
-        # если мы не уверены → НЕ отклоняем
-        if not sender:
-            print("UNKNOWN → SKIP")
+            if nick == sender_nick:
+                sender_team = card.get_attribute("mnpl-team")
+                break
+
+        if sender_team is None:
+            print("SENDER NOT FOUND IN PLAYER LIST")
             return False
 
-        if sender.get("team") == my_team:
+        sender_team = int(sender_team)
+
+        print("SENDER TEAM:", sender_team, "MY TEAM:", my_team)
+
+        # 3. логика решения
+        if sender_team == my_team:
             print("CONTRACT: ACCEPT")
-            time.sleep(0.3)
+            time.sleep(2)
             contract.locator("._button:has-text('Принять')").click()
         else:
             print("CONTRACT: DECLINE")
-            time.sleep(0.3)
+            time.sleep(2)
             contract.locator("._button:has-text('Отклонить')").click()
+            send_message(page, "С террористами переговоры не ведём")
 
         return True
 
@@ -117,53 +189,61 @@ def should_buy(state):
     pos = state.get_my_position()
     field = state.get_my_field()
 
-
     if not field or field.get("type") != "field":
         return False
 
-    owner = state.get_owner(pos)
-    if owner is not None:
+    if state.get_owner(pos) is not None:
         return False
 
     price = field.get("price", 0)
-    money = state.get_me()["money"]
+    me = state.get_me()
+
+    if not me:
+        return False
+
+    money = me["money"]
+    my_team = me["team"]
 
     if money < price:
         return False
 
     group = field.get("group")
     group_fields = state.get_group_fields(group)
-    owners = [state.get_owner(p) for p in group_fields]
 
-    # убираем None
+    owners = [state.get_owner(p) for p in group_fields]
     owned = [o for o in owners if o is not None]
 
+    owner_teams = []
+
+    for o in owned:
+        player = state.get_player(o)
+        if player:
+            owner_teams.append(player["team"])
 
     print("---- BUY DEBUG ----")
     print("Money:", money)
     print("Price:", price)
     print("Group:", group)
     print("Owners:", owners)
-
-
-    teammate = state.get_teammate()
-    teammate_id = teammate["user_id"] if teammate else None
+    print("Owner teams:", owner_teams)
 
     # --- 1. никто не владеет ---
-    if not owned:
+    if not owner_teams:
         return True
 
-    # --- 2. все свои / тимейт ---
-    if all(o == state.me_id or o == teammate_id for o in owned):
+    # есть ли враги / тиммейты
+    has_enemy = any(team != my_team for team in owner_teams)
+    has_teammate = any(team == my_team for team in owner_teams)
+
+    # --- 2. нет врагов ---
+    if not has_enemy:
         return True
 
-    # --- 3. у врага есть (ломаем монополию) ---
-    enemies = [o for o in owned if o != state.me_id and o != teammate_id]
-    has_teammate = any(o == teammate_id for o in owned)
-
-    if enemies and not has_teammate:
+    # --- 3. только враги ---
+    if has_enemy and not has_teammate:
         return True
 
+    # --- 4. смешанная группа (и враг и союзник) ---
     return False
 
 def click_button(page, text):
@@ -205,13 +285,15 @@ def detect_actions(page):
     except:
         return {}
         
-
+    
+    
 def parse_number(text):
     num = re.findall(r"[\d,]+", text)[0]
     return int(num.replace(",", ""))
 
 def handle_actions(page, state, actions):
     global last_action_time
+    global waiting_for_money
 
     if not state.is_my_turn_now():
         return
@@ -234,14 +316,35 @@ def handle_actions(page, state, actions):
     if actions.get("buy"):
         decision = should_buy(state)
 
-        if decision:
-            print("DO: BUY")
-            time.sleep(0.5)
-            click_contains(page, "Купить за")
-        else:
+        if not decision:
             print("DO: AUCTION")
             time.sleep(0.5)
             click_button(page, "На аукцион")
+            last_action_time = now
+            return
+
+        # --- получаем цену ---
+        price = get_buy_amount(page)
+        money = state.get_me()["money"]
+
+        print("BUY CHECK:", price, "vs", money)
+
+        # --- хватает денег ---
+        if money >= price:
+            waiting_for_money = False
+            print("DO: BUY")
+            time.sleep(0.5)
+            click_contains(page, "Купить за")
+
+        # --- не хватает → просим у тимейта ---
+        else:
+            if not waiting_for_money:
+                waiting_for_money = True
+                need = price - money
+                print("NOT ENOUGH MONEY → NEED:", need)
+
+                open_contract_with_teammate(page, state, need)
+
         last_action_time = now
         return
 
@@ -251,15 +354,14 @@ def handle_actions(page, state, actions):
         money = state.get_me()["money"]
 
         print("PAY CHECK:", amount, "vs", money)
-
+        if not actions.get("buy"):
+            waiting_for_money = False
         if money >= amount:
-            print("DO: PAY")
-            time.sleep(0.3)
             click_contains(page, "Заплатить")
         else:
-            print("NOT ENOUGH MONEY → OPEN CONTRACT")
-            time.sleep(0.3)
-            open_contract_with_teammate(page, state)
+            need = amount - money
+            print("NEED:", need)
+            open_contract_with_teammate(page, state, need)
 
         last_action_time = now
         return

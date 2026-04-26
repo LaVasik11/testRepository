@@ -83,3 +83,16 @@ mnpl-group="1"
 
 Договор:
 <div class="TableContract" style=""><div class="TableContract-top"><div class="TableContract-top-title">Договор</div><div class="TableContract-top-close"></div></div><div class="TableContract-content"><div class="TableContract-content-head"><div class="_user_index_3"><div class="_avatar" style="background-image: url(&quot;https://unpx.io/wxEpEiovduvcXadQ&quot;);"></div><div class="_info"><div class="_nick">Вы</div><div class="_subtitle">предлагаете</div></div></div><div class="_user_index_1"><div class="_avatar" style="background-image: url(&quot;https://unpx.io/S3m4AME46FPfa30J&quot;);"></div><div class="_info"><div class="_nick">DV</div><div class="_subtitle">отдаёт</div></div></div></div><div class="TableContract-content-list"><div><div class="scr" scr-active="1"><div class="scr-window" style="width: 261px; height: 296px;"><div class="scr-content" style="width: 211px;"><div class="_one _cash _clickable"><div class="_image"></div><div class="_info"><div class="_title">0k <span class="_edit"></span></div><div class="_subtitle">Наличные</div></div></div></div><div class="scr-pane" style="display: none;"><div class="scr-pane-handler"></div></div></div></div><!----></div><div><div class="scr" scr-active="1"><div class="scr-window" style="width: 260px; height: 296px;"><div class="scr-content" style="width: 210px;"><div class="_one _cash _clickable"><div class="_image"></div><div class="_info"><div class="_title">0k <span class="_edit"></span></div><div class="_subtitle">Наличные</div></div></div></div><div class="scr-pane" style="display: none;"><div class="scr-pane-handler"></div></div></div></div><!----></div></div><div class="TableContract-content-bottom"><div class="_sum">0</div><div class="_text">Общая сумма</div><div class="_sum">0</div></div></div><div class="TableContract-actions"><div class="_button">Предложить</div><div class="_future">Future</div></div></div>
+
+
+
+<div class="_contract"></div>
+
+<div class="_info"><div class="_title">0k <span class="_edit"></span></div><div class="_subtitle">Наличные</div></div>
+
+<div class="_button">Предложить</div>
+
+
+<input maxlenght="200" placeholder="Введите сообщение">
+
+<div class="_one _cash _clickable"><div class="_image"></div><div class="_info"><div class="_title">0k <span class="_edit"></span></div><div class="_subtitle">Наличные</div></div></div>

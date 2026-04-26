@@ -30,16 +30,18 @@ class GameState:
         status = data["status"]
 
         players = status.get("players", [])
-        
+
+        self.players_list = players  # ← важно
+        self.players = {}
+
         for p in players:
-            print("RAW PLAYER:", p)
             self.players[p["user_id"]] = p
 
             if p["user_id"] == self.me_id:
                 self.my_team = p["team"]
 
-        self.fields_state = status.get("fields", {})
         self.current_player = status.get("action_player")
+
 
     # ---------- GETTERS ----------
 
