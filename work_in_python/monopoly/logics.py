@@ -47,9 +47,6 @@ waiting_for_money = False
 def open_contract_with_teammate(page, state, need):
     global waiting_for_money
 
-    if waiting_for_money:
-        return
-
     try:
         me = state.get_me()
         if not me:
@@ -73,34 +70,39 @@ def open_contract_with_teammate(page, state, need):
 
                 waiting_for_money = True
 
-                # открыть меню
+                # --- открыть меню ---
                 card.click()
                 time.sleep(0.3)
 
                 menu = card.locator("xpath=following-sibling::div[contains(@class, 'table-body-players-card-menu')]")
                 menu.locator("._contract").click()
 
+                # --- ждём окно ---
                 page.wait_for_selector(".TableContract", timeout=2000)
-
                 contract = page.locator(".TableContract")
 
-                # 🔥 правильный клик
-                contract.locator("._cash ._title").click()
-                time.sleep(0.2)
+                # --- ПРАВАЯ колонка (мы даём деньги) ---
+                cash_block = contract.locator(".TableContract-content-list > div").nth(1)
 
-                need_k = max(1, int(need / 1000))
-                print("TYPE:", need_k)
+                cash_block.locator("._one._cash").click()
+                time.sleep(0.3)
 
+                # --- ввод ---
                 page.keyboard.press("Control+A")
                 page.keyboard.press("Backspace")
+                page.keyboard.type(str(need))
 
-                page.keyboard.insert_text(str(need_k))
+                time.sleep(0.2)
+
+                page.keyboard.press("Enter")   # 🔥 КЛЮЧЕВОЕ
 
                 time.sleep(0.3)
 
                 contract.locator("._button:has-text('Предложить')").click()
 
                 print("CONTRACT SENT:", need)
+
+                time.sleep(1)
 
                 waiting_for_money = False
                 return
@@ -295,6 +297,9 @@ def handle_actions(page, state, actions):
     global last_action_time
     global waiting_for_money
 
+    if not page.locator(".TableContract").is_visible():
+        waiting_for_money = False
+
     if not state.is_my_turn_now():
         return
 
@@ -336,14 +341,13 @@ def handle_actions(page, state, actions):
             time.sleep(0.5)
             click_contains(page, "Купить за")
 
-        # --- не хватает → просим у тимейта ---
+        # --- не хватает денег ---
         else:
+            need = price - money
             if not waiting_for_money:
-                waiting_for_money = True
-                need = price - money
                 print("NOT ENOUGH MONEY → NEED:", need)
-
                 open_contract_with_teammate(page, state, need)
+                waiting_for_money = True
 
         last_action_time = now
         return
@@ -361,6 +365,7 @@ def handle_actions(page, state, actions):
         else:
             need = amount - money
             print("NEED:", need)
+            print("CALLING CONTRACT FUNCTION")
             open_contract_with_teammate(page, state, need)
 
         last_action_time = now
