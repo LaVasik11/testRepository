@@ -371,7 +371,7 @@ def handle_actions(page, state, actions):
 
     # --- 2. BUY ---
     if actions.get("buy"):
-        decision = should_buy(state)
+        decision = should_buy(page, state)
 
         if not decision:
             print("DO: AUCTION")
@@ -380,7 +380,6 @@ def handle_actions(page, state, actions):
             last_action_time = now
             return
 
-        # --- получаем цену ---
         price = get_buy_amount(page)
         money = state.get_me()["money"]
 
@@ -388,18 +387,22 @@ def handle_actions(page, state, actions):
 
         # --- хватает денег ---
         if money >= price:
-            waiting_for_money = False
             print("DO: BUY")
+            waiting_for_money = False
             time.sleep(timesleep)
             click_contains(page, "Купить за")
+            last_action_time = now
+            return
 
-        # --- не хватает денег ---
+        # --- не хватает ---
+        need = price - money
+
+        if not waiting_for_money:
+            print("NOT ENOUGH MONEY → NEED:", need)
+            open_contract_with_teammate(page, state, need)
+            waiting_for_money = True
         else:
-            need = price - money
-            if not waiting_for_money:
-                print("NOT ENOUGH MONEY → NEED:", need)
-                open_contract_with_teammate(page, state, need)
-                waiting_for_money = True
+            print("WAITING FOR MONEY...")
 
         last_action_time = now
         return
