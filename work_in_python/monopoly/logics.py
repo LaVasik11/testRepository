@@ -4,6 +4,7 @@ import time
 
 last_action_time = 0
 waiting_for_money = False
+from main import timesleep
 
 def get_pay_amount(page):
     try:
@@ -53,61 +54,84 @@ def open_contract_with_teammate(page, state, need):
             return
 
         my_id = me["user_id"]
-        my_team = me["team"]
 
-        cards = page.locator(".table-body-players-card-body")
-        players = list(state.players.values())
+        cards = page.locator(".table-body-players-card")
 
+        my_team = None
+
+        # --- находим свою карточку и команду ---
         for i in range(cards.count()):
-            if i >= len(players):
-                continue
-
-            player = players[i]
             card = cards.nth(i)
 
-            if player.get("team") == my_team and player.get("user_id") != my_id:
-                print("FOUND TEAMMATE:", player.get("user_id"))
+            card_id = card.get_attribute("id")
+            if not card_id:
+                continue
+
+            if str(my_id) in card_id:
+                my_team = card.get_attribute("mnpl-team")
+                break
+
+        if my_team is None:
+            print("MY TEAM NOT FOUND IN UI")
+            return
+
+        print("MY TEAM (UI):", my_team)
+
+        # --- ищем тимейта ---
+        for i in range(cards.count()):
+            card = cards.nth(i)
+
+            card_id = card.get_attribute("id")
+            team = card.get_attribute("mnpl-team")
+
+            if not card_id or not team:
+                continue
+
+            # пропускаем себя
+            if str(my_id) in card_id:
+                continue
+
+            # 🔥 КЛЮЧ: тот же mnpl-team
+            if team == my_team:
+                print("FOUND TEAMMATE CARD:", card_id)
 
                 waiting_for_money = True
 
-                # --- открыть меню ---
-                card.click()
-                time.sleep(0.3)
+                body = card.locator(".table-body-players-card-body")
+                body.click()
+                page.wait_for_timeout(300)
 
-                menu = card.locator("xpath=following-sibling::div[contains(@class, 'table-body-players-card-menu')]")
+                menu = card.locator(".table-body-players-card-menu")
                 menu.locator("._contract").click()
 
                 # --- ждём окно ---
                 page.wait_for_selector(".TableContract", timeout=2000)
                 contract = page.locator(".TableContract")
 
-                # --- ПРАВАЯ колонка (мы даём деньги) ---
+                # --- правая колонка (мы даём деньги) ---
                 cash_block = contract.locator(".TableContract-content-list > div").nth(1)
 
                 cash_block.locator("._one._cash").click()
-                time.sleep(0.3)
-
-                # --- ввод ---
+                page.wait_for_timeout(300)
+                time.sleep(timesleep)
                 page.keyboard.press("Control+A")
                 page.keyboard.press("Backspace")
                 page.keyboard.type(str(need))
 
-                time.sleep(0.2)
-
-                page.keyboard.press("Enter")   # 🔥 КЛЮЧЕВОЕ
-
-                time.sleep(0.3)
+                page.wait_for_timeout(200)
+                time.sleep(timesleep)
+                page.keyboard.press("Enter")
+                time.sleep(timesleep)
+                page.wait_for_timeout(300)
 
                 contract.locator("._button:has-text('Предложить')").click()
 
-                print("CONTRACT SENT:", need)
-
-                time.sleep(1)
+                print("CONTRACT SENT TO TEAMMATE:", need)
 
                 waiting_for_money = False
                 return
 
-        print("TEAMMATE NOT FOUND")
+        print("TEAMMATE NOT FOUND (UI)")
 
     except Exception as e:
         waiting_for_money = False
@@ -172,11 +196,11 @@ def handle_contract(page, state):
         # 3. логика решения
         if sender_team == my_team:
             print("CONTRACT: ACCEPT")
-            time.sleep(2)
+            time.sleep(timesleep)
             contract.locator("._button:has-text('Принять')").click()
         else:
             print("CONTRACT: DECLINE")
-            time.sleep(2)
+            time.sleep(timesleep)
             contract.locator("._button:has-text('Отклонить')").click()
             send_message(page, "С террористами переговоры не ведём")
 
@@ -187,7 +211,7 @@ def handle_contract(page, state):
         return False
     
 
-def should_buy(state):
+def should_buy(page, state):
     pos = state.get_my_position()
     field = state.get_my_field()
 
@@ -197,18 +221,35 @@ def should_buy(state):
     if state.get_owner(pos) is not None:
         return False
 
-    price = field.get("price", 0)
     me = state.get_me()
-
     if not me:
         return False
 
+    price = field.get("price", 0)
     money = me["money"]
-    my_team = me["team"]
 
     if money < price:
         return False
 
+    # ---------- получаем МОЮ команду из UI ----------
+    my_id = me["user_id"]
+    cards = page.locator(".table-body-players-card")
+
+    my_team = None
+
+    for i in range(cards.count()):
+        card = cards.nth(i)
+        cid = card.get_attribute("id")
+
+        if cid and str(my_id) in cid:
+            my_team = card.get_attribute("mnpl-team")
+            break
+
+    if my_team is None:
+        print("MY TEAM NOT FOUND (UI)")
+        return False
+
+    # ---------- получаем команды владельцев ----------
     group = field.get("group")
     group_fields = state.get_group_fields(group)
 
@@ -217,35 +258,46 @@ def should_buy(state):
 
     owner_teams = []
 
-    for o in owned:
-        player = state.get_player(o)
-        if player:
-            owner_teams.append(player["team"])
+    for owner_id in owned:
+        team = None
+
+        # ищем в DOM по id
+        for i in range(cards.count()):
+            card = cards.nth(i)
+            cid = card.get_attribute("id")
+
+            if cid and str(owner_id) in cid:
+                team = card.get_attribute("mnpl-team")
+                break
+
+        if team is not None:
+            owner_teams.append(team)
 
     print("---- BUY DEBUG ----")
     print("Money:", money)
     print("Price:", price)
     print("Group:", group)
     print("Owners:", owners)
-    print("Owner teams:", owner_teams)
+    print("Owner teams (UI):", owner_teams)
+    print("My team (UI):", my_team)
 
-    # --- 1. никто не владеет ---
+    # ---------- ЛОГИКА ----------
+
     if not owner_teams:
         return True
 
-    # есть ли враги / тиммейты
     has_enemy = any(team != my_team for team in owner_teams)
     has_teammate = any(team == my_team for team in owner_teams)
 
-    # --- 2. нет врагов ---
+    # ✅ только свои → покупаем
     if not has_enemy:
         return True
 
-    # --- 3. только враги ---
+    # ✅ только враги → ломаем монополию
     if has_enemy and not has_teammate:
         return True
 
-    # --- 4. смешанная группа (и враг и союзник) ---
+    # ❌ смешанная группа → НЕ покупаем
     return False
 
 def click_button(page, text):
@@ -312,7 +364,7 @@ def handle_actions(page, state, actions):
     # --- 1. ROLL ---
     if actions.get("roll"):
         print("DO: ROLL")
-        time.sleep(0.3)
+        time.sleep(timesleep)
         click_button(page, "Бросить кубики")
         last_action_time = now
         return
@@ -323,7 +375,7 @@ def handle_actions(page, state, actions):
 
         if not decision:
             print("DO: AUCTION")
-            time.sleep(0.5)
+            time.sleep(timesleep)
             click_button(page, "На аукцион")
             last_action_time = now
             return
@@ -338,7 +390,7 @@ def handle_actions(page, state, actions):
         if money >= price:
             waiting_for_money = False
             print("DO: BUY")
-            time.sleep(0.5)
+            time.sleep(timesleep)
             click_contains(page, "Купить за")
 
         # --- не хватает денег ---
@@ -374,7 +426,7 @@ def handle_actions(page, state, actions):
     # --- 4. decline contract ---
     if actions.get("decline"):
         print("DO: DECLINE")
-        time.sleep(0.3)
+        time.sleep(timesleep)
         click_button(page, "Отклонить")
         last_action_time = now
         return
@@ -382,10 +434,10 @@ def handle_actions(page, state, actions):
     # --- 5. casino ---
     if actions.get("refuse"):
         print("DO: REFUSE")
-        time.sleep(0.3)
+        time.sleep(timesleep)
         click_button(page, "Отказаться")
         last_action_time = now
         return
 
     print("NO ACTION")
-    time.sleep(0.3)
+    time.sleep(timesleep)
