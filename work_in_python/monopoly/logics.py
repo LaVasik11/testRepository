@@ -4,7 +4,7 @@ import time
 
 last_action_time = 0
 waiting_for_money = False
-from main import timesleep
+timesleep = 0.3
 
 def get_pay_amount(page):
     try:

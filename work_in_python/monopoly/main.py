@@ -2,7 +2,7 @@ import subprocess
 import time
 import socket
 
-timesleep = 0.3
+
 
 def wait_for_port(port, host="127.0.0.1", timeout=10.0):
     start = time.time()
