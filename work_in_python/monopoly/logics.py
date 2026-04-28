@@ -235,32 +235,47 @@ def handle_contract(page, state):
         print("CONTRACT ERROR:", e)
         return False
     
-
 def should_buy(page, state):
+    print("\n===== SHOULD BUY START =====")
 
     if state.is_solo():
+        print("SOLO MODE → BUY")
         return True
     
     pos = state.get_my_position()
     field = state.get_my_field()
 
+    print("POS:", pos)
+    print("FIELD:", field)
+
     if not field or field.get("type") != "field":
+        print("NOT A FIELD → SKIP")
         return False
 
-    if state.get_owner(pos) is not None:
+    owner_now = state.get_owner(pos)
+    print("CURRENT OWNER:", owner_now)
+
+    if owner_now is not None:
+        print("ALREADY OWNED → SKIP")
         return False
 
     me = state.get_me()
+    print("ME:", me)
+
     if not me:
+        print("NO ME → SKIP")
         return False
 
     price = field.get("price", 0)
     money = me["money"]
 
+    print("PRICE:", price, "MONEY:", money)
+
     if money < price:
+        print("NOT ENOUGH MONEY → SKIP")
         return False
 
-    # ---------- получаем МОЮ команду из UI ----------
+    # ---------- UI TEAM ----------
     my_id = me["user_id"]
     cards = page.locator(".table-body-players-card")
 
@@ -269,64 +284,75 @@ def should_buy(page, state):
     for i in range(cards.count()):
         card = cards.nth(i)
         cid = card.get_attribute("id")
+        team = card.get_attribute("mnpl-team")
+
+        print(f"[CARD {i}] id={cid} team={team}")
 
         if cid and str(my_id) in cid:
-            my_team = card.get_attribute("mnpl-team")
-            break
+            my_team = team
+            print("FOUND MY TEAM:", my_team)
 
     if my_team is None:
-        print("MY TEAM NOT FOUND (UI)")
+        print("❌ MY TEAM NOT FOUND (UI)")
         return False
 
-    # ---------- получаем команды владельцев ----------
+    # ---------- OWNERS ----------
     group = field.get("group")
     group_fields = state.get_group_fields(group)
+
+    print("GROUP:", group)
+    print("GROUP FIELDS:", group_fields)
 
     owners = [state.get_owner(p) for p in group_fields]
     owned = [o for o in owners if o is not None]
 
+    print("OWNERS RAW:", owners)
+    print("OWNED FILTERED:", owned)
+
     owner_teams = []
 
     for owner_id in owned:
-        team = None
+        print("\nCHECK OWNER:", owner_id)
 
-        # ищем в DOM по id
+        found = False
+
         for i in range(cards.count()):
             card = cards.nth(i)
             cid = card.get_attribute("id")
+            team = card.get_attribute("mnpl-team")
 
             if cid and str(owner_id) in cid:
-                team = card.get_attribute("mnpl-team")
+                print(f"  MATCH → card {i} team={team}")
+                owner_teams.append(team)
+                found = True
                 break
 
-        if team is not None:
-            owner_teams.append(team)
+        if not found:
+            print("  ❌ OWNER NOT FOUND IN UI:", owner_id)
 
-    print("---- BUY DEBUG ----")
-    print("Money:", money)
-    print("Price:", price)
-    print("Group:", group)
-    print("Owners:", owners)
-    print("Owner teams (UI):", owner_teams)
-    print("My team (UI):", my_team)
+    print("\nFINAL OWNER TEAMS:", owner_teams)
+    print("MY TEAM:", my_team)
 
     # ---------- ЛОГИКА ----------
-
     if not owner_teams:
+        print("NO OWNERS → BUY")
         return True
 
     has_enemy = any(team != my_team for team in owner_teams)
     has_teammate = any(team == my_team for team in owner_teams)
 
-    # ✅ только свои → покупаем
+    print("HAS ENEMY:", has_enemy)
+    print("HAS TEAMMATE:", has_teammate)
+
     if not has_enemy:
+        print("ONLY TEAMMATES → BUY")
         return True
 
-    # ✅ только враги → ломаем монополию
     if has_enemy and not has_teammate:
+        print("ONLY ENEMIES → BUY (BREAK MONOPOLY)")
         return True
 
-    # ❌ смешанная группа → НЕ покупаем
+    print("❌ MIXED GROUP → SKIP BUY")
     return False
 
 def click_button(page, text):
