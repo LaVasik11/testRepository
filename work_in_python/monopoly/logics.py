@@ -6,6 +6,21 @@ last_action_time = 0
 waiting_for_money = False
 timesleep = 0.3
 
+def has_teammate(state):
+    me = state.get_me()
+    if not me:
+        return False
+
+    my_team = me.get("team")
+
+    teammates = [
+        p for p in state.players.values()
+        if p.get("team") == my_team and p["user_id"] != me["user_id"]
+    ]
+
+    return len(teammates) > 0
+
+
 def get_pay_amount(page):
     try:
         text = page.locator("div._action:has-text('Заплатить')").inner_text()
@@ -42,12 +57,14 @@ def send_message(page, text):
         return False
     
 
-waiting_for_money = False
-
 
 def open_contract_with_teammate(page, state, need):
     global waiting_for_money
 
+    if state.is_solo():
+        print("SOLO → SKIP CONTRACT")
+        return
+    
     try:
         me = state.get_me()
         if not me:
@@ -145,11 +162,16 @@ def handle_contract(page, state):
         if not contract.is_visible():
             return False
 
+        if state.is_solo():
+            print("SOLO GAME → DECLINE ALL")
+            contract.locator("._button:has-text('Отклонить')").click()
+            return True
+    
         me = state.get_me()
         if not me:
             return False
 
-        my_team = me["team"]
+        my_team = me.get("team")
 
         # 1. берём ник sender из контракта
         sender_nick = None
@@ -170,6 +192,9 @@ def handle_contract(page, state):
             return False
 
         print("SENDER NICK:", sender_nick)
+        if sender_nick == "Вы":
+            print("IGNORE OWN CONTRACT")
+            return True
 
         # 2. ищем этого игрока в таблице игроков
         players = page.locator(".table-body-players-card")
@@ -212,6 +237,10 @@ def handle_contract(page, state):
     
 
 def should_buy(page, state):
+
+    if state.is_solo():
+        return True
+    
     pos = state.get_my_position()
     field = state.get_my_field()
 
@@ -349,8 +378,6 @@ def handle_actions(page, state, actions):
     global last_action_time
     global waiting_for_money
 
-    if not page.locator(".TableContract").is_visible():
-        waiting_for_money = False
 
     if not state.is_my_turn_now():
         return
@@ -399,10 +426,12 @@ def handle_actions(page, state, actions):
 
         if not waiting_for_money:
             print("NOT ENOUGH MONEY → NEED:", need)
-            open_contract_with_teammate(page, state, need)
-            waiting_for_money = True
-        else:
-            print("WAITING FOR MONEY...")
+
+            if has_teammate(state):
+                open_contract_with_teammate(page, state, need)
+                waiting_for_money = True
+            else:
+                print("SOLO MODE → SKIP (no money)")
 
         last_action_time = now
         return
@@ -421,7 +450,10 @@ def handle_actions(page, state, actions):
             need = amount - money
             print("NEED:", need)
             print("CALLING CONTRACT FUNCTION")
-            open_contract_with_teammate(page, state, need)
+            if has_teammate(state):
+                open_contract_with_teammate(page, state, need)
+            else:
+                print("SOLO MODE → CANNOT PAY (no teammate)")
 
         last_action_time = now
         return

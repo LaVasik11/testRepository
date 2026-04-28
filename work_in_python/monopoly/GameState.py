@@ -38,12 +38,15 @@ class GameState:
             self.players[p["user_id"]] = p
 
             if p["user_id"] == self.me_id:
-                self.my_team = p["team"]
+                self.my_team = p.get("team")
 
         self.current_player = status.get("action_player")
 
 
     # ---------- GETTERS ----------
+
+    def is_solo(self):
+        return self.my_team is None
 
     def get_me(self):
         return self.players.get(self.me_id)
@@ -52,15 +55,18 @@ class GameState:
         return self.players.get(user_id)
 
     def get_teammate(self):
+        if self.my_team is None:
+            return None
+
         for p in self.players.values():
-            if p["team"] == self.my_team and p["user_id"] != self.me_id:
+            if p.get("team") == self.my_team and p["user_id"] != self.me_id:
                 return p
         return None
 
     def get_enemies(self):
         return [
             p for p in self.players.values()
-            if p["team"] != self.my_team
+            if p.get("team") != self.my_team
         ]
 
     def get_position(self, user_id):

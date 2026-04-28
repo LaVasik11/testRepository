@@ -149,7 +149,7 @@ def run():
 
         page.on("websocket", handle_ws)
 
-        page.reload()
+        page.goto("https://monopoly-one.com/games")
 
         wait_for_start()
         started = True
