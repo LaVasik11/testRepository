@@ -4,13 +4,37 @@ import subprocess
 import socket
 import platform
 import shutil
-
 from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QLabel
-
 from playwright.sync_api import sync_playwright
-
 from start import ui_loop_step, handle_ws
 from GameState import GameState
+import os
+
+
+
+def get_chrome_path():
+    system = platform.system()
+
+    if system == "Linux":
+        return (
+            shutil.which("google-chrome") or
+            shutil.which("chromium") or
+            shutil.which("chromium-browser")
+        )
+
+    if system == "Windows":
+        paths = [
+            r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+            r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+        ]
+
+        for p in paths:
+            if os.path.exists(p):
+                return p
+
+        return None
+
+    raise RuntimeError("Unsupported OS")
 
 
 def wait_for_port(port, host="127.0.0.1", timeout=10.0):
@@ -23,14 +47,6 @@ def wait_for_port(port, host="127.0.0.1", timeout=10.0):
             time.sleep(0.5)
     return False
 
-
-def get_chrome_command():
-    system = platform.system()
-
-    if system == "Linux":
-        return shutil.which("chromium-browser") or shutil.which("chromium") or shutil.which("google-chrome")
-
-    raise RuntimeError("Chrome not found")
 
 
 ui_state = {
@@ -89,12 +105,22 @@ class BotUI(QWidget):
     def worker(self):
         ui_state["initializing"] = True
 
-        chrome_path = get_chrome_command()
+        chrome_path = get_chrome_path()
+
+        if not chrome_path:
+            self.status.setText("Chrome not found")
+            ui_state["initializing"] = False
+            return
+
+        if platform.system() == "Windows":
+            user_data_dir = r"C:\temp\chrome-profile"
+        else:
+            user_data_dir = "/tmp/chrome-profile"
 
         subprocess.Popen([
             chrome_path,
             "--remote-debugging-port=9222",
-            "--user-data-dir=/tmp/chrome-profile"
+            f"--user-data-dir={user_data_dir}"
         ])
 
         if not wait_for_port(9222):
