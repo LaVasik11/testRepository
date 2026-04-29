@@ -1,5 +1,5 @@
 import json
-from logics import detect_actions, handle_actions, handle_contract
+from logics import detect_actions, handle_actions, handle_contract, try_upgrade
 
 
 def ui_loop_step(page, state):
@@ -22,6 +22,8 @@ def ui_loop_step(page, state):
 
         print("=== MY TURN ===")
 
+        try_upgrade(page, state)
+        
         actions = detect_actions(page)
         print("ACTIONS:", actions)
 

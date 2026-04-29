@@ -6,6 +6,13 @@ last_action_time = 0
 waiting_for_money = False
 timesleep = 0.3
 
+
+def try_upgrade(page, state):
+    if not state.is_my_turn_now():
+        return
+    print("try upgrade...")
+    
+
 def has_teammate(state):
     me = state.get_me()
     if not me:
@@ -236,102 +243,73 @@ def handle_contract(page, state):
         return False
     
 def should_buy(page, state):
+
     print("\n===== SHOULD BUY START =====")
 
     if state.is_solo():
         print("SOLO MODE → BUY")
         return True
-    
-    pos = state.get_my_position()
+
     field = state.get_my_field()
-
-    print("POS:", pos)
-    print("FIELD:", field)
-
     if not field or field.get("type") != "field":
-        print("NOT A FIELD → SKIP")
-        return False
-
-    owner_now = state.get_owner(pos)
-    print("CURRENT OWNER:", owner_now)
-
-    if owner_now is not None:
-        print("ALREADY OWNED → SKIP")
+        print("NOT A FIELD")
         return False
 
     me = state.get_me()
-    print("ME:", me)
-
     if not me:
-        print("NO ME → SKIP")
+        print("NO ME")
         return False
 
-    price = field.get("price", 0)
+    price = get_buy_amount(page)
     money = me["money"]
 
-    print("PRICE:", price, "MONEY:", money)
+    print("PRICE(UI):", price, "MONEY:", money)
 
     if money < price:
-        print("NOT ENOUGH MONEY → SKIP")
+        print("NOT ENOUGH MONEY")
         return False
 
-    # ---------- UI TEAM ----------
-    my_id = me["user_id"]
-    cards = page.locator(".table-body-players-card")
+    my_team = me.get("team")
+    print("MY TEAM:", my_team)
 
-    my_team = None
-
-    for i in range(cards.count()):
-        card = cards.nth(i)
-        cid = card.get_attribute("id")
-        team = card.get_attribute("mnpl-team")
-
-        print(f"[CARD {i}] id={cid} team={team}")
-
-        if cid and str(my_id) in cid:
-            my_team = team
-            print("FOUND MY TEAM:", my_team)
-
-    if my_team is None:
-        print("❌ MY TEAM NOT FOUND (UI)")
-        return False
-
-    # ---------- OWNERS ----------
     group = field.get("group")
-    group_fields = state.get_group_fields(group)
-
     print("GROUP:", group)
-    print("GROUP FIELDS:", group_fields)
 
-    owners = [state.get_owner(p) for p in group_fields]
-    owned = [o for o in owners if o is not None]
-
-    print("OWNERS RAW:", owners)
-    print("OWNED FILTERED:", owned)
+    fields = page.locator(f".table-body-board-fields-one[mnpl-group='{group}']")
+    cards = page.locator(".table-body-players-card")
 
     owner_teams = []
 
-    for owner_id in owned:
-        print("\nCHECK OWNER:", owner_id)
+    print("CHECKING GROUP FIELDS...")
 
-        found = False
+    for i in range(fields.count()):
+        f = fields.nth(i)
+        owner = f.get_attribute("mnpl-owner")
 
-        for i in range(cards.count()):
-            card = cards.nth(i)
-            cid = card.get_attribute("id")
-            team = card.get_attribute("mnpl-team")
+        print(f"[FIELD {i}] owner:", owner)
 
-            if cid and str(owner_id) in cid:
-                print(f"  MATCH → card {i} team={team}")
-                owner_teams.append(team)
-                found = True
-                break
+        if owner is None:
+            continue
 
-        if not found:
-            print("  ❌ OWNER NOT FOUND IN UI:", owner_id)
+        try:
+            owner_index = int(owner)
+        except:
+            print("INVALID OWNER:", owner)
+            continue
 
-    print("\nFINAL OWNER TEAMS:", owner_teams)
-    print("MY TEAM:", my_team)
+        if owner_index >= cards.count():
+            print("OWNER INDEX OUT OF RANGE:", owner_index)
+            continue
+
+        card = cards.nth(owner_index)
+        team = card.get_attribute("mnpl-team")
+
+        print(f" → owner index: {owner_index}, team:", team)
+
+        if team is not None:
+            owner_teams.append(int(team))
+
+    print("OWNER TEAMS:", owner_teams)
 
     # ---------- ЛОГИКА ----------
     if not owner_teams:
@@ -345,14 +323,14 @@ def should_buy(page, state):
     print("HAS TEAMMATE:", has_teammate)
 
     if not has_enemy:
-        print("ONLY TEAMMATES → BUY")
+        print("ONLY TEAM → BUY")
         return True
 
     if has_enemy and not has_teammate:
-        print("ONLY ENEMIES → BUY (BREAK MONOPOLY)")
+        print("ONLY ENEMY → BUY")
         return True
 
-    print("❌ MIXED GROUP → SKIP BUY")
+    print("MIXED GROUP → SKIP")
     return False
 
 def click_button(page, text):
