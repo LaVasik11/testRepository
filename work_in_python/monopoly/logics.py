@@ -36,10 +36,35 @@ def try_upgrade(page, state):
     if not me:
         return
 
-    my_team = int(me.get("team"))
+    my_id = me["user_id"]
 
-    fields = page.locator(".table-body-board-fields-one")
     cards = page.locator(".table-body-players-card")
+
+    my_team = None
+
+    # --- находим свою команду (ТОЧНО КАК У ТЕБЯ) ---
+    for i in range(cards.count()):
+        card = cards.nth(i)
+
+        card_id = card.get_attribute("id")
+        if not card_id:
+            continue
+
+        if str(my_id) in card_id:
+            my_team = card.get_attribute("mnpl-team")
+            break
+
+    if my_team is None:
+        print("MY TEAM NOT FOUND")
+        return
+
+    try:
+        my_team = int(my_team)
+    except:
+        return
+
+    # --- собираем все поля ---
+    fields = page.locator(".table-body-board-fields-one")
 
     groups = {}
 
@@ -47,59 +72,78 @@ def try_upgrade(page, state):
         f = fields.nth(i)
 
         group = f.get_attribute("mnpl-group")
-        owner = f.get_attribute("mnpl-owner")
-
         if group is None:
             continue
 
         group = int(group)
 
+        owner = f.get_attribute("mnpl-owner")
+
+        team = None
+
+        if owner is not None:
+            owner_id = str(owner)
+
+            # --- ИЩЕМ ВЛАДЕЛЬЦА ТОЧНО КАК В КОНТРАКТЕ ---
+            for j in range(cards.count()):
+                card = cards.nth(j)
+
+                card_id = card.get_attribute("id")
+                team_attr = card.get_attribute("mnpl-team")
+
+                if not card_id or not team_attr:
+                    continue
+
+                if owner_id in card_id:
+                    try:
+                        team = int(team_attr)
+                    except:
+                        team = None
+                    break
+
         if group not in groups:
             groups[group] = []
 
-        groups[group].append(owner)
+        groups[group].append({
+            "element": f,
+            "team": team
+        })
 
     print("GROUPS:", groups.keys())
 
     # --- проверяем монополии ---
-    for group, owners in groups.items():
+    for group_id, items in groups.items():
+        teams = [x["team"] for x in items]
 
-        owner_teams = []
+        print(f"[GROUP {group_id}] teams:", teams)
 
-        for owner in owners:
-            if owner is None:
-                owner_teams.append(None)
-                continue
-
-            try:
-                owner_id = int(owner)
-            except:
-                owner_teams.append(None)
-                continue
-
-            if owner_id >= cards.count():
-                owner_teams.append(None)
-                continue
-
-            team = get_team_by_owner_id(page, owner_id)
-
-            if team is None:
-                owner_teams.append(None)
-                continue
-
-            try:
-                owner_teams.append(int(team))
-            except:
-                owner_teams.append(None)
-
-        print(f"[GROUP {group}] teams:", owner_teams)
-
-        # --- условия монополии ---
-        if None in owner_teams:
+        # пропускаем если есть None
+        if any(t is None for t in teams):
             continue
 
-        if all(t == my_team for t in owner_teams):
-            print(f"\n|! YOU HAVE MONOPOLY IN GROUP {group} !|\n")
+        # если не все наши → пропуск
+        if not all(t == my_team for t in teams):
+            continue
+
+        print(f"MONOPOLY FOUND: {group_id}")
+
+        # --- апгрейд ---
+        for item in items:
+            el = item["element"]
+
+            try:
+                el.click()
+                page.wait_for_timeout(200)
+
+                upgrade_btn = page.locator("div._action:has-text('Улучшить')")
+
+                if upgrade_btn.count() > 0:
+                    print("UPGRADE CLICK")
+                    upgrade_btn.first.click()
+                    page.wait_for_timeout(300)
+
+            except Exception as e:
+                print("UPGRADE ERROR:", e)
     
 
 def has_teammate(state):
