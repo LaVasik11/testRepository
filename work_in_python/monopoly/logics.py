@@ -8,44 +8,45 @@ timesleep = 0.2
 
 
 def get_monopoly_group(page, state):
+    print("\n===== MONOPOLY CHECK START =====")
+
     if not state.is_my_turn_now():
+        print("NOT MY TURN")
         return False
 
     me = state.get_me()
     if not me:
+        print("NO ME")
         return False
 
     my_id = str(me["user_id"])
+    print("MY ID:", my_id)
 
     cards = page.locator(".table-body-players-card")
 
-    my_team = None
+    # --- НАХОДИМ СВОЙ CARD INDEX (для понимания кто мы) ---
+    my_card_index = None
 
-    # --- находим свою команду (как у тебя уже работает) ---
     for i in range(cards.count()):
         card = cards.nth(i)
 
         card_id = card.get_attribute("id")
-        if not card_id:
-            continue
 
-        if my_id in card_id:
-            my_team = card.get_attribute("mnpl-team")
+        if card_id and my_id in card_id:
+            my_card_index = i
+            print("FOUND MY CARD INDEX:", my_card_index)
             break
 
-    if my_team is None:
-        return False
-
-    try:
-        my_team = int(my_team)
-    except:
+    if my_card_index is None:
+        print("MY CARD NOT FOUND")
         return False
 
     fields = page.locator(".table-body-board-fields-one")
 
     groups = {}
 
-    # --- собираем группы ---
+    print("\nCOLLECTING FIELDS:", fields.count())
+
     for i in range(fields.count()):
         f = fields.nth(i)
 
@@ -57,44 +58,45 @@ def get_monopoly_group(page, state):
 
         owner = f.get_attribute("mnpl-owner")
 
-        team = None
-
-        if owner is not None:
-            owner_id = str(owner)
-
-            for j in range(cards.count()):
-                card = cards.nth(j)
-
-                card_id = card.get_attribute("id")
-                team_attr = card.get_attribute("mnpl-team")
-
-                if not card_id or not team_attr:
-                    continue
-
-                if owner_id in card_id:
-                    try:
-                        team = int(team_attr)
-                    except:
-                        team = None
-                    break
+        print(f"[FIELD {i}] group={group} owner={owner}")
 
         if group not in groups:
             groups[group] = []
 
-        groups[group].append(team)
+        groups[group].append(owner)
 
-    # --- проверка монополии ---
-    for group_id, teams in groups.items():
+    print("\n===== GROUP SUMMARY =====")
+
+    for group_id, owners in groups.items():
+        print(f"GROUP {group_id}: {owners}")
+
+    print("\n===== MONOPOLY CHECK =====")
+
+    for group_id, owners in groups.items():
 
         if group_id in (0, 9):
+            print(f"SKIP SPECIAL GROUP {group_id}")
             continue
 
-        if any(t is None for t in teams):
+        if any(o is None for o in owners):
+            print(f"SKIP GROUP {group_id}: EMPTY OWNERS")
             continue
 
-        if all(t == my_team for t in teams):
-            return group_id
+        # --- монополия = все owner одинаковые ---
+        first = owners[0]
 
+        if all(o == first for o in owners):
+
+            print(f"MONOPOLY FOUND: GROUP {group_id}, OWNER={first}")
+
+            # если хочешь строго "твоя монополия"
+            if int(first) == my_card_index:
+                print("=> THIS IS YOUR MONOPOLY")
+                return group_id
+            else:
+                print("=> NOT YOUR MONOPOLY")
+
+    print("NO MONOPOLY FOUND")
     return False
     
 
