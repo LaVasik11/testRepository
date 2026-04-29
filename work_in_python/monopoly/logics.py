@@ -4,7 +4,7 @@ import time
 
 last_action_time = 0
 waiting_for_money = False
-timesleep = 0.3
+timesleep = 0.2
 
 
 def try_upgrade(page, state):
@@ -243,7 +243,6 @@ def handle_contract(page, state):
         return False
     
 def should_buy(page, state):
-
     print("\n===== SHOULD BUY START =====")
 
     if state.is_solo():
@@ -269,7 +268,7 @@ def should_buy(page, state):
         print("NOT ENOUGH MONEY")
         return False
 
-    my_team = me.get("team")
+    my_team = int(me.get("team"))
     print("MY TEAM:", my_team)
 
     group = field.get("group")
@@ -292,32 +291,37 @@ def should_buy(page, state):
             continue
 
         try:
-            owner_index = int(owner)
+            owner_id = int(owner)
         except:
             print("INVALID OWNER:", owner)
             continue
 
-        if owner_index >= cards.count():
-            print("OWNER INDEX OUT OF RANGE:", owner_index)
+        if owner_id >= cards.count():
+            print("OWNER INDEX OUT OF RANGE:", owner_id)
             continue
 
-        card = cards.nth(owner_index)
+        card = cards.nth(owner_id)
+
         team = card.get_attribute("mnpl-team")
 
-        print(f" → owner index: {owner_index}, team:", team)
+        print(f" → owner id: {owner_id}, team:", team)
 
-        if team is not None:
+        if team is None:
+            continue
+
+        try:
             owner_teams.append(int(team))
+        except:
+            pass
 
     print("OWNER TEAMS:", owner_teams)
 
-    # ---------- ЛОГИКА ----------
     if not owner_teams:
         print("NO OWNERS → BUY")
         return True
 
-    has_enemy = any(team != my_team for team in owner_teams)
-    has_teammate = any(team == my_team for team in owner_teams)
+    has_enemy = any(t != my_team for t in owner_teams)
+    has_teammate = any(t == my_team for t in owner_teams)
 
     print("HAS ENEMY:", has_enemy)
     print("HAS TEAMMATE:", has_teammate)

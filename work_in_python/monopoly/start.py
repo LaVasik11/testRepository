@@ -22,6 +22,9 @@ def ui_loop_step(page, state):
 
         print("=== MY TURN ===")
 
+        state.sync_fields_from_page(page)
+        print("OWNERS LOADED:", len(state.fields_state))
+        print("OWNER MAP:", state.owner_team_map)
         try_upgrade(page, state)
         
         actions = detect_actions(page)

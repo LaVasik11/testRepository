@@ -1,4 +1,5 @@
 import json
+from turtle import pos
 
 
 class GameState:
@@ -9,7 +10,7 @@ class GameState:
         self.fields_state = {}
         self.board = []
         self.current_player = None
-
+        self.owner_team_map = {}
         self.my_team = None
 
     # ---------- INIT ----------
@@ -36,6 +37,7 @@ class GameState:
 
         for p in players:
             self.players[p["user_id"]] = p
+            self.owner_team_map[p["user_id"]] = p.get("team")
 
             if p["user_id"] == self.me_id:
                 self.my_team = p.get("team")
@@ -87,6 +89,9 @@ class GameState:
     def get_owner(self, pos):
         return self.fields_state.get(str(pos), {}).get("owner")
 
+    def get_owner_team(self, owner_id):
+        return self.owner_team_map.get(owner_id)
+
     def get_field_state(self, pos):
         return self.fields_state.get(str(pos), {})
 
@@ -132,6 +137,43 @@ class GameState:
                 return False
 
         return True
+
+    def sync_fields_from_page(self, page):
+        self.fields_state = {}
+
+        fields = page.locator(".table-body-board-fields-one")
+
+        for i in range(fields.count()):
+            f = fields.nth(i)
+
+            group = f.get_attribute("mnpl-group")
+            owner = f.get_attribute("mnpl-owner")
+
+            if group is None or owner is None:
+                continue
+
+            pos = str(i)
+
+            self.fields_state[pos] = {
+                "group": int(group),
+                "owner": int(owner)
+            }
+
+    def build_owner_team_map(self, page):
+        self.owner_team_map = {}
+
+        cards = page.locator(".table-body-players-card")
+
+        for i in range(cards.count()):
+            card = cards.nth(i)
+
+            order = card.get_attribute("mnpl-order")
+            team = card.get_attribute("mnpl-team")
+
+            if order is None or team is None:
+                continue
+
+            self.owner_team_map[int(order)] = int(team)
 
     # ---------- TURN ----------
 
