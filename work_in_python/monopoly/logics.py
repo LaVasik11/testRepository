@@ -7,42 +7,21 @@ waiting_for_money = False
 timesleep = 0.2
 
 
-def get_team_by_owner_id(page, owner_id):
-    cards = page.locator(".table-body-players-card")
-
-    for i in range(cards.count()):
-        card = cards.nth(i)
-
-        card_id = card.get_attribute("id")
-        if not card_id:
-            continue
-
-        # ВАЖНО: точное сравнение, не "in"
-        if card_id.replace("player_card_", "") == str(owner_id):
-            team = card.get_attribute("mnpl-team")
-            if team is not None:
-                return int(team)
-
-    return None
-
-
-def try_upgrade(page, state):
+def get_monopoly_group(page, state):
     if not state.is_my_turn_now():
-        return
-
-    print("try upgrade...")
+        return False
 
     me = state.get_me()
     if not me:
-        return
+        return False
 
-    my_id = me["user_id"]
+    my_id = str(me["user_id"])
 
     cards = page.locator(".table-body-players-card")
 
     my_team = None
 
-    # --- находим свою команду (ТОЧНО КАК У ТЕБЯ) ---
+    # --- находим свою команду (как у тебя уже работает) ---
     for i in range(cards.count()):
         card = cards.nth(i)
 
@@ -50,24 +29,23 @@ def try_upgrade(page, state):
         if not card_id:
             continue
 
-        if str(my_id) in card_id:
+        if my_id in card_id:
             my_team = card.get_attribute("mnpl-team")
             break
 
     if my_team is None:
-        print("MY TEAM NOT FOUND")
-        return
+        return False
 
     try:
         my_team = int(my_team)
     except:
-        return
+        return False
 
-    # --- собираем все поля ---
     fields = page.locator(".table-body-board-fields-one")
 
     groups = {}
 
+    # --- собираем группы ---
     for i in range(fields.count()):
         f = fields.nth(i)
 
@@ -84,7 +62,6 @@ def try_upgrade(page, state):
         if owner is not None:
             owner_id = str(owner)
 
-            # --- ИЩЕМ ВЛАДЕЛЬЦА ТОЧНО КАК В КОНТРАКТЕ ---
             for j in range(cards.count()):
                 card = cards.nth(j)
 
@@ -104,46 +81,21 @@ def try_upgrade(page, state):
         if group not in groups:
             groups[group] = []
 
-        groups[group].append({
-            "element": f,
-            "team": team
-        })
+        groups[group].append(team)
 
-    print("GROUPS:", groups.keys())
+    # --- проверка монополии ---
+    for group_id, teams in groups.items():
 
-    # --- проверяем монополии ---
-    for group_id, items in groups.items():
-        teams = [x["team"] for x in items]
+        if group_id in (0, 9):
+            continue
 
-        print(f"[GROUP {group_id}] teams:", teams)
-
-        # пропускаем если есть None
         if any(t is None for t in teams):
             continue
 
-        # если не все наши → пропуск
-        if not all(t == my_team for t in teams):
-            continue
+        if all(t == my_team for t in teams):
+            return group_id
 
-        print(f"MONOPOLY FOUND: {group_id}")
-
-        # --- апгрейд ---
-        for item in items:
-            el = item["element"]
-
-            try:
-                el.click()
-                page.wait_for_timeout(200)
-
-                upgrade_btn = page.locator("div._action:has-text('Улучшить')")
-
-                if upgrade_btn.count() > 0:
-                    print("UPGRADE CLICK")
-                    upgrade_btn.first.click()
-                    page.wait_for_timeout(300)
-
-            except Exception as e:
-                print("UPGRADE ERROR:", e)
+    return False
     
 
 def has_teammate(state):
@@ -202,7 +154,6 @@ def open_contract_with_teammate(page, state, need):
     global waiting_for_money
 
     if state.is_solo():
-        print("SOLO → SKIP CONTRACT")
         return
     
     try:
@@ -228,10 +179,7 @@ def open_contract_with_teammate(page, state, need):
                 break
 
         if my_team is None:
-            print("MY TEAM NOT FOUND IN UI")
             return
-
-        print("MY TEAM (UI):", my_team)
 
         for i in range(cards.count()):
             card = cards.nth(i)
@@ -246,7 +194,6 @@ def open_contract_with_teammate(page, state, need):
                 continue
 
             if team == my_team:
-                print("FOUND TEAMMATE CARD:", card_id)
 
                 waiting_for_money = True
 
@@ -277,12 +224,10 @@ def open_contract_with_teammate(page, state, need):
 
                 contract.locator("._button:has-text('Предложить')").click()
 
-                print("CONTRACT SENT TO TEAMMATE:", need)
 
                 waiting_for_money = False
                 return
 
-        print("TEAMMATE NOT FOUND (UI)")
 
     except Exception as e:
         waiting_for_money = False
@@ -297,7 +242,6 @@ def handle_contract(page, state):
             return False
 
         if state.is_solo():
-            print("SOLO GAME → DECLINE ALL")
             contract.locator("._button:has-text('Отклонить')").click()
             return True
     
@@ -321,12 +265,9 @@ def handle_contract(page, state):
                 break
 
         if not sender_nick:
-            print("NO SENDER NICK")
             return False
 
-        print("SENDER NICK:", sender_nick)
         if sender_nick == "Вы":
-            print("IGNORE OWN CONTRACT")
             return True
 
         players = page.locator(".table-body-players-card")
@@ -343,12 +284,10 @@ def handle_contract(page, state):
                 break
 
         if sender_team is None:
-            print("SENDER NOT FOUND IN PLAYER LIST")
             return False
 
         sender_team = int(sender_team)
 
-        print("SENDER TEAM:", sender_team, "MY TEAM:", my_team)
 
         if sender_team == my_team:
             print("CONTRACT: ACCEPT")
@@ -367,15 +306,11 @@ def handle_contract(page, state):
         return False
     
 def should_buy(page, state):
-    print("\n===== SHOULD BUY START =====")
-
     if state.is_solo():
-        print("SOLO MODE → BUY")
         return True
 
     field = state.get_my_field()
     if not field or field.get("type") != "field":
-        print("NOT A FIELD")
         return False
 
     me = state.get_me()
@@ -385,24 +320,20 @@ def should_buy(page, state):
     price = get_buy_amount(page)
     money = me["money"]
 
-    print("PRICE(UI):", price, "MONEY:", money)
 
     if money < price:
         print("NOT ENOUGH MONEY")
         return False
 
     my_team = int(me.get("team"))
-    print("MY TEAM:", my_team)
 
     group = field.get("group")
-    print("GROUP:", group)
 
     fields = page.locator(f".table-body-board-fields-one[mnpl-group='{group}']")
     cards = page.locator(".table-body-players-card")
 
     owner_teams = []
 
-    print("CHECKING GROUP FIELDS...")
 
     for i in range(fields.count()):
         f = fields.nth(i)
@@ -415,8 +346,6 @@ def should_buy(page, state):
                 return True
 
         owner = f.get_attribute("mnpl-owner")
-
-        print(f"[FIELD {i}] owner:", owner)
 
         if owner is None:
             continue
@@ -438,32 +367,24 @@ def should_buy(page, state):
                     team = int(team_attr)
                 break
 
-        print(f" → owner id: {owner_id}, team:", team)
 
         if team is not None:
             owner_teams.append(team)
 
-    print("OWNER TEAMS:", owner_teams)
 
     if not owner_teams:
-        print("NO OWNERS → BUY")
         return True
 
     has_enemy = any(t != my_team for t in owner_teams)
     has_teammate = any(t == my_team for t in owner_teams)
 
-    print("HAS ENEMY:", has_enemy)
-    print("HAS TEAMMATE:", has_teammate)
 
     if not has_enemy:
-        print("ONLY TEAM → BUY")
         return True
 
     if has_enemy and not has_teammate:
-        print("ONLY ENEMY → BUY")
         return True
 
-    print("MIXED GROUP → SKIP")
     return False
 
 def click_button(page, text):
@@ -546,7 +467,6 @@ def handle_actions(page, state, actions):
         price = get_buy_amount(page)
         money = state.get_me()["money"]
 
-        print("BUY CHECK:", price, "vs", money)
 
         if money >= price:
             print("DO: BUY")
@@ -559,13 +479,11 @@ def handle_actions(page, state, actions):
         need = price - money
 
         if not waiting_for_money:
-            print("NOT ENOUGH MONEY → NEED:", need)
-
             if has_teammate(state):
                 open_contract_with_teammate(page, state, need)
                 waiting_for_money = True
             else:
-                print("SOLO MODE → SKIP (no money)")
+                print("SOLO MODE → SKIP")
 
         last_action_time = now
         return
@@ -575,19 +493,16 @@ def handle_actions(page, state, actions):
         amount = get_pay_amount(page)
         money = state.get_me()["money"]
 
-        print("PAY CHECK:", amount, "vs", money)
         if not actions.get("buy"):
             waiting_for_money = False
         if money >= amount:
             click_contains(page, "Заплатить")
         else:
             need = amount - money
-            print("NEED:", need)
-            print("CALLING CONTRACT FUNCTION")
             if has_teammate(state):
                 open_contract_with_teammate(page, state, need)
             else:
-                print("SOLO MODE → CANNOT PAY (no teammate)")
+                print("SOLO MODE → SKIP")
 
         last_action_time = now
         return

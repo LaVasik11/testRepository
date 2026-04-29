@@ -1,5 +1,5 @@
 import json
-from logics import detect_actions, handle_actions, handle_contract, try_upgrade
+from logics import detect_actions, handle_actions, handle_contract, get_monopoly_group
 
 
 def ui_loop_step(page, state):
@@ -20,15 +20,15 @@ def ui_loop_step(page, state):
             page.wait_for_timeout(200)
             return
 
-        print("=== MY TURN ===")
-
         state.sync_fields_from_page(page)
-        print("OWNERS LOADED:", len(state.fields_state))
-        print("OWNER MAP:", state.owner_team_map)
-        try_upgrade(page, state)
+        group = get_monopoly_group(page, state)
+
+        if group:
+            print("МОНОПОЛИЯ:", group)
+        else:
+            print("НЕТ МОНОПОЛИИ")
         
         actions = detect_actions(page)
-        print("ACTIONS:", actions)
 
         handle_actions(page, state, actions)
 
@@ -70,8 +70,8 @@ def handle_ws_message(raw, state):
 
     state.update(data)
 
-    if state.me_id and state.is_my_turn(data):
-        state.debug_print()
+    # if state.me_id and state.is_my_turn(data):
+    #     state.debug_print()
 
 
 def handle_ws(ws, state):
