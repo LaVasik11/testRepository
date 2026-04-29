@@ -256,7 +256,6 @@ def should_buy(page, state):
 
     me = state.get_me()
     if not me:
-        print("NO ME")
         return False
 
     price = get_buy_amount(page)
@@ -283,6 +282,22 @@ def should_buy(page, state):
 
     for i in range(fields.count()):
         f = fields.nth(i)
+
+        logo = f.locator("._logo").get_attribute("style")
+
+        is_car_group = False
+        is_game_group = False
+
+        if logo:
+            if "brands/0/" in logo:
+                is_car_group = True
+            if "brands/9/" in logo:
+                is_game_group = True
+
+        if is_car_group or is_game_group:
+            print(f"[FIELD {i}] SPECIAL GROUP DETECTED → FORCE BUY")
+            return True
+
         owner = f.get_attribute("mnpl-owner")
 
         print(f"[FIELD {i}] owner:", owner)
@@ -293,15 +308,12 @@ def should_buy(page, state):
         try:
             owner_id = int(owner)
         except:
-            print("INVALID OWNER:", owner)
             continue
 
         if owner_id >= cards.count():
-            print("OWNER INDEX OUT OF RANGE:", owner_id)
             continue
 
         card = cards.nth(owner_id)
-
         team = card.get_attribute("mnpl-team")
 
         print(f" → owner id: {owner_id}, team:", team)
