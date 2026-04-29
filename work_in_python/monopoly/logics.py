@@ -7,10 +7,99 @@ waiting_for_money = False
 timesleep = 0.2
 
 
+def get_team_by_owner_id(page, owner_id):
+    cards = page.locator(".table-body-players-card")
+
+    for i in range(cards.count()):
+        card = cards.nth(i)
+
+        card_id = card.get_attribute("id")
+        if not card_id:
+            continue
+
+        # ВАЖНО: точное сравнение, не "in"
+        if card_id.replace("player_card_", "") == str(owner_id):
+            team = card.get_attribute("mnpl-team")
+            if team is not None:
+                return int(team)
+
+    return None
+
+
 def try_upgrade(page, state):
     if not state.is_my_turn_now():
         return
+
     print("try upgrade...")
+
+    me = state.get_me()
+    if not me:
+        return
+
+    my_team = int(me.get("team"))
+
+    fields = page.locator(".table-body-board-fields-one")
+    cards = page.locator(".table-body-players-card")
+
+    groups = {}
+
+    for i in range(fields.count()):
+        f = fields.nth(i)
+
+        group = f.get_attribute("mnpl-group")
+        owner = f.get_attribute("mnpl-owner")
+
+        if group is None:
+            continue
+
+        group = int(group)
+
+        if group not in groups:
+            groups[group] = []
+
+        groups[group].append(owner)
+
+    print("GROUPS:", groups.keys())
+
+    # --- проверяем монополии ---
+    for group, owners in groups.items():
+
+        owner_teams = []
+
+        for owner in owners:
+            if owner is None:
+                owner_teams.append(None)
+                continue
+
+            try:
+                owner_id = int(owner)
+            except:
+                owner_teams.append(None)
+                continue
+
+            if owner_id >= cards.count():
+                owner_teams.append(None)
+                continue
+
+            team = get_team_by_owner_id(page, owner_id)
+
+            if team is None:
+                owner_teams.append(None)
+                continue
+
+            try:
+                owner_teams.append(int(team))
+            except:
+                owner_teams.append(None)
+
+        print(f"[GROUP {group}] teams:", owner_teams)
+
+        # --- условия монополии ---
+        if None in owner_teams:
+            continue
+
+        if all(t == my_team for t in owner_teams):
+            print(f"\n|! YOU HAVE MONOPOLY IN GROUP {group} !|\n")
     
 
 def has_teammate(state):
@@ -83,7 +172,6 @@ def open_contract_with_teammate(page, state, need):
 
         my_team = None
 
-        # --- находим свою карточку и команду ---
         for i in range(cards.count()):
             card = cards.nth(i)
 
@@ -101,7 +189,6 @@ def open_contract_with_teammate(page, state, need):
 
         print("MY TEAM (UI):", my_team)
 
-        # --- ищем тимейта ---
         for i in range(cards.count()):
             card = cards.nth(i)
 
@@ -111,11 +198,9 @@ def open_contract_with_teammate(page, state, need):
             if not card_id or not team:
                 continue
 
-            # пропускаем себя
             if str(my_id) in card_id:
                 continue
 
-            # 🔥 КЛЮЧ: тот же mnpl-team
             if team == my_team:
                 print("FOUND TEAMMATE CARD:", card_id)
 
@@ -128,11 +213,9 @@ def open_contract_with_teammate(page, state, need):
                 menu = card.locator(".table-body-players-card-menu")
                 menu.locator("._contract").click()
 
-                # --- ждём окно ---
                 page.wait_for_selector(".TableContract", timeout=2000)
                 contract = page.locator(".TableContract")
 
-                # --- правая колонка (мы даём деньги) ---
                 cash_block = contract.locator(".TableContract-content-list > div").nth(1)
 
                 cash_block.locator("._one._cash").click()
@@ -180,7 +263,6 @@ def handle_contract(page, state):
 
         my_team = me.get("team")
 
-        # 1. берём ник sender из контракта
         sender_nick = None
 
         users = contract.locator("._info")
@@ -203,7 +285,6 @@ def handle_contract(page, state):
             print("IGNORE OWN CONTRACT")
             return True
 
-        # 2. ищем этого игрока в таблице игроков
         players = page.locator(".table-body-players-card")
 
         sender_team = None
@@ -225,7 +306,6 @@ def handle_contract(page, state):
 
         print("SENDER TEAM:", sender_team, "MY TEAM:", my_team)
 
-        # 3. логика решения
         if sender_team == my_team:
             print("CONTRACT: ACCEPT")
             time.sleep(timesleep)
@@ -285,18 +365,10 @@ def should_buy(page, state):
 
         logo = f.locator("._logo").get_attribute("style")
 
-        is_car_group = False
-        is_game_group = False
-
         if logo:
-            if "brands/0/" in logo:
-                is_car_group = True
-            if "brands/9/" in logo:
-                is_game_group = True
-
-        if is_car_group or is_game_group:
-            print(f"[FIELD {i}] SPECIAL GROUP DETECTED → FORCE BUY")
-            return True
+            if "brands/0/" in logo or "brands/9/" in logo:
+                print(f"[FIELD {i}] SPECIAL GROUP → FORCE BUY")
+                return True
 
         owner = f.get_attribute("mnpl-owner")
 
@@ -305,26 +377,27 @@ def should_buy(page, state):
         if owner is None:
             continue
 
-        try:
-            owner_id = int(owner)
-        except:
-            continue
+        owner_id = str(owner)
 
-        if owner_id >= cards.count():
-            continue
+        team = None
 
-        card = cards.nth(owner_id)
-        team = card.get_attribute("mnpl-team")
+        for j in range(cards.count()):
+            card = cards.nth(j)
+
+            card_id = card.get_attribute("id")
+            if not card_id:
+                continue
+
+            if card_id == f"player_card_{owner_id}":
+                team_attr = card.get_attribute("mnpl-team")
+                if team_attr is not None:
+                    team = int(team_attr)
+                break
 
         print(f" → owner id: {owner_id}, team:", team)
 
-        if team is None:
-            continue
-
-        try:
-            owner_teams.append(int(team))
-        except:
-            pass
+        if team is not None:
+            owner_teams.append(team)
 
     print("OWNER TEAMS:", owner_teams)
 
@@ -404,7 +477,6 @@ def handle_actions(page, state, actions):
 
     now = time.time()
 
-    # защита от спама (1.5 сек)
     if now - last_action_time < 1.5:
         return
 
@@ -432,7 +504,6 @@ def handle_actions(page, state, actions):
 
         print("BUY CHECK:", price, "vs", money)
 
-        # --- хватает денег ---
         if money >= price:
             print("DO: BUY")
             waiting_for_money = False
@@ -441,7 +512,6 @@ def handle_actions(page, state, actions):
             last_action_time = now
             return
 
-        # --- не хватает ---
         need = price - money
 
         if not waiting_for_money:
