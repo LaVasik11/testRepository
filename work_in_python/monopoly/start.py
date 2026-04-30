@@ -1,5 +1,5 @@
 import json
-from logics import detect_actions, handle_actions, handle_contract, get_monopoly_group
+from logics import detect_actions, handle_actions, handle_contract, get_monopoly_group, upgrade_monopoly_group
 
 
 def ui_loop_step(page, state):
@@ -13,6 +13,7 @@ def ui_loop_step(page, state):
             return
 
         if not state.is_my_turn_now():
+            state.did_upgrade_this_turn = False
             page.wait_for_timeout(200)
             return
 
@@ -21,15 +22,15 @@ def ui_loop_step(page, state):
             return
 
         state.sync_fields_from_page(page)
-        group = get_monopoly_group(page, state)
 
-        if group:
-            print("МОНОПОЛИЯ:", group)
-        else:
-            print("НЕТ МОНОПОЛИИ")
-        
+        if not state.did_upgrade_this_turn:
+            group = get_monopoly_group(page, state)
+            if group:
+                success = upgrade_monopoly_group(page, state, group[0])
+                if success:
+                    state.did_upgrade_this_turn = True
+
         actions = detect_actions(page)
-
         handle_actions(page, state, actions)
 
         page.wait_for_timeout(200)

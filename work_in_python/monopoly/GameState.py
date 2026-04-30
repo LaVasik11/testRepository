@@ -12,6 +12,7 @@ class GameState:
         self.current_player = None
         self.owner_team_map = {}
         self.my_team = None
+        self.did_upgrade_this_turn = False
 
     # ---------- INIT ----------
 

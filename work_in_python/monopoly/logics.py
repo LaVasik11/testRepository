@@ -7,6 +7,89 @@ waiting_for_money = False
 timesleep = 0.2
 
 
+def upgrade_monopoly_group(page, state, group_id):
+
+    if not hasattr(upgrade_monopoly_group, "indexes"):
+        upgrade_monopoly_group.indexes = {}
+
+    if group_id not in upgrade_monopoly_group.indexes:
+        upgrade_monopoly_group.indexes[group_id] = 0
+
+    my_nickname = state.get_my_nickname(page)
+
+    cards = page.query_selector_all("div.table-body-players-card")
+
+    my_order = None
+
+    for card in cards:
+        nick_el = card.query_selector("div.table-body-players-card-body-nick ._nick div")
+        if not nick_el:
+            continue
+
+        nick = nick_el.inner_text().strip()
+
+        if nick == my_nickname:
+            my_order = card.get_attribute("mnpl-order")
+            break
+
+
+    if my_order is None:
+        return False
+
+    fields = page.query_selector_all(
+        f'div.table-body-board-fields-one[mnpl-group="{group_id}"]'
+    )
+
+
+    my_fields = []
+
+    for f in fields:
+        owner = f.get_attribute("mnpl-owner")
+
+        if owner == my_order:
+            my_fields.append(f)
+
+    if not my_fields:
+        return False
+
+    index = upgrade_monopoly_group.indexes[group_id] % len(my_fields)
+
+    field = my_fields[index]
+
+    field.click()
+
+    page.wait_for_timeout(100)
+
+    card = page.query_selector("div.TableFieldcard")
+    if not card:
+        return False
+
+    build_btn = card.query_selector("div._green")
+    if not build_btn:
+        return False
+
+    price_el = card.query_selector(
+        '.TableFieldcard-data-rows div:has(div:has-text("Покупка филиала")) ._value'
+    )
+
+    if not price_el:
+        return False
+
+    price_text = price_el.inner_text().replace(",", "").strip()
+    build_price = int(price_text)
+
+    money = state.get_me()["money"]
+
+
+    if money < build_price * 2:
+        return False
+    build_btn.click()
+
+    upgrade_monopoly_group.indexes[group_id] += 1
+
+    return True
+
+
 def get_monopoly_group(page, state):
     my_nickname = state.get_my_nickname(page)
 
