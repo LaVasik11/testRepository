@@ -47,6 +47,24 @@ class GameState:
 
     # ---------- GETTERS ----------
 
+    def get_my_nickname(self, page):
+        cards = page.locator(".table-body-players-card")
+
+        for i in range(cards.count()):
+            card = cards.nth(i)
+
+            card_id = card.get_attribute("id")
+            if not card_id:
+                continue
+
+            if str(self.me_id) not in card_id:
+                continue
+
+            nick = card.locator(".table-body-players-card-body-nick ._nick div").inner_text()
+            return nick
+
+        return None
+
     def is_solo(self):
         return self.my_team is None
 
@@ -122,21 +140,6 @@ class GameState:
             if f.get("group") == group_id
         ]
 
-    def get_group_owners(self, group_id):
-        fields = self.get_group_fields(group_id)
-        return [self.get_owner(pos) for pos in fields]
-
-    def is_monopoly(self, group_id, owner_id):
-        owners = self.get_group_owners(group_id)
-
-        if not owners:
-            return False
-
-        for o in owners:
-            if o != owner_id:
-                return False
-
-        return True
 
     def sync_fields_from_page(self, page):
         self.fields_state = {}
@@ -158,22 +161,6 @@ class GameState:
                 "group": int(group),
                 "owner": int(owner)
             }
-
-    def build_owner_team_map(self, page):
-        self.owner_team_map = {}
-
-        cards = page.locator(".table-body-players-card")
-
-        for i in range(cards.count()):
-            card = cards.nth(i)
-
-            order = card.get_attribute("mnpl-order")
-            team = card.get_attribute("mnpl-team")
-
-            if order is None or team is None:
-                continue
-
-            self.owner_team_map[int(order)] = int(team)
 
     # ---------- TURN ----------
 

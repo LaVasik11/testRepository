@@ -4,12 +4,21 @@ import subprocess
 import socket
 import platform
 import shutil
+import os
 from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QLabel
+from PySide6.QtCore import QTimer
 from playwright.sync_api import sync_playwright
 from start import ui_loop_step, handle_ws
 from GameState import GameState
-import os
 
+
+ui_state = {
+    "page": None,
+    "started": False,
+    "initializing": False
+}
+
+game_state = GameState()
 
 
 def get_chrome_path():
@@ -48,17 +57,6 @@ def wait_for_port(port, host="127.0.0.1", timeout=10.0):
     return False
 
 
-
-ui_state = {
-    "page": None,
-    "started": False,
-    "loop_running": False,
-    "initializing": False
-}
-
-game_state = GameState()
-
-
 class BotUI(QWidget):
     def __init__(self):
         super().__init__()
@@ -82,7 +80,12 @@ class BotUI(QWidget):
 
         self.setLayout(self.layout)
 
-        self.loop_running = False
+        self.chrome_proc = None
+        self.loop_event = threading.Event()
+
+        self.monitor = QTimer()
+        self.monitor.timeout.connect(self.check_browser)
+        self.monitor.start(500)
 
     def start_init(self):
         self.init_btn.hide()
@@ -92,32 +95,49 @@ class BotUI(QWidget):
         if not ui_state["started"]:
             return
 
-        self.loop_running = not self.loop_running
-        ui_state["loop_running"] = self.loop_running
-
-        if self.loop_running:
-            self.loop_btn.setText("Stop")
-            self.status.setText("Status: RUNNING")
-        else:
+        if self.loop_event.is_set():
+            self.loop_event.clear()
             self.loop_btn.setText("Start")
             self.status.setText("Status: PAUSED")
+        else:
+            self.loop_event.set()
+            self.loop_btn.setText("Stop")
+            self.status.setText("Status: RUNNING")
+
+    def check_browser(self):
+        if self.chrome_proc and self.chrome_proc.poll() is not None:
+            self.cleanup_after_close()
+
+    def cleanup_after_close(self):
+        ui_state["started"] = False
+
+        self.loop_event.clear()
+
+        self.loop_btn.setText("Start")
+        self.loop_btn.setEnabled(False)
+
+        self.init_btn.show()
+        self.status.setText("Status: OFF")
+
+        self.chrome_proc = None
 
     def worker(self):
         ui_state["initializing"] = True
 
         chrome_path = get_chrome_path()
-
         if not chrome_path:
             self.status.setText("Chrome not found")
             ui_state["initializing"] = False
+            self.init_btn.show()
             return
 
-        if platform.system() == "Windows":
-            user_data_dir = r"C:\temp\chrome-profile"
-        else:
-            user_data_dir = "/tmp/chrome-profile"
+        user_data_dir = (
+            r"C:\temp\chrome-profile"
+            if platform.system() == "Windows"
+            else "/tmp/chrome-profile"
+        )
 
-        subprocess.Popen([
+        self.chrome_proc = subprocess.Popen([
             chrome_path,
             "--remote-debugging-port=9222",
             f"--user-data-dir={user_data_dir}"
@@ -126,6 +146,7 @@ class BotUI(QWidget):
         if not wait_for_port(9222):
             self.status.setText("Chrome failed")
             ui_state["initializing"] = False
+            self.init_btn.show()
             return
 
         with sync_playwright() as p:
@@ -135,7 +156,6 @@ class BotUI(QWidget):
             page = context.pages[0]
 
             page.on("websocket", lambda ws: handle_ws(ws, game_state))
-
             page.goto("https://monopoly-one.com/games")
 
             ui_state["page"] = page
@@ -143,11 +163,14 @@ class BotUI(QWidget):
             ui_state["initializing"] = False
 
             self.status.setText("Status: READY")
-
             self.loop_btn.setEnabled(True)
 
             while True:
-                if ui_state["loop_running"]:
+                if self.chrome_proc and self.chrome_proc.poll() is not None:
+                    self.cleanup_after_close()
+                    break
+
+                if self.loop_event.is_set():
                     ui_loop_step(page, game_state)
                     time.sleep(0.2)
                 else:

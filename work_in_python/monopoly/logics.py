@@ -8,97 +8,61 @@ timesleep = 0.2
 
 
 def get_monopoly_group(page, state):
-    print("\n===== MONOPOLY CHECK START =====")
+    my_nickname = state.get_my_nickname(page)
 
-    if not state.is_my_turn_now():
-        print("NOT MY TURN")
-        return False
+    cards = page.query_selector_all("div.table-body-players-card")
 
-    me = state.get_me()
-    if not me:
-        print("NO ME")
-        return False
+    my_order = None
 
-    my_id = str(me["user_id"])
-    print("MY ID:", my_id)
+    for card in cards:
+        nick_el = card.query_selector("div.table-body-players-card-body-nick ._nick div")
+        if not nick_el:
+            continue
 
-    cards = page.locator(".table-body-players-card")
+        nick = nick_el.inner_text().strip()
 
-    # --- НАХОДИМ СВОЙ CARD INDEX (для понимания кто мы) ---
-    my_card_index = None
-
-    for i in range(cards.count()):
-        card = cards.nth(i)
-
-        card_id = card.get_attribute("id")
-
-        if card_id and my_id in card_id:
-            my_card_index = i
-            print("FOUND MY CARD INDEX:", my_card_index)
+        if nick == my_nickname:
+            my_order = card.get_attribute("mnpl-order")
             break
 
-    if my_card_index is None:
-        print("MY CARD NOT FOUND")
-        return False
+    if my_order is None:
+        return []
 
-    fields = page.locator(".table-body-board-fields-one")
+    fields = page.query_selector_all("div.table-body-board-fields-one[mnpl-group]")
 
     groups = {}
 
-    print("\nCOLLECTING FIELDS:", fields.count())
+    for field in fields:
+        group = field.get_attribute("mnpl-group")
+        owner = field.get_attribute("mnpl-owner")
 
-    for i in range(fields.count()):
-        f = fields.nth(i)
-
-        group = f.get_attribute("mnpl-group")
         if group is None:
             continue
 
-        group = int(group)
-
-        owner = f.get_attribute("mnpl-owner")
-
-        print(f"[FIELD {i}] group={group} owner={owner}")
+        if group in ("0", "9"):
+            continue
 
         if group not in groups:
             groups[group] = []
 
-        groups[group].append(owner)
+        has_big = field.query_selector("span._big") is not None
 
-    print("\n===== GROUP SUMMARY =====")
+        groups[group].append((owner, has_big))
 
-    for group_id, owners in groups.items():
-        print(f"GROUP {group_id}: {owners}")
+    result = []
 
-    print("\n===== MONOPOLY CHECK =====")
+    for group, items in groups.items():
+        owners = [o for o, _ in items]
+        big_flags = [b for _, b in items]
 
-    for group_id, owners in groups.items():
-
-        if group_id in (0, 9):
-            print(f"SKIP SPECIAL GROUP {group_id}")
+        if not owners:
             continue
 
-        if any(o is None for o in owners):
-            print(f"SKIP GROUP {group_id}: EMPTY OWNERS")
-            continue
+        if all(o == my_order for o in owners) and not all(big_flags):
+            result.append(int(group))
 
-        # --- монополия = все owner одинаковые ---
-        first = owners[0]
+    return result
 
-        if all(o == first for o in owners):
-
-            print(f"MONOPOLY FOUND: GROUP {group_id}, OWNER={first}")
-
-            # если хочешь строго "твоя монополия"
-            if int(first) == my_card_index:
-                print("=> THIS IS YOUR MONOPOLY")
-                return group_id
-            else:
-                print("=> NOT YOUR MONOPOLY")
-
-    print("NO MONOPOLY FOUND")
-    return False
-    
 
 def has_teammate(state):
     me = state.get_me()
@@ -244,6 +208,7 @@ def handle_contract(page, state):
             return False
 
         if state.is_solo():
+            time.sleep(timesleep)
             contract.locator("._button:has-text('Отклонить')").click()
             return True
     
@@ -344,7 +309,6 @@ def should_buy(page, state):
 
         if logo:
             if "brands/0/" in logo or "brands/9/" in logo:
-                print(f"[FIELD {i}] SPECIAL GROUP → FORCE BUY")
                 return True
 
         owner = f.get_attribute("mnpl-owner")
