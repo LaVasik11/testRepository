@@ -48,7 +48,6 @@ def handle_ws_message(raw, state):
 
             if user_data and "user_id" in user_data:
                 state.set_me(user_data["user_id"])
-                print("MY ID:", state.me_id)
 
         except Exception as e:
             print("AUTH PARSE ERROR:", e)
@@ -76,7 +75,6 @@ def handle_ws_message(raw, state):
 
 
 def handle_ws(ws, state):
-    print("WS connected:", ws.url)
 
     def on_recv(frame):
         data = frame if isinstance(frame, str) else frame.decode("utf-8", errors="ignore")

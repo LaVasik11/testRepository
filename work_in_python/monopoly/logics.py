@@ -1,3 +1,4 @@
+from random import random
 import re
 import time
 
@@ -55,7 +56,7 @@ def upgrade_monopoly_group(page, state, group_id):
     index = upgrade_monopoly_group.indexes[group_id] % len(my_fields)
 
     field = my_fields[index]
-
+    time.sleep(timesleep)
     field.click()
 
     page.wait_for_timeout(100)
@@ -83,9 +84,19 @@ def upgrade_monopoly_group(page, state, group_id):
 
     if money < build_price * 2:
         return False
+    time.sleep(timesleep)
     build_btn.click()
 
     upgrade_monopoly_group.indexes[group_id] += 1
+
+    scr = page.query_selector("div.scr-window")
+    if scr:
+        box = scr.bounding_box()
+        if box:
+            x = box["x"] + box["width"] / 2
+            y = box["y"] + box["height"] / 2
+            time.sleep(timesleep)
+            page.mouse.click(x, y)
 
     return True
 
@@ -182,7 +193,6 @@ def send_message(page, text):
         input_box = page.locator("input[placeholder='Введите сообщение']")
 
         if not input_box.is_visible():
-            print("CHAT INPUT NOT FOUND")
             return False
 
         input_box.click()
@@ -190,7 +200,6 @@ def send_message(page, text):
 
         page.keyboard.press("Enter")
 
-        print("MESSAGE SENT:", text)
         return True
 
     except Exception as e:
@@ -340,11 +349,9 @@ def handle_contract(page, state):
 
 
         if sender_team == my_team:
-            print("CONTRACT: ACCEPT")
             time.sleep(timesleep)
             contract.locator("._button:has-text('Принять')").click()
         else:
-            print("CONTRACT: DECLINE")
             time.sleep(timesleep)
             contract.locator("._button:has-text('Отклонить')").click()
             send_message(page, "С террористами переговоры не ведём")
@@ -372,7 +379,6 @@ def should_buy(page, state):
 
 
     if money < price:
-        print("NOT ENOUGH MONEY")
         return False
 
     my_team = int(me.get("team"))
@@ -496,7 +502,6 @@ def handle_actions(page, state, actions):
 
     # --- 1. ROLL ---
     if actions.get("roll"):
-        print("DO: ROLL")
         time.sleep(timesleep)
         click_button(page, "Бросить кубики")
         last_action_time = now
@@ -507,7 +512,6 @@ def handle_actions(page, state, actions):
         decision = should_buy(page, state)
 
         if not decision:
-            print("DO: AUCTION")
             time.sleep(timesleep)
             click_button(page, "На аукцион")
             last_action_time = now
@@ -518,7 +522,6 @@ def handle_actions(page, state, actions):
 
 
         if money >= price:
-            print("DO: BUY")
             waiting_for_money = False
             time.sleep(timesleep)
             click_contains(page, "Купить за")
@@ -532,7 +535,7 @@ def handle_actions(page, state, actions):
                 open_contract_with_teammate(page, state, need)
                 waiting_for_money = True
             else:
-                print("SOLO MODE → SKIP")
+                pass
 
         last_action_time = now
         return
@@ -551,14 +554,13 @@ def handle_actions(page, state, actions):
             if has_teammate(state):
                 open_contract_with_teammate(page, state, need)
             else:
-                print("SOLO MODE → SKIP")
+                pass
 
         last_action_time = now
         return
 
     # --- 4. decline contract ---
     if actions.get("decline"):
-        print("DO: DECLINE")
         time.sleep(timesleep)
         click_button(page, "Отклонить")
         last_action_time = now
@@ -566,11 +568,25 @@ def handle_actions(page, state, actions):
     
     # --- 5. casino ---
     if actions.get("refuse"):
-        print("DO: REFUSE")
-        time.sleep(timesleep)
-        click_button(page, "Отказаться")
+        money = state.get_me()["money"]
+
+        if money > 1_000_000:
+
+            dices = page.query_selector_all(".TableActionJackpot-dices > div")
+
+            if dices:
+                dice = random.choice(dices)
+                dice.click()
+
+                page.wait_for_timeout(100)
+
+                click_button(page, "Поставить 1,000k")
+            else:
+                click_button(page, "Отказаться")
+
+        else:
+            click_button(page, "Отказаться")
+
         last_action_time = now
         return
-
-    print("NO ACTION")
     time.sleep(timesleep)
