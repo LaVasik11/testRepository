@@ -377,70 +377,70 @@ def should_buy(page, state):
     price = get_buy_amount(page)
     money = me["money"]
 
-
     if money < price:
         return False
 
-    my_team = int(me.get("team"))
-
     group = field.get("group")
 
-    fields = page.locator(f".table-body-board-fields-one[mnpl-group='{group}']")
-    cards = page.locator(".table-body-players-card")
+    # --- ОСОБЫЕ ГРУППЫ (ВСЕГДА ПОКУПАЕМ) ---
+    if group in (0, 9):
+        print("[BUY_CHECK] SPECIAL GROUP -> BUY")
+        return True
 
-    owner_teams = []
+    fields = page.query_selector_all(
+        f".table-body-board-fields-one[mnpl-group='{group}']"
+    )
 
+    cards = page.query_selector_all(".table-body-players-card")
 
-    for i in range(fields.count()):
-        f = fields.nth(i)
+    # --- найти свой mnpl-order ---
+    my_nickname = state.get_my_nickname(page)
+    my_order = None
 
-        logo = f.locator("._logo").get_attribute("style")
+    for card in cards:
+        nick_el = card.query_selector(".table-body-players-card-body-nick ._nick div")
+        if not nick_el:
+            continue
 
-        if logo:
-            if "brands/0/" in logo or "brands/9/" in logo:
-                return True
+        if nick_el.inner_text().strip() == my_nickname:
+            my_order = int(card.get_attribute("mnpl-order"))
+            break
 
+    if my_order is None:
+        return False
+
+    my_parity = my_order % 2
+
+    owner_types = []
+
+    for f in fields:
         owner = f.get_attribute("mnpl-owner")
 
         if owner is None:
             continue
 
-        owner_id = str(owner)
+        owner_order = int(owner)
+        owner_parity = owner_order % 2
 
-        team = None
+        if owner_parity == my_parity:
+            owner_types.append("ally")
+        else:
+            owner_types.append("enemy")
 
-        for j in range(cards.count()):
-            card = cards.nth(j)
-
-            card_id = card.get_attribute("id")
-            if not card_id:
-                continue
-
-            if card_id == f"player_card_{owner_id}":
-                team_attr = card.get_attribute("mnpl-team")
-                if team_attr is not None:
-                    team = int(team_attr)
-                break
-
-
-        if team is not None:
-            owner_teams.append(team)
-
-
-    if not owner_teams:
+    if not owner_types:
         return True
 
-    has_enemy = any(t != my_team for t in owner_teams)
-    has_teammate = any(t == my_team for t in owner_teams)
+    has_enemy = "enemy" in owner_types
+    has_ally = "ally" in owner_types
 
+    print(f"[BUY_CHECK] owners={owner_types}")
 
-    if not has_enemy:
-        return True
+    if has_enemy and has_ally:
+        print("[BUY_CHECK] MIXED (ALLY + ENEMY) -> SKIP")
+        return False
 
-    if has_enemy and not has_teammate:
-        return True
-
-    return False
+    print("[BUY_CHECK] OK -> BUY")
+    return True
 
 def click_button(page, text):
     try:
@@ -509,9 +509,13 @@ def handle_actions(page, state, actions):
 
     # --- 2. BUY ---
     if actions.get("buy"):
+        print("\n[BUY] --- START ---")
+
         decision = should_buy(page, state)
+        print(f"[BUY] decision={decision}")
 
         if not decision:
+            print("[BUY] DECISION = FALSE -> AUCTION")
             time.sleep(timesleep)
             click_button(page, "На аукцион")
             last_action_time = now
@@ -520,22 +524,42 @@ def handle_actions(page, state, actions):
         price = get_buy_amount(page)
         money = state.get_me()["money"]
 
+        print(f"[BUY] price={price}")
+        print(f"[BUY] money={money}")
+
+        if price is None:
+            print("[BUY] ERROR: price is None")
+            last_action_time = now
+            return
 
         if money >= price:
+            print("[BUY] ENOUGH MONEY -> TRY BUY")
+
             waiting_for_money = False
+
             time.sleep(timesleep)
-            click_contains(page, "Купить за")
+
+            success = click_contains(page, "Купить за")
+            print(f"[BUY] CLICK BUY RESULT={success}")
+
             last_action_time = now
             return
 
         need = price - money
+        print(f"[BUY] NOT ENOUGH MONEY, need={need}")
 
         if not waiting_for_money:
+            print("[BUY] NOT WAITING FOR MONEY")
+
             if has_teammate(state):
+                print("[BUY] HAS TEAMMATE -> OPEN CONTRACT")
                 open_contract_with_teammate(page, state, need)
                 waiting_for_money = True
             else:
-                pass
+                print("[BUY] NO TEAMMATE -> NOTHING")
+
+        else:
+            print("[BUY] ALREADY WAITING FOR MONEY")
 
         last_action_time = now
         return
@@ -570,7 +594,8 @@ def handle_actions(page, state, actions):
     if actions.get("refuse"):
         money = state.get_me()["money"]
 
-        if money > 1_000_000:
+        print(f"[CASINO] money={money}")
+        if money > 1000:
 
             dices = page.query_selector_all(".TableActionJackpot-dices > div")
 
