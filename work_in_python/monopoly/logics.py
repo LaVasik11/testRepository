@@ -418,7 +418,9 @@ def should_buy(page, state):
 
         if owner is None:
             continue
-
+        
+        print(f"[BUY_CHECK] raw owner={owner}"
+              )
         owner_order = int(owner)
         owner_parity = owner_order % 2
 
@@ -598,7 +600,7 @@ def handle_actions(page, state, actions):
         if money > 1000:
 
             dices = page.query_selector_all(".TableActionJackpot-dices > div")
-
+            print(f"[CASINO] dices count={len(dices)}")
             if dices:
                 dice = random.choice(dices)
                 dice.click()
